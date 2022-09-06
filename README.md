@@ -25,7 +25,8 @@ dealta_t: small real value; step size for the Euler method
 T: integer; duration of the simulation
 
 initial_states: list or array containing two arrays of length number of nodes: one with initial states for v and the other one for w \
-either network or initial_states must be given
+If no initial states are given then random ones are created for every node. \
+Sidenote: either network or initial_states must be given
           
 # Use plot_activity(act_mat)
 Example: \
