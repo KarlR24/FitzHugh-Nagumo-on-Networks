@@ -5,8 +5,8 @@ Here the ODE is approximated according to the Euler method. \
 The code is built according to fabridamicelli and rewritten for FitzHugh-Nagumo oscillators. \
 https://github.com/fabridamicelli/kuramoto
 
-FitzHugh-Nagumo: \
-$\dot{v_i} = v_i - \frac{v_i^3}{3} - w_i + k* \sum_{j = 1}^N a_{ij} (v_i - v_j)$ \
+FitzHugh-Nagumo for one node: \
+$\dot{v_i} = v_i - \frac{v_i^3}{3} - w_i + k* \sum_{j is neighbor of i} a_{ij} (v_i - v_j)$ \
 $\dot{w_i} = \frac{1}{\tau} (v_i - bw_i + a) $
 
 # How to use FitzHugh_Nagumo_coupled()
