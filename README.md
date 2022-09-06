@@ -46,3 +46,6 @@ Here the initial_states are chosen such that one node in a corner is perturbed a
 
 The parameters are chosen such that we have oscillatory behaviour and the colormap is only with respect to the first equation of FitzHugh-Nagumo. \
 Observe the propagation of the pertubation awaz from perturbed node throughout the network.
+
+
+$\tau$
