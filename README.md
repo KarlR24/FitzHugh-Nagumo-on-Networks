@@ -1,7 +1,9 @@
 # FitzHugh-Nagumo-on-Networks
 Implementation of FitzHugh-Nagumo oscillators on a network.
 Every node of the network is a FitzHugh-Nagumo oscillator which are coupled according to the nearest neighbor relations. \
-Here the ODE is approximated according to the Euler method.
+Here the ODE is approximated according to the Euler method. \
+The code is built according to fabridamicelli and rewritten for FitzHugh-Nagumo oscillators. \
+https://github.com/fabridamicelli/kuramoto
 
 # How to use FitzHugh_Nagumo_coupled()
 FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) \
@@ -20,3 +22,10 @@ T: integer; duration of the simulation
 initial_states: list or array containing two arrays of length number of nodes: one with initial states for v and the other one for w \
 either network or initial_states must be given
           
+# Use plot_activity(act_mat)
+Example: \
+G = nx.grid_2d_graph(3, 3) \
+model = FitzHugh_Nagumo_coupled(coupling=2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) \
+
+
+![image](https://user-images.githubusercontent.com/104760326/188576765-893c7b97-43e5-458e-85de-4273d5efa95b.png)
