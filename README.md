@@ -5,6 +5,10 @@ Here the ODE is approximated according to the Euler method. \
 The code is built according to fabridamicelli and rewritten for FitzHugh-Nagumo oscillators. \
 https://github.com/fabridamicelli/kuramoto
 
+FitzHugh-Nagumo: \
+$\dot{v_i} = v_i - \frac{v_i^3}{3} - w_i + k* \sum_{j = 1}^N a_{ij} (v_i - v_j)$ \
+$\dot{w_i} = \frac{1}{\tau} (v_i - bw_i + a) $
+
 # How to use FitzHugh_Nagumo_coupled()
 FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) \
 coupling: positive real value which gives the strength of the coupling of neighbors \
@@ -48,4 +52,3 @@ The parameters are chosen such that we have oscillatory behaviour and the colorm
 Observe the propagation of the pertubation awaz from perturbed node throughout the network.
 
 
-$\tau$
