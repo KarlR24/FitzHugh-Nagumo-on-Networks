@@ -1,6 +1,6 @@
 # FitzHugh-Nagumo-on-Networks
 Implementation of FitzHugh-Nagumo oscillators on a network.
-Every node of the network is a FitzHugh-Nagumo oscillator which are coupled according to the nearest neighbor relations.
+Every node of the network is a FitzHugh-Nagumo oscillator which are coupled according to the nearest neighbor relations. \
 Here the ODE is approximated according to the Euler method.
 
 # How to use FitzHugh_Nagumo_coupled()
