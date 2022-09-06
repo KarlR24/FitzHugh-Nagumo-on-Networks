@@ -35,7 +35,7 @@ plot_activity(act_mat)
 
 
 # Further use of class: 
-Create pngs from act_mat to create GIF. Can visually inspect/observe propagation of pertubations. 
+With additional code: create pngs from act_mat to create GIF. Then, use GIF to visually inspect/observe behaviour of the dynamics on the network. 
 
 Example: G = nx.grid_2d_graph(10, 10) \
 model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins) \
@@ -45,4 +45,4 @@ Here the initial_states are chosen such that one node in a corner is perturbed a
 ![10x10, one perturbed, twilight](https://user-images.githubusercontent.com/104760326/188586292-599d7e96-57f2-4e70-a445-8ad671d5f781.gif)
 
 The parameters are chosen such that we have oscillatory behaviour and the colormap is only with respect to the first equation of FitzHugh-Nagumo. \
-Observe the propagation of the pertubation throughout the network.
+Observe the propagation of the pertubation awaz from perturbed node throughout the network.
