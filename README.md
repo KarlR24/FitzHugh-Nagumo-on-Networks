@@ -6,7 +6,7 @@ Here the ODE is approximated according to the Euler method.
 # How to use FitzHugh_Nagumo_coupled()
 FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) \
 coupling: positive real value which gives the strength of the coupling of neighbors \
-          Note: if we are at a very stable fixed point it can happen that the coupling is too weak to influence/perturbe its neighbors \
+          Note: if we are at a very stable fixed point it can happen that the coupling is too weak to influence/perturbe its neighbors 
           
 network: graph which gives the neighbor relations (ie. adjacency matrix) \
          If no network is specified a Watts Strogatz network with rewiring probability p = 0 is created.
