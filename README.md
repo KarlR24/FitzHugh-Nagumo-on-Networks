@@ -35,12 +35,11 @@ plot_activity(act_mat)
 
 
 # Further use of class: 
-Create pngs from act_mat to create GIF. Can visually inspect/observe propagation of pertubations. \
+Create pngs from act_mat to create GIF. Can visually inspect/observe propagation of pertubations. 
 
 Example: G = nx.grid_2d_graph(10, 10)
 model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins)
 
 
-10x10, one perturbed, twilight.gif
-
+![10x10, one perturbed, twilight](https://user-images.githubusercontent.com/104760326/188586292-599d7e96-57f2-4e70-a445-8ad671d5f781.gif)
 
