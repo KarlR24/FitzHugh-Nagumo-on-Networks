@@ -26,6 +26,21 @@ either network or initial_states must be given
 Example: \
 G = nx.grid_2d_graph(3, 3) \
 model = FitzHugh_Nagumo_coupled(coupling=2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) \
+adj_mat = nx.to_numpy_array(G) \
+act_mat=model.run(adj_mat) \
+plot_activity(act_mat)
 
 
 ![image](https://user-images.githubusercontent.com/104760326/188576765-893c7b97-43e5-458e-85de-4273d5efa95b.png)
+
+
+# Further use of class: 
+Create pngs from act_mat to create GIF. Can visually inspect/observe propagation of pertubations. \
+
+Example: G = nx.grid_2d_graph(10, 10)
+model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins)
+
+
+10x10, one perturbed, twilight.gif
+
+
