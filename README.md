@@ -18,7 +18,7 @@ coupling: positive real value which gives the strength of the coupling of neighb
 network: graph which gives the neighbor relations (ie. adjacency matrix) \
          If no network is specified a Watts Strogatz network with rewiring probability p = 0 is created.
          
-a, b, tau: real numbers/ parameters of the FitzHugh-Nagumo model
+a, b, tau: float/ parameters of the FitzHugh-Nagumo model
 
 dealta_t: small real value; step size for the Euler method
 
@@ -40,6 +40,21 @@ plot_activity(act_mat)
 ![image](https://user-images.githubusercontent.com/104760326/188576765-893c7b97-43e5-458e-85de-4273d5efa95b.png)
 
 
+# Use plot_phase_portrait
+force_field=True draws arrows in the direction of the flow 
+
+Example: same example as for plot activity \
+G = nx.grid_2d_graph(3, 3) \
+model = FitzHugh_Nagumo_coupled(coupling
+=2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) \
+adj_mat = nx.to_numpy_array(G) \
+act_mat=model.run(adj_mat) \
+plot_phase_portrait(0.3, 0.1, 0.2, act_mat, force_field=True)
+
+
+![download](https://user-images.githubusercontent.com/104760326/188612773-91fcc9eb-a876-48ba-b8ce-1a9c740a492f.png)
+
+
 # Further use of class: 
 With additional code: create pngs from act_mat to create GIF. Then, use GIF to visually inspect/observe behaviour of the dynamics on the network. 
 
@@ -52,5 +67,6 @@ Here the initial_states are chosen such that one node in a corner is perturbed a
 
 The parameters are chosen such that we have oscillatory behaviour and the colormap is only with respect to the first equation of FitzHugh-Nagumo. \
 Observe the propagation of the pertubation awaz from perturbed node throughout the network.
+
 
 
