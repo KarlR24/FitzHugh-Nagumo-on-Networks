@@ -7,7 +7,7 @@ https://github.com/fabridamicelli/kuramoto
 
 FitzHugh-Nagumo for node i: \
 $\dot{v_i} = v_i - \frac{v_i^3}{3} - w_i + k* \sum_{j =1,...,N} a_{ij} (v_i - v_j)$ \
-$\dot{w_i} = \frac{1}{\tau} (v_i - bw_i + a) $ \
+$\dot{w_i} = \frac{1}{\tau} (v_i - bw_i + a)$ \
 where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network). 
 
 # How to use FitzHugh_Nagumo_coupled()
