@@ -57,12 +57,54 @@ plot_phase_portrait(0.3, 0.1, 0.2, act_mat, force_field=True)
 
 
 # Further use of class: 
-With additional code: create pngs from act_mat to create GIF. Then, use GIF to visually inspect/observe behaviour of the dynamics on the network. 
+With Make_images_and_Gif: create pngs from act_mat to create GIF. Then, use GIF to visually inspect/observe behaviour of the dynamics on the network. 
 
-Example: G = nx.grid_2d_graph(10, 10) \
+image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
+    '''
+    G: network
+    
+    act_mat: array
+    
+    pos: dictionary with nodes as keys and positions as values
+        
+    stepstart: float
+        iteration step where first png is created
+    
+    stepsize: float
+        after stepsize many iterations the next png is created
+    '''
+    
+   
+GIF_creator(duration, png_dir, path):
+    '''
+    duration: float
+        time each picture is shown in GIF
+        
+    png_dir: string
+        direction where .pngs are to make GIF out of
+    
+    path: string
+        direction where the GIF should be saved
+        
+    this code is from stackoverflow.com
+    '''
+    
+    
+    
+Example: Here the initial_states are chosen such that one node in a corner is perturbed and all other nodes are at the equilibrium. \
+G = nx.grid_2d_graph(10, 10) \
 model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins) \
-Here the initial_states are chosen such that one node in a corner is perturbed and all other nodes are at the equilibrium.
+act_mat = model.run(adj_mat=nx.to_numpy_array(G))
+pos = nx.spring_layout(G, iterations=500) \
+colormap = matplotlib.cm.twilight \
+stepstart = 100 \
+stepsize = 250 \
+The image_creator saves the created pngs in the directory into a folder named "pngs". This folder has to be created beforehand manually. \
 
+
+image_creator(G, act_mat, pos, colormap, stepstart, stepsize)
+
+GIF_creator(0.05, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
 
 ![10x10, one perturbed, twilight](https://user-images.githubusercontent.com/104760326/188586292-599d7e96-57f2-4e70-a445-8ad671d5f781.gif)
 
