@@ -60,6 +60,7 @@ plot_phase_portrait(0.3, 0.1, 0.2, act_mat, force_field=True)
 With Make_images_and_Gif: create pngs from act_mat to create GIF. Then, use GIF to visually inspect/observe behaviour of the dynamics on the network. 
 
 image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
+
     '''
     G: network
     
@@ -76,6 +77,7 @@ image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
     
    
 GIF_creator(duration, png_dir, path):
+
     '''
     duration: float
         time each picture is shown in GIF
