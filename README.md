@@ -18,10 +18,10 @@ coupling: positive real value which gives the strength of the coupling of neighb
 network: graph on which dynamics run. Also gives the neighbor relations (ie. adjacency matrix) \
          If no network is specified a Watts Strogatz network with rewiring probability p = 0 is created.
          
-a, b, tau: float/ parameters of the FitzHugh-Nagumo model
+a, b, tau: float/ parameters of the FitzHugh-Nagumo model \
            Note: depending on the choice of parameters the dynamics exhibit different qualitative behaviours (saddle node bifurcation, limit cycles,                  Hopf bifurcation, etc.)
 
-dealta_t: small real value; step size for the Euler method
+dealta_t: small real value; step size for the Euler method 
 
 T: integer; duration of the simulation
 
