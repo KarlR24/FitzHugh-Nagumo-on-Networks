@@ -67,6 +67,9 @@ image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
     act_mat: array
     
     pos: dictionary with nodes as keys and positions as values
+    
+    colormap: matplotlib.cm.colormap
+        colormap for node states
         
     stepstart: float
         iteration step where first png is created
@@ -81,6 +84,7 @@ GIF_creator(duration, png_dir, path):
     '''
     duration: float
         time each picture is shown in GIF
+        useful range is between 0.05 to 0.2 
         
     png_dir: string
         direction where .pngs are to make GIF out of
