@@ -46,14 +46,14 @@ plot_activity(act_mat)
 force_field=True draws arrows in the direction of the flow 
 
 Example: same example as for plot activity \
-'''
-G = nx.grid_2d_graph(3, 3) \
-model = FitzHugh_Nagumo_coupled(coupling
-=2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) \
-adj_mat = nx.to_numpy_array(G) \
-act_mat=model.run(adj_mat) \
-plot_phase_portrait(0.3, 0.1, 0.2, act_mat, force_field=True)
-'''
+          '''
+          G = nx.grid_2d_graph(3, 3) \
+          model = FitzHugh_Nagumo_coupled(coupling
+          =2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) \
+          adj_mat = nx.to_numpy_array(G) \
+          act_mat=model.run(adj_mat) \
+          plot_phase_portrait(0.3, 0.1, 0.2, act_mat, force_field=True)
+          '''
 
 ![download](https://user-images.githubusercontent.com/104760326/188612773-91fcc9eb-a876-48ba-b8ce-1a9c740a492f.png)
 
