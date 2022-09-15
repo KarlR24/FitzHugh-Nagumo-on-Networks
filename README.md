@@ -31,7 +31,6 @@ Sidenote: either network or initial_states must be given
           
 # Use plot_activity(act_mat)
 Example: \
-
 G = nx.grid_2d_graph(3, 3) \
 model = FitzHugh_Nagumo_coupled(coupling=2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) \
 adj_mat = nx.to_numpy_array(G) \
