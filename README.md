@@ -12,7 +12,7 @@ where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network)
 
 # How to use FitzHugh_Nagumo_coupled()
 FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) \
-coupling: positive real value which gives the strength of the coupling of neighbors \
+coupling: positive real value which gives the strength of the coupling of neighbors with default vaulue = 1\
           Note: if we are at a very stable fixed point it can happen that the coupling is too weak to influence/perturbe its neighbors 
           
 network: graph on which dynamics run. Also gives the neighbor relations (ie. adjacency matrix) \
