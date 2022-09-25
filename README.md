@@ -98,7 +98,7 @@ GIF_creator(duration, png_dir, path):
     
     
     
-$\b{Example:}$ Here the initial_states are chosen such that one node in a corner is perturbed and all other nodes are at the equilibrium. \
+Example: Here the initial_states are chosen such that one node in a corner is perturbed and all other nodes are at the equilibrium. \
 G = nx.grid_2d_graph(10, 10) \
 model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins) \
 act_mat = model.run(adj_mat=nx.to_numpy_array(G))
