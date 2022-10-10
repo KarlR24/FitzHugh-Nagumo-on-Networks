@@ -63,7 +63,7 @@ With Make_images_and_Gif: create pngs from act_mat to create GIF. Then, use GIF 
 
 image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
 
-    '''
+    
     G: network
     
     act_mat: array
@@ -78,12 +78,12 @@ image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
     
     stepsize: float
         after stepsize many iterations the next png is created
-    '''
+    
     
    
 GIF_creator(duration, png_dir, path):
 
-    '''
+    
     duration: float
         time each picture is shown in GIF
         useful range is between 0.05 to 0.2 
@@ -95,7 +95,7 @@ GIF_creator(duration, png_dir, path):
         direction where the GIF should be saved
         
     this code is from stackoverflow.com
-    '''
+    
     
     
     
