@@ -113,10 +113,14 @@ image_creator(G, act_mat, pos, colormap, stepstart, stepsize)
 
 GIF_creator(0.05, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
 
-![10x10, one perturbed, twilight](https://user-images.githubusercontent.com/104760326/188586292-599d7e96-57f2-4e70-a445-8ad671d5f781.gif)
 
 The parameters are chosen such that we have oscillatory behaviour and the colormap is only with respect to the first equation of FitzHugh-Nagumo. \
-Observe the propagation of the pertubation awaz from perturbed node throughout the network.
+Observe the propagation of the pertubation away from perturbed node throughout the network.
+
+
+![10x10, one perturbed, twilight](https://user-images.githubusercontent.com/104760326/188586292-599d7e96-57f2-4e70-a445-8ad671d5f781.gif)
+
+
 
 
 
