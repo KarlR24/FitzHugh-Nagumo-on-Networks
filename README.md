@@ -108,7 +108,8 @@ pos = nx.spring_layout(G, iterations=500) \
 colormap = matplotlib.cm.twilight \
 stepstart = 100 \
 stepsize = 250 \
-The image_creator saves the created pngs in the directory into a folder named "pngs". This folder has to be created beforehand manually. \
+
+The image_creator saves the created pngs in the directory into a folder named "pngs". This folder has to be created beforehand manually. 
 
 
 image_creator(G, act_mat, pos, colormap, stepstart, stepsize)
