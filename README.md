@@ -107,7 +107,7 @@ act_mat = model.run(adj_mat=nx.to_numpy_array(G))
 pos = nx.spring_layout(G, iterations=500) \
 colormap = matplotlib.cm.twilight \
 stepstart = 100 \
-stepsize = 250 \
+stepsize = 250 
 
 The image_creator saves the created pngs in the directory into a folder named "pngs". This folder has to be created beforehand manually. 
 
