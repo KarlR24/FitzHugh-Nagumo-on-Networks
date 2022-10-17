@@ -15,15 +15,15 @@ Remark: Depending on the choice of parameters in the equations the behaviour of 
 FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) 
 
           coupling: positive real value which gives the strength of the coupling of neighbors with 
-                    default vaulue = 1\
+                    default vaulue = 1
                     Note: if we are at a very stable fixed point it can happen that the coupling is 
-                    too weak to influence/perturbe its neighbors \
+                    too weak to influence/perturbe its neighbors 
                     usually the coupling strenght is between 0 (= no coupling & only local dynamics) and 2.
                 
-          network: graph on which dynamics run. Also gives the neighbor relations (ie. adjacency matrix) \
+          network: graph on which dynamics run. Also gives the neighbor relations (ie. adjacency matrix) 
                    If no network is specified a Watts Strogatz network with rewiring probability p = 0 is created.
          
-          a, b, tau: float/ parameters of the FitzHugh-Nagumo model \
+          a, b, tau: float/ parameters of the FitzHugh-Nagumo model 
                    Note: depending on the choice of parameters the dynamics exhibit different qualitative 
                          behaviours (saddle node bifurcation, limit cycles, Hopf bifurcation, etc.)
 
@@ -32,8 +32,8 @@ FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delt
           T: integer; duration of the simulation
 
           initial_states: list or array containing two arrays of length number of nodes: one with initial 
-                    states for v and the other one for w \
-                    If no initial states are given then random ones are created for every node. \
+                    states for v and the other one for w 
+                    If no initial states are given then random ones are created for every node. 
                     Sidenote: either network or initial_states must be given
           
 
