@@ -131,8 +131,8 @@ Observe the propagation of the pertubation away from perturbed node throughout t
 
 # Phase Coherence measure:
 
-def plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T):
-    '''
+plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T):
+    
     number_simulation_runs: integer
         number of simulations to run for phase coherence plots
     
@@ -151,12 +151,13 @@ def plot_phase_coherence(number_simulation_runs, range_initial_states, coupling,
         for Euler approximation of the differential equations
           
           
-    phase coherence measure: 
-    "The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
+phase coherence measure: 
+"The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - 
+Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
     
                      1
             R(t) =  --- * sum_i,j { [v_i(t) - v_j(t)]^2 } 
                     N^2
                     
         where {} denotes the average of a stochastic random variable
-    '''
+    
