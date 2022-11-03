@@ -131,59 +131,32 @@ Observe the propagation of the pertubation away from perturbed node throughout t
 
 # Phase Coherence measure:
 
-'''
-The phase coherence measure $R(t)$ is according to the paper: 
-The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction - Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
-
-$R(t) = \frac{1}{N^2} \sum_{ij} \langle[v_i(t) - v_j(t)]^2 \rangle$
-
-where $N$ is the number of nodes in the graph, $v_i(t)$ the state of node $i$ at time $t$ and $\langle \rangle$ the average for a stochastic random variable. This average is taken in the paper because the authors added Gaussian white noise in the differential equation for $v_i(t)$. However, the class FitzHugh-Nagumo on networks does not add any random variables in the differential equations. Therefore, the empirical average is taken in the sum of differences $\sum_{i, j} \frac{v_i(t) - v_j(t)}{2}$.
-
-
-The phase coherence formula $R(t)$ is implemented in the following way:\
-$v_t = [v_{1t} \dots v_{Nt}]$ states at time t for a network with $N$ nodes.\
-state_i, state_j = numpy.meshgrid($v_t,v_t$), where 
-
-$state_i =
-\begin{pmatrix}
-v_{1t} & v_{2t} & \dots & v_{Nt}\\
-v_{1t} & v_{2t} & \dots & v_{Nt}\\
-\vdots\\
-v_{1t} & v_{2t} & \dots & v_{Nt}\\
-\end{pmatrix}
-$
-, 
-$state_j =
-\begin{pmatrix}
-v_{1t} & v_{1t} & \dots & v_{1t}\\
-v_{2t} & v_{2t} & \dots & v_{2t}\\
-\vdots\\
-v_{Nt} & v_{Nt} & \dots & v_{Nt}\\
-\end{pmatrix}
-$
-
-Then, 
-$ A = state_i - state_j = 
-\begin{pmatrix}
-v_{1t}-v_{1t} & v_{2t}-v_{1t} & \dots & v_{Nt}-v_{1t}\\
-v_{1t}-v_{2t} & v_{2t}-v_{2t} & \dots & v_{Nt}-v_{2t}\\
-\vdots\\
-v_{1t}-v_{Nt} & v_{2t}-v_{Nt} & \dots & v_{Nt}-v_{Nt}\\
-\end{pmatrix}$
-
-$
-A*A^T =
-\begin{pmatrix}
-\sum_i (v_{it}-v_{1t})^2 & \sum_i (v_{it}-v_{1t})*(v_{it}-v_{2t}) & \dots & \sum_i (v_{it}-v_{1t})*(v_{it}-v_{Nt})\\
-\sum_i (v_{it}-v_{2t})*(v_{it}-v_{1t}) & \sum_i (v_{it}-v_{2t})^2 & \dots & \sum_i (v_{it}-v_{2t})*(v_{it}-v_{Nt})\\
-\vdots\\
-\sum_i (v_{it}-v_{Nt})(v_{it}-v_{1t}) & \sum_i (v_{it}-v_{Nt})(v_{it}-v_{2t}) & \dots & \sum_i (v_{it}-v_{Nt})^2\\
-\end{pmatrix}
-$ 
-
-Note that $\sum_i \sum_j (v_{i}(t)-v_{j}(t))^2 = \sum_j \sum_i ((v_{i}(t)-v_{j}(t))^2$.
-
-Therefore, we obtain the phase coherence as in the paper by taking the trace of $A*A^T$ and multiplying the sum with $\frac{1}{N^2}$
-
-$R(t) = \frac{1}{N^2}tr(A*A^T)$
-'''
+def plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T):
+    '''
+    number_simulation_runs: integer
+        number of simulations to run for phase coherence plots
+    
+    range_initial_states: positiv integer
+        size of rectangle around origin from which initial states are drawn according to uniform distribution
+    
+    coupling: float
+        coupling strength between oscillators
+    
+    network: networkx graph
+        
+    a, b, tau: float
+        parameters for FitzHugh-Nagumo
+    
+    delta_t, T: float
+        for Euler approximation of the differential equations
+          
+          
+    phase coherence measure: 
+    "The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
+    
+                     1
+            R(t) =  --- * sum_i,j { [v_i(t) - v_j(t)]^2 } 
+                    N^2
+                    
+        where {} denotes the average of a stochastic random variable
+    '''
