@@ -165,3 +165,9 @@ coupling = 1, G = nx.watts_strogatz_graph(10, 2, 0),  a = 1, b = 1, tau = 1, del
 
 plot_phase_coherence(10, 5, 1, G, 1, 1, 1, 10**(-3), 100)
 
+![phase coh v, non oscil](https://user-images.githubusercontent.com/104760326/199758056-a11e7743-0ba5-4cc7-b47f-c89787318c5d.png)
+
+![phase coh w, non oscil](https://user-images.githubusercontent.com/104760326/199758091-be5a3d21-11ff-4dbd-a987-9096daec744d.png)
+
+
+
