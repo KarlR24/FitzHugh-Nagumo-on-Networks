@@ -67,7 +67,7 @@ def plot_phase_coherence(number_simulation_runs, range_initial_states, coupling,
             intact_sq_v = np.matmul(interactions_v, interactions_v.T)
             intact_sq_w = np.matmul(interactions_w, interactions_w.T)
             
-            # to get double sum in formula we only need to sum up all entries of the first column 
+            # to get the double sum in the formula -> sum up all diagonal entries 
             coherence_v = N**(-2)*(np.trace(intact_sq_v))
             coherence_w = N**(-2)*(np.trace(intact_sq_w))
 
