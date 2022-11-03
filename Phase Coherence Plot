@@ -1,3 +1,4 @@
+'''
 The phase coherence measure $R(t)$ is according to the paper: 
 The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction - Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
 
@@ -52,7 +53,7 @@ Note that $\sum_i \sum_j (v_{i}(t)-v_{j}(t))^2 = \sum_j \sum_i ((v_{i}(t)-v_{j}(
 Therefore, we obtain the phase coherence as in the paper by taking the trace of $A*A^T$ and multiplying the sum with $\frac{1}{N^2}$
 
 $R(t) = \frac{1}{N^2}tr(A*A^T)$
-
+'''
 
 import networkx as nx
 import matplotlib
