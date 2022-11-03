@@ -155,9 +155,9 @@ phase coherence measure:
 "The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - 
 Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
     
-                     1
-            R(t) =  --- * sum_i,j { [v_i(t) - v_j(t)]^2 } 
-                    N^2
+         1
+R(t) =  --- * sum_i,j { [v_i(t) - v_j(t)]^2 } 
+        N^2
                     
-        where {} denotes the average of a stochastic random variable
+where {} denotes the average of a stochastic random variable
     
