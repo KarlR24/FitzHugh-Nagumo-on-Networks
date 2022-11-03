@@ -38,7 +38,7 @@ def plot_phase_coherence(number_simulation_runs, range_initial_states, coupling,
     
     # create matrix with dimensions (time steps in simulation x number of runs)
     # one simulation run measures the coherence of the whole network for all time steps
-    # at the end one simulation run is one curve in the plot 
+    # at the end: one simulation run is one curve in the plot 
     phase_coherence_v = np.empty([int(T/delta_t)+1, number_simulation_runs], dtype=float)
     phase_coherence_w = np.empty([int(T/delta_t)+1, number_simulation_runs], dtype=float)
 
@@ -54,7 +54,7 @@ def plot_phase_coherence(number_simulation_runs, range_initial_states, coupling,
             
             # get the difference of the states for all nodes for fixed time step 'timestep':
             # take empirical average since there is no random variable involved
-            # because the difference is taken of two states divide by 2 to take average
+            # because the difference is taken of two states divide by 2 for average
             state_vi, state_vj = np.meshgrid(A0[timestep, :], A0[timestep, :])
             state_wi, state_wj = np.meshgrid(A1[timestep, :], A1[timestep, :])
             
@@ -63,7 +63,6 @@ def plot_phase_coherence(number_simulation_runs, range_initial_states, coupling,
             interactions_w = 2**(-1)*np.abs((state_wi - state_wj))
             
             # to take the squares of the differences in the formula we multilply the array with its transposed
-            # note that: entry A_ij in resulting matrix the sum over all j for fixed i
             intact_sq_v = np.matmul(interactions_v, interactions_v.T)
             intact_sq_w = np.matmul(interactions_w, interactions_w.T)
             
