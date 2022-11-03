@@ -150,7 +150,8 @@ plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, net
     delta_t, T: float
         for Euler approximation of the differential equations
           
-          
+Note that for every simulation run there are new random initial states generated. Every simulation run is one curve in the plot.
+
 phase coherence measure: 
 "The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - 
 Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
