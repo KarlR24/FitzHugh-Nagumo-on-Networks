@@ -34,7 +34,7 @@ def plot_phase_coherence(number_simulation_runs, range_initial_states, coupling,
         where {} denotes the average of a stochastic random variable
     '''
     # to generate random initial conditions for every node and every run
-    number_nodes = G.number_of_nodes()
+    number_nodes = network.number_of_nodes()
     
     # create matrix with dimensions (time steps in simulation x number of runs)
     # one simulation run measures the coherence of the whole network for all time steps
