@@ -12,7 +12,7 @@ where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network)
 Remark: Depending on the choice of parameters in the equations the behaviour of the dynamics changes drastically. E.g. the choice of parameters in the ReadMe is such that the system exhibits oscillatory behaviour.
 
 # How to use FitzHugh_Nagumo_coupled()
-FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) 
+     FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) 
 
           coupling: positive real value which gives the strength of the coupling of neighbors with 
                     default vaulue = 1
