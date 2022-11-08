@@ -49,7 +49,8 @@ plot_activity(act_mat)
 
 
 # Use plot_phase_portrait
-force_field=True draws arrows in the direction of the flow 
+force_field=True draws arrows in the direction of the flow \
+Note that the force_field is drawn for the differential equation without coupling! Therefore, it is not precise but accurate enough to get an idea of the flow.
 
 Example: same example as for plot activity \
           G = nx.grid_2d_graph(3, 3) \
