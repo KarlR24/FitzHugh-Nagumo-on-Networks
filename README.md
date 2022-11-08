@@ -67,38 +67,38 @@ Example: same example as for plot activity \
 # Further use of class: 
 With Make_images_and_Gif: create pngs from act_mat to create GIF. Then, use GIF to visually inspect/observe behaviour of the dynamics on the network. 
 
-image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
+     image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
 
     
-    G: network
+          G: network
     
-    act_mat: array
+          act_mat: array
     
-    pos: dictionary with nodes as keys and positions as values
+          pos: dictionary with nodes as keys and positions as values
     
-    colormap: matplotlib.cm.colormap
-        colormap for node states
+          colormap: matplotlib.cm.colormap
+               colormap for node states
         
-    stepstart: float
-        iteration step where first png is created
+          stepstart: float
+               iteration step where first png is created
     
-    stepsize: float
-        after stepsize many iterations the next png is created
+          stepsize: float
+               after stepsize many iterations the next png is created
     
     
    
-GIF_creator(duration, png_dir, path):
+     GIF_creator(duration, png_dir, path):
 
     
-    duration: float
-        time each picture is shown in GIF
-        useful range is between 0.05 to 0.2 
+          duration: float
+               time each picture is shown in GIF
+               useful range is between 0.05 to 0.2 
         
-    png_dir: string
-        direction where .pngs are to make GIF out of
+          png_dir: string
+               direction where .pngs are to make GIF out of
     
-    path: string
-        direction where the GIF should be saved
+          path: string
+               direction where the GIF should be saved
         
     this code is from stackoverflow.com
     
@@ -131,24 +131,24 @@ Observe the propagation of the pertubation away from perturbed node throughout t
 
 # Phase Coherence measure:
 
-plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T):
+     plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T):
     
-    number_simulation_runs: integer
-        number of simulations to run for phase coherence plots
+          number_simulation_runs: integer
+               number of simulations to run for phase coherence plots
     
-    range_initial_states: positiv integer
-        size of rectangle around origin from which initial states are drawn according to uniform distribution
+          range_initial_states: positiv integer
+               size of rectangle around origin from which initial states are drawn according to uniform distribution
     
-    coupling: float
-        coupling strength between oscillators
+          coupling: float
+               coupling strength between oscillators
     
-    network: networkx graph
+          network: networkx graph
         
-    a, b, tau: float
-        parameters for FitzHugh-Nagumo
+          a, b, tau: float
+               parameters for FitzHugh-Nagumo
     
-    delta_t, T: float
-        for Euler approximation of the differential equations
+          delta_t, T: float
+               for Euler approximation of the differential equations
           
 Note that for every simulation new random initial states are generated. Every simulation run is one curve in the plot which describes the phase coherence of the network for the run time of the model.
 
