@@ -13,7 +13,6 @@ Remark: Depending on the choice of parameters in the equations the behaviour of 
 
 # How to use FitzHugh_Nagumo_coupled()
      FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) 
-
           coupling: positive real value which gives the strength of the coupling of neighbors with 
                     default vaulue = 1
                     Note: if we are at a very stable fixed point it can happen that the coupling is 
@@ -68,8 +67,6 @@ Example: same example as for plot activity \
 With Make_images_and_Gif: create pngs from act_mat to create GIF. Then, use GIF to visually inspect/observe behaviour of the dynamics on the network. 
 
      image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
-
-    
           G: network
     
           act_mat: array
@@ -88,8 +85,6 @@ With Make_images_and_Gif: create pngs from act_mat to create GIF. Then, use GIF 
     
    
      GIF_creator(duration, png_dir, path):
-
-    
           duration: float
                time each picture is shown in GIF
                useful range is between 0.05 to 0.2 
@@ -132,7 +127,6 @@ Observe the propagation of the pertubation away from perturbed node throughout t
 # Phase Coherence measure:
 
      plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T):
-    
           number_simulation_runs: integer
                number of simulations to run for phase coherence plots
     
