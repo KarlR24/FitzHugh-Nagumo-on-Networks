@@ -104,7 +104,7 @@ With Make_images_and_Gif: create pngs from act_mat to create GIF. Then, use GIF 
 Example: Here the initial_states are chosen such that one node in a corner is perturbed and all other nodes are at the equilibrium. \
 G = nx.grid_2d_graph(10, 10) \
 model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins) \
-act_mat = model.run(adj_mat=nx.to_numpy_array(G))
+act_mat = model.run(adj_mat=nx.to_numpy_array(G))\
 pos = nx.spring_layout(G, iterations=500) \
 colormap = matplotlib.cm.twilight \
 stepstart = 100 \
