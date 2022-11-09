@@ -178,10 +178,10 @@ plot_phase_coherence(10, 5, 1, G, 1, 1, 1, 10**(-3), 100)
 Like the image_creator above run_around creates and stores png images in a folder "pngs".
 
 Example: G = nx.watts_strogatz_graph(10, 2, 0)\
-model1 = FitzHugh_Nagumo_coupled(coupling=0.5, network=G, a=1, b=0.1, tau=5, delta_t=10**(-3), T=500, initial_states=ins)\
-act_mat = model1.run(adj_mat)\
+model = FitzHugh_Nagumo_coupled(coupling=0.5, network=G, a=1, b=0.1, tau=5, delta_t=10**(-3), T=500)\
+act_mat = model.run(adj_mat)\
 run_around(act_mat, 50, 500)
 
-![10 node ring, cpl=0 5, a=1, b=0 1, tau=5, T=500, runaround](https://user-images.githubusercontent.com/104760326/200849817-55175359-92ac-491a-84db-b8a2a526a184.gif)
+![10 node ring, cpl=0.5, a=1, b=0.1, tau=5, T=500, runaround](https://user-images.githubusercontent.com/104760326/200849817-55175359-92ac-491a-84db-b8a2a526a184.gif)
 
 
