@@ -147,14 +147,14 @@ Observe the propagation of the pertubation away from perturbed node throughout t
           
 Note that for every simulation new random initial states are generated. Every simulation run is one curve in the plot which describes the phase coherence of the network for the run time of the model.
 
-phase coherence measure: 
+phase coherence measure $R(t)$ from the paper: 
 "The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - 
 Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
     
 $R(t) =  \frac{1}{N^2} * \sum_{i,j} \langle [v_i(t) - v_j(t)]^2 \rangle $
         
                     
-where $\langle \rangle$ denotes the average of a stochastic random variable
+where $\langle \rangle$ denotes the average of a stochastic random variable.
     
 Example: For a ring graph with ten nodes we want to run the dynamics with non-oscillatory parameter choice on it ten times where for every simulation run new initial states are generated. The initial states are picked according to a uniform distribution and should be in the interval $[-5, 5]$. The rest of the parameters are in the same order as they are in the FitzHughNagumo_on_network class:
 coupling = 1, G = nx.watts_strogatz_graph(10, 2, 0),  a = 1, b = 1, tau = 1, delta_t = 10**(-3) and T = 100
