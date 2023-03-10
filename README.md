@@ -145,7 +145,7 @@ Observe the propagation of the pertubation away from perturbed node throughout t
           delta_t, T: float
                for Euler approximation of the differential equations
           
-Note that for every simulation new random initial states are generated. Every simulation run is one curve in the plot which describes the phase coherence of the network for the run time of the model.
+Note that for every simulation new random initial states are generated. Every simulation run is one curve in the plot which describes the phase coherence of the network for the run time of the model. Also, the acitivity matrix is not stored therefore not for further analysis available.
 
 phase coherence measure $R(t)$ from the paper: 
 "The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - 
@@ -186,3 +186,32 @@ Now compile pngs into GIF with GIF_creator.
 ![10 node ring, cpl=0.5, a=1, b=0.1, tau=5, T=500, runaround](https://user-images.githubusercontent.com/104760326/200849817-55175359-92ac-491a-84db-b8a2a526a184.gif)
 
 
+# phase_coh_freq():
+phase_coh_freq(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T, every_x_run, last_steps):
+     number_simulation_runs: integer
+        number of simulations to run for phase coherence plots
+    
+    range_initial_states: positiv integer
+        size of rectangle around origin from which initial states are drawn according to uniform distribution
+    
+    coupling: float
+        coupling strength between oscillators
+    
+    network: networkx graph
+        
+    a, b, tau: float
+        parameters for FitzHugh-Nagumo
+    
+    delta_t, T: float
+        for Euler approximation of the differential equations
+        
+    every_x_run: integer
+        for every x-th run in the simulation, the individual node dynamics will be analysis and GIFs & plots generated
+        
+    last_steps: interger (< T/delta_t)
+        number of time units/steps where eg. phase coherence frequency is analysed and chimera GIF are generated
+        want to analyse time where network has reached a stable state of (some degree of) synchronicity
+        
+This function combines the functions above to make simulation runs and analysing them in one go. 
+Note that: the functions above are written for single model realizations whereas this function is meant for several simulation runs and the analysis
+of individual runs (eg. frequency analysis of the phase coherence measure and node activity and chimera, runaround and blinking network GIF).
