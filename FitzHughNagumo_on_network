@@ -1,0 +1,188 @@
+import networkx as nx
+import numpy as np
+import random as rd
+
+class FitzHugh_Nagumo_coupled():
+    def __init__(self, coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None):
+        '''
+        coupling: float
+            coupling strength between oscillators where default is 1
+            later on we normalize the coupling by the number of incoming interactions
+        
+        network: graph
+            nx network with number of nodes and neighbor relations --> adjacency matrix
+            sidenote: number of nodes = number of oscillators
+            
+        a, b, tau: float
+            parameters of the FitzHugh-Nagumo model
+            
+        delta_t: float
+            delta_t is size of integration/time steps
+            
+        T: float
+            time for which simulation runs
+            total number of integration/time steps is T/delta_t
+        
+        initial_states: 2d-array (or list)
+            array with initial states for all nodes
+            length of initial_states must match number of nodes
+            note: FitzHugh-Nagumo described by two ODEs. For coding: we want the initial_states to contain two arrays 
+            one array contains initial states for v's and the second array contains initial states for w's.
+            So, initial_states is an (2 x #nodes)-array [[v_1, ..., v_n], [w_1, ..., w_n]]
+        '''
+        
+        # first check that either network or initial states are specified
+        if network is None and initial_states is None:
+            raise ValueError("either network or initial_states must be specified")
+          
+        # initialize parameters of FitzHugh-Nagumo
+        # if no parameter specification then set them to some fixed values
+        # if not all given raise error to specify all parameters
+        if a==None and b==None and tau==None:
+            self.a = 1
+            self.b = 0.4
+            self.tau = 0.8
+                        
+        elif a==None or b==None or tau==None:
+            raise ValueError("parameter value(s) missing, check a, b, tau")
+        
+        else:
+            self.a = a
+            self.b = b
+            self.tau = tau
+            
+        # initialize rest of parameters
+        self.coupling = coupling
+        self.delta_t = delta_t
+        self.T = T
+        
+        # if initial states given then generate network with number of nodes = number initial states
+        # Watts-Strogatz network generated with random number of neighbors
+        if network is None:
+            self.initial_states = initial_states
+            number_nodes = len(self.initial_states[0]) # match number of nodes to number of initial states
+            k = rd.randint(2, number_nodes - 1)
+            self.network = nx.watts_strogatz_graph(number_nodes, k, 0) # watts strogatz graph for ring reasons
+            self.adj_mat = nx.to_numpy_array(self.network) 
+            
+        # if a network is given then generate random initial states for all nodes
+        # note: initial_states is an 1D-array with two entries that are again arrays. First array contains
+        # initial states "for all v's" and the second one contains initial states "for all w's".
+        elif initial_states is None:
+            self.network = network
+            number_nodes = self.network.number_of_nodes()
+            self.initial_states = np.array([np.random.normal(size=number_nodes), np.random.normal(size=number_nodes)])    #np.random.normal() draws samples from (parametrized) normal distribution
+            self.adj_mat = nx.to_numpy_array(network)
+            
+        elif network is not None and initial_states is not None:
+            self.network = network
+            self.initial_states = initial_states
+            self.adj_mat = nx.to_numpy_array(network)
+            
+        
+    def init_inner_states(self):
+        return self.initial_states 
+    
+   
+    def derivative(self, i, vec_a, interactions, normalization, sol_v, sol_w):
+        '''
+        i: int
+            time/iteration step
+            
+        vec_a: array
+            array of lenght number of nodes filled with parameter a
+            
+        interactions: 2d-array
+            entry i,j: interaction between node i and node j times entry i,j of adjacency matrix
+            
+        normalization: array
+            coupling divided by degree of node
+        
+        sol_v: array
+            activity of all nodes for dynamics of v
+        
+        sol_w: array
+            activity of all nodes for dynamics of w
+        '''
+        
+        assert len(self.initial_states[0])==len(self.initial_states[1])==len(self.adj_mat), \
+        'Input dimensions inner_states (v = {}, w = {}) & adj_mat ={}, nx.to_numpy_array(network) = {} do not match'.format(len(initial_states[0]), len(initial_states[1]), adj_mat.shape, nx.to_numpy_array(self.network).shape, print(adj_mat), print(nx.to_numpy_array(self.network)))
+        
+        #state_i, state_j = np.meshgrid(sol_v[int(i-1)], sol_v[int(i-1)])
+        #interactions = adj_mat * (state_i - state_j)
+        #normalization = self.coupling/(self.adj_mat !=0).sum(axis=0)
+        #vec_a = np.empty(len(self.adj_mat), dtype=float)
+        #vec_a.fill(self.a)
+
+        dvdt = sol_v[int(i-1), :] - 1./3*sol_v[int(i-1), :]**3 - sol_w[int(i-1), :] + np.multiply(interactions.sum(axis=0), normalization)
+        dwdt = 1/self.tau*(sol_v[int(i-1), :] - self.b*sol_w[int(i-1), :] + vec_a)
+        
+        return [dvdt, dwdt]
+  
+
+    def approximation(self, inner_states, adj_mat):
+        '''
+        inner_states: list 
+            state values for all nodes and all timesteps
+    
+        adj_mat: array
+            adjacency matrix of the network
+        '''
+        
+        assert len(self.initial_states[0])==len(self.initial_states[1])==len(adj_mat), \
+        'Input dimensions inner_states (v = {}, w = {}) & adj_mat ={} do not match'.format(len(self.initial_states[0]), len(self.initial_states[1]), adj_mat.shape, print(adj_mat), print(nx.to_numpy_array(self.network)))
+        
+        
+        # optimizing dynamics with np.empty array of shape = (rows x columns) = (timesteps x #nodes)
+        # then replace rows with "actual states" the nodes are in at time i
+        
+        sol_v = np.empty([int(self.T/self.delta_t)+1, len(adj_mat)], dtype=float)
+        sol_w = np.empty([int(self.T/self.delta_t)+1, len(adj_mat)], dtype=float)
+        
+        vec_a = np.empty(len(adj_mat), dtype=float)
+        vec_a.fill(self.a)
+        
+        normalization = self.coupling/(adj_mat !=0).sum(axis=0)
+        # for more general networks: check number of interactions since could have isolated nodes in network!
+        
+        for i in range(int(self.T/self.delta_t)+1):
+            if i==0:
+                sol_v[0, :] = self.initial_states[0]
+                sol_w[0, :] = self.initial_states[1]
+                
+            else:
+                state_i, state_j = np.meshgrid(sol_v[i-1, :], sol_v[i-1, :])
+                interactions = adj_mat * (state_i - state_j)
+                
+                # solution with dvdt, dwdt here is slightly faster than calling derivative function
+                dvdt = sol_v[int(i-1), :] - 1./3*sol_v[int(i-1), :]**3 - sol_w[int(i-1), :] + np.multiply(interactions.sum(axis=0), normalization)
+                dwdt = 1/self.tau*(sol_v[int(i-1), :] - self.b*sol_w[int(i-1), :] + vec_a)
+
+                new_v = dvdt*(self.delta_t) + sol_v[int(i-1), :]
+                new_w = dwdt*(self.delta_t) + sol_w[int(i-1), :]
+                
+                # call derivative function but it is slower compared to how it is coded above
+                #new_v = self.derivative(i, vec_a, interactions, normalization, sol_v, sol_w)[0]*(self.delta_t) + sol_v[int(i-1), :]
+                #new_w = self.derivative(i, vec_a, interactions, normalization, sol_v, sol_w)[1]*(self.delta_t) + sol_w[int(i-1), :]
+                
+                sol_v[int(i),:] = new_v
+                sol_w[int(i),:] = new_w
+                
+        inner_states = [sol_v, sol_w]         
+        return inner_states 
+
+        
+    def run(self, adj_mat=None, inner_states=None):
+        '''
+        adj_mat: connectivity of network
+        inner_states: array containing states
+        
+        returns: activity matrix 
+        '''
+        
+        if inner_states is None:
+            inner_states = self.init_inner_states()
+            
+        return self.approximation(inner_states, adj_mat)
+    
+    
