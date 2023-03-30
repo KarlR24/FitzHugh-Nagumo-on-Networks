@@ -11,7 +11,7 @@ $\dot{w_i} = \frac{1}{\tau} (v_i - bw_i + a)$ \
 where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network) and $I_i$ is the number of incoming interactions for node i (ie. degree of node i). Note that the sum is equivalent to summing only over neighboring nodes and omitting the adjacency matrix. \
 Remark: Depending on the choice of parameters in the equations the behaviour of the dynamics changes drastically. E.g. the choice of parameters in the ReadMe is such that the system exhibits oscillatory behaviour.
 
-# How to use FitzHugh_Nagumo_coupled()
+# Class FitzHugh_Nagumo_coupled()
      FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) 
           coupling: positive real value which gives the strength of the coupling of neighbors with 
                     default vaulue = 1
@@ -36,8 +36,10 @@ Remark: Depending on the choice of parameters in the equations the behaviour of 
                     Sidenote: either network or initial_states must be given
           
 
-# plot_activity(act_mat)\
-This plots the node activity for all nodes for all times.\
+# Visualizations:
+
+# plot_activity(act_mat)
+This plots the node activity for all nodes for all times.
 
 Example: \
 G = nx.grid_2d_graph(3, 3) \
@@ -66,16 +68,22 @@ Example: same example as for plot activity \
 ![download](https://user-images.githubusercontent.com/104760326/188612773-91fcc9eb-a876-48ba-b8ce-1a9c740a492f.png)
 
 
-# Visualizations: 
-In visualizations: create pngs and use them to create GIFs or videos. \
-There are several different ways to visualize the network dynamics
+ # Pngs to GIF/Video
+ 
+The following functions create sequences of png images and use them to create GIFs/videos. \
+There are several different ways to visualize the network dynamics:
+
+     The function image_creator visualized the node activity on the network. The network is plotted according to a specified layout 
+     and the node activity is colorcoded. \
+     Afterwards, one can make a GIF (used here) or video out of the png images 
 
      image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
-          G: network
+          G: networkX graph
     
-          act_mat: array
+          act_mat: ndarray
     
           pos: dictionary with nodes as keys and positions as values
+               layouts like nx.circular_layout, nx.spring_layout, etc.
     
           colormap: matplotlib.cm.colormap
                colormap for node states
@@ -128,8 +136,35 @@ Observe the propagation of the pertubation away from perturbed node throughout t
 ![10x10, one perturbed, twilight](https://user-images.githubusercontent.com/104760326/188586292-599d7e96-57f2-4e70-a445-8ad671d5f781.gif)
 
 
+# run around:
+
+     runaround visualizes the node activity in the phase plane where the first variable v is on the x-axis and the second variable w is on the y-axis.
+     
+     runaround(act_mat, stepstart, stepend, stepsize)
+          act_mat: array
+               states of oscillators for all times
+          stepstart: int
+               time step where first png is created
+          stepend: int
+               time step where last png is created
+          stepsize: int
+               after stepsize many timesteps/iterations the next png is created
+               
+Like the image_creator above run_around creates and stores png images in a folder "pngs".
+
+Example: G = nx.watts_strogatz_graph(10, 2, 0)\
+model = FitzHugh_Nagumo_coupled(coupling=0.5, network=G, a=1, b=0.1, tau=5, delta_t=10**(-3), T=500)\
+act_mat = model.run(adj_mat)\
+runaround(act_mat, 50, 500)\
+Now compile pngs into GIF with GIF_creator.
+
+![10 node ring, cpl=0.5, a=1, b=0.1, tau=5, T=500, runaround](https://user-images.githubusercontent.com/104760326/200849817-55175359-92ac-491a-84db-b8a2a526a184.gif)
+
+
+
 # Phase Coherence measure:
 
+     
      plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T):
           number_simulation_runs: integer
                number of simulations to run for phase coherence plots
@@ -148,7 +183,8 @@ Observe the propagation of the pertubation away from perturbed node throughout t
           delta_t, T: float
                for Euler approximation of the differential equations
           
-Note that for every simulation new random initial states are generated. Every simulation run is one curve in the plot which describes the phase coherence of the network for the run time of the model. Also, the acitivity matrix is not stored therefore not for further analysis available.
+Note that new random initial states are generated for every simulation run. Every simulation run is one curve in the plot which describes the phase coherence (synchronicity of the oscillators) in the network.
+Note that, the acitivity matrix is not stored therefore not for further analysis available. The output of this functions a plot phase coherence measure for both variables v, w.
 
 phase coherence measure $R(t)$ from the paper: 
 "The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - 
@@ -160,7 +196,17 @@ $R(t) =  \frac{1}{N^2} * \sum_{i,j} \langle [v_i(t) - v_j(t)]^2 \rangle $
 where $\langle \rangle$ denotes the average of a stochastic random variable.
     
 Example: For a ring graph with ten nodes we want to run the dynamics with non-oscillatory parameter choice on it ten times where for every simulation run new initial states are generated. The initial states are picked according to a uniform distribution and should be in the interval $[-5, 5]$. The rest of the parameters are in the same order as they are in the FitzHughNagumo_on_network class:
-coupling = 1, G = nx.watts_strogatz_graph(10, 2, 0),  a = 1, b = 1, tau = 1, delta_t = 10**(-3) and T = 100
+number_simulation_runs = 10 
+initial_states_interval = 5
+coupling = 1
+network = nx.watts_strogatz_graph(10, 2, 0)
+a = 1
+b = 1
+tau = 1 
+delta_t = 10**(-3)
+T = 100
+
+plot_phase_coherence(number_simulation_runs, initial_states_interval, coupling, network, a, b, tau, delta_t, T)
 
 plot_phase_coherence(10, 5, 1, G, 1, 1, 1, 10**(-3), 100)
 
@@ -168,25 +214,6 @@ plot_phase_coherence(10, 5, 1, G, 1, 1, 1, 10**(-3), 100)
 
 ![phase coh w, non oscil](https://user-images.githubusercontent.com/104760326/199758091-be5a3d21-11ff-4dbd-a987-9096daec744d.png)
 
-
-# run around:
-     run_around(act_mat, stepstart, stepsize)
-          act_mat: array
-               states of oscillators for all times
-          stepstart: int
-               time step where first png is created and how many steps are shown in phase plane
-          stepsize: int
-               after stepsize many iterations the next png is created
-               
-Like the image_creator above run_around creates and stores png images in a folder "pngs".
-
-Example: G = nx.watts_strogatz_graph(10, 2, 0)\
-model = FitzHugh_Nagumo_coupled(coupling=0.5, network=G, a=1, b=0.1, tau=5, delta_t=10**(-3), T=500)\
-act_mat = model.run(adj_mat)\
-run_around(act_mat, 50, 500)\
-Now compile pngs into GIF with GIF_creator.
-
-![10 node ring, cpl=0.5, a=1, b=0.1, tau=5, T=500, runaround](https://user-images.githubusercontent.com/104760326/200849817-55175359-92ac-491a-84db-b8a2a526a184.gif)
 
 
 # phase_coh_freq():
