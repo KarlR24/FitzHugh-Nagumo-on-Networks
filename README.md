@@ -36,7 +36,9 @@ Remark: Depending on the choice of parameters in the equations the behaviour of 
                     Sidenote: either network or initial_states must be given
           
 
-# Use plot_activity(act_mat)
+# plot_activity(act_mat)\
+This plots the node activity for all nodes for all times.\
+
 Example: \
 G = nx.grid_2d_graph(3, 3) \
 model = FitzHugh_Nagumo_coupled(coupling=2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) \
@@ -48,7 +50,7 @@ plot_activity(act_mat)
 ![image](https://user-images.githubusercontent.com/104760326/188576765-893c7b97-43e5-458e-85de-4273d5efa95b.png)
 
 
-# Use plot_phase_portrait
+# plot_phase_portrait(a, b, tau, act_mat, force_field=optional)
 force_field=True draws arrows in the direction of the flow \
 Note that the force_field is drawn for the differential equation without coupling! Therefore, it is not precise but accurate enough to get an idea of the flow.
 
@@ -64,8 +66,9 @@ Example: same example as for plot activity \
 ![download](https://user-images.githubusercontent.com/104760326/188612773-91fcc9eb-a876-48ba-b8ce-1a9c740a492f.png)
 
 
-# Further use of class: 
-With Make_images_and_Gif: create pngs from act_mat to create GIF. Then, use GIF to visually inspect/observe behaviour of the dynamics on the network. 
+# Visualizations: 
+In visualizations: create pngs and use them to create GIFs or videos. \
+There are several different ways to visualize the network dynamics
 
      image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
           G: network
