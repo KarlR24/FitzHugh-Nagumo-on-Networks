@@ -293,12 +293,60 @@ phase_coh_freq(number_simulation_runs, range_initial_states, coupling, network, 
         for Euler approximation of the differential equations
         
     every_x_run: integer
-        for every x-th run in the simulation, the individual node dynamics will be analysis and GIFs & plots generated
+        for every x-th run in the simulation, the individual node dynamics will be analysis and GIFs/videos & plots generated
         
     last_steps: interger (< T/delta_t)
         number of time units/steps where eg. phase coherence frequency is analysed and chimera GIF are generated
         want to analyse time where network has reached a stable state of (some degree of) synchronicity
         
-This function combines the functions above to make simulation runs and analysing them in one go. 
-Note that: the functions above are written for single model realizations whereas this function is meant for several simulation runs and the analysis
-of individual runs (eg. frequency analysis of the phase coherence measure and node activity and chimera, runaround and blinking network GIF).
+This function combines the class and visualiation function from above to make simulation runs and analyse them in one go. \
+Additionally, the activity matrix for the first variable v is plotted as heatmap to be able to link the different visualization together.\
+Furthermore, the node activity and the phase coherence measure are decomposed into their frequencies using Fast Fourier Transform (FFT).\
+Note that: phase_coh_freq purpose is to make simulation runs and analysis individual runs with the same function. \
+In comparison, the individual functions above can be used for sinlge model realizations to test and visualize
+
+Example
+number_simulation_runs = 3
+range_initial_states = 3
+coupling = 1
+network = nx.watts_strogatz_graph(500, 20, 0)
+a = 0.3
+b = 0.1
+tau = 5
+delta_t = 10**(-2)
+T = 1000
+every_x_run = 10
+last_steps = 10000
+
+phase_coh_freq(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T, every_x_run, last_steps) = 
+
+phase_coh_freq(3, 3, 1, G, 0.3, 0.1, 5, 10**(-2), 1000, 10, 10000)
+
+![heatmap for longtalk](https://user-images.githubusercontent.com/104760326/228865661-2c919912-877a-4e25-9853-394b9dd9e078.png)
+
+![node activity, long talk](https://user-images.githubusercontent.com/104760326/228865707-a4bc710c-8b6c-4918-9420-286560a1455e.png)
+
+![frq ana rand nodes, long talk](https://user-images.githubusercontent.com/104760326/228865769-ac4f9604-c412-46ef-8f27-83fed089a49c.png)
+
+![node 1 act, long talk](https://user-images.githubusercontent.com/104760326/228865827-f59894f7-3a53-4491-8f76-20db72374e0b.png)
+
+![freq ana node 1, long talk](https://user-images.githubusercontent.com/104760326/228865864-35d67857-f307-40d8-880f-d25fdb80b059.png)
+
+![phase coh, long talk](https://user-images.githubusercontent.com/104760326/228865913-962ee750-8a3c-46e5-9994-dfe170aa7983.png)
+
+![phase coh last, long talk](https://user-images.githubusercontent.com/104760326/228866204-0e3f1fd4-7d01-4440-82cf-f704d6e3ffa3.png)
+
+![freq ana phase coh, long talk](https://user-images.githubusercontent.com/104760326/228866233-ce019498-35a0-4423-a9a1-dc66b5392ad2.png)
+
+![phase coh run1, long talk](https://user-images.githubusercontent.com/104760326/228866294-3adabd7d-ad6c-42c9-967b-c5e3d4768bd0.png)
+
+
+
+
+
+
+
+
+
+
+
