@@ -1,3 +1,110 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.signal import find_peaks
+import seaborn as sns
+from pathlib import Path
+import os
+from datetime import datetime
+from moviepy.editor import *
+
+
+
+def plot_activity(activity):
+    """
+    Plot v vs time & w vs time for each oscillator time series.
+    activity: 2D-np.ndarray
+        Activity time series, node vs. time; ie output of FitzHugh_Nagumo_coupled.run()
+    return:
+        matplotlib axis for further customization
+    """
+    _, ax = plt.subplots(figsize=(12, 4))
+    ax.plot(activity[0])
+    ax.set_xlabel('Time', fontsize=25)
+    ax.set_ylabel('v', fontsize=25)
+    
+    _, ax = plt.subplots(figsize=(12, 4))
+    ax.plot(activity[1])
+    ax.set_xlabel('Time', fontsize=25)
+    ax.set_ylabel('w', fontsize=25)
+    
+    return ax
+
+
+
+
+def plot_phase_portrait(a, b, tau, act_mat, force_field=False):
+    '''
+    a, b: parameters used in FitzHugh-Nagumo model
+    
+    act_mat: activity matrix according to class FitzHugh_Nagumo_on_network
+    '''
+    if force_field is False:
+        plt.figure(figsize=(20,20))
+    
+        # plot the clines for v', w'
+        x_null = np.arange(-5,5,.1) 
+        y1 = [z-1./3*z**3 for z in x_null]
+        y2 = [1/b*z+a/b for z in x_null]
+
+        plt.plot(x_null,y1)
+        plt.plot(x_null,y2)
+    
+        minv = act_mat[0].min() - 1
+        maxv = act_mat[0].max() + 1
+    
+        minw = act_mat[1].min() - 1
+        maxw = act_mat[1].max() + 1
+
+        plt.xlim([minv, maxv])
+        plt.ylim([minw, maxw])
+
+        for i in range(int(len(adj_mat))):
+            xs = act_mat[0]
+            x = xs[:, i]       
+            ys = act_mat[1]
+            y = ys[:, i]
+            plt.plot(x, y)
+    
+    else:
+        plt.figure(figsize=(20,20))
+        x, y = np.meshgrid(np.linspace(act_mat[0].min() - 1, act_mat[0].max() + 1, 25), np.linspace(act_mat[1].min() - 1, act_mat[1].max() + 1, 25))
+        v = x-1./3*x**3 - y
+        w = 1/tau * (x + a - b*y)
+        plt.quiver(x, y, v, w)
+        
+    #plt.figure(figsize=(20,20))
+    
+        # plot the clines for v', w'
+        x_null = np.arange(-5,5,.1) 
+        y1 = [z-1./3*z**3 for z in x_null]
+        y2 = [1/b*z+a/b for z in x_null]
+
+        plt.plot(x_null,y1)
+        plt.plot(x_null,y2)
+    
+        minv = act_mat[0].min() - 1
+        maxv = act_mat[0].max() + 1
+    
+        minw = act_mat[1].min() - 1
+        maxw = act_mat[1].max() + 1
+
+        plt.xlim([minv, maxv])
+        plt.ylim([minw, maxw])
+
+        for i in range(int(len(adj_mat))):
+            xs = act_mat[0]
+            x = xs[:, i]       
+            ys = act_mat[1]
+            y = ys[:, i]
+            plt.plot(x, y)
+
+
+
+
+
+
+
 def runaround(act_mat, stepstart, stepend, stepsize):
     
     '''
