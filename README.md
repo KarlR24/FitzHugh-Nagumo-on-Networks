@@ -194,6 +194,8 @@ https://user-images.githubusercontent.com/104760326/228857148-89eddbb7-cc18-498d
 
 
 
+
+
 # Phase Coherence measure:
 
      
@@ -245,6 +247,29 @@ plot_phase_coherence(10, 5, 1, G, 1, 1, 1, 10**(-3), 100)
 ![phase coh v, non oscil](https://user-images.githubusercontent.com/104760326/199758056-a11e7743-0ba5-4cc7-b47f-c89787318c5d.png)
 
 ![phase coh w, non oscil](https://user-images.githubusercontent.com/104760326/199758091-be5a3d21-11ff-4dbd-a987-9096daec744d.png)
+
+
+# coh_gif(phase_coherence_v, simulation_run, stepsize)
+
+To compare the dynamics from image_creator, scatter_chim_gif and runaround we make a GIF/video where a vertical bar is at the current time step. This function is used in the code of phase_coh_freq below!
+
+     coh_gif(phase_coherence_v, simulation_run, stepsize):
+          '''
+          phase_coherence_v: 2d-array
+               phase coherence values for every time step
+        
+          simulation_run: integer
+               simulation run of interest to make GIF
+    
+          stepsize: float
+               after stepsize many iterations the next png is created
+          '''
+    
+Example: Since coh_gif takes its imputs from variables inside the phase_coh_freq function. Therefore, this example only showcases the output images compiled into a video.
+
+
+
+https://user-images.githubusercontent.com/104760326/228861323-ac74ffc4-0a10-4013-8a87-663674978003.mp4
 
 
 
