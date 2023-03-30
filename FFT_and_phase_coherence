@@ -54,9 +54,7 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
     # at the end one simulation run is one curve in the plot 
     phase_coherence_v = np.empty([int(T/delta_t)+1, number_simulation_runs], dtype=float)
     
-    #to reduce computational time all lines correspomding to the phase coherence measure for w are excluded
-    #those lines are one below the lines for the first variable v
-    #phase_coherence_w = np.empty([int(T/delta_t)+1, number_simulation_runs], dtype=float)
+    #to reduce computational time all we compute the phase coherence only for the first variable v
     
     act_mat = None
     sns.set_style("whitegrid")
@@ -80,7 +78,7 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
             state_vi, state_vj = np.meshgrid(A0[timestep, :], A0[timestep, :])
             
             # absolute value because pairwise differences are squared in formula and therefore positive
-            #interactions_v = 2**(-1)*(state_vi - state_vj)
+            #interactions_v = 2**(-1)*(state_vi - state_vj) 
             interactions_v = (maxact - minact)**(-1)*(state_vi - state_vj)
             
             # to take the squares of the differences in the formula we multilply the array with its transposed
@@ -227,7 +225,6 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
     
     # Frequency analyisis of phase coherence matrix
     start_sampl = int(T/delta_t)-last_steps
-    print('We start sampling the phase coherence at t =', start_sampl)
 
     signal = phase_coherence_v[int(start_sampl):,:]
     FFT_sig = np.fft.fft(signal, axis=0)
@@ -235,6 +232,8 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
     magnitude = np.abs(FFT_sig)
     #PSD = magnitude**2 # power spectral density
     freqs = np.fft.fftfreq(len(FFT_sig), delta_t)
+    
+    #print('We start sampling the phase coherence at t =', start_sampl)
 
     # figures
     fig, (ax4, ax5) = plt.subplots(2, 1, figsize=(20,20))
