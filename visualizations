@@ -1,0 +1,292 @@
+def runaround(act_mat, stepstart, stepend, stepsize):
+    
+    '''
+    act_mat: nd array
+        activity matrix from model
+        
+    stepstart: integer 
+        starting time to begin taking pictures to make a GIF
+        stepstart < T/delta_t, ie. total number of steps in model
+        
+    stepend: integer 
+        time step where last pictures is taken for GIF
+        stepstart < stepend < T/delta_t, ie. total number of steps in model   
+    
+    stepsize: integer
+        every stepsize-number of timestep is taken from the activity matrix
+    '''
+    
+    A = act_mat[0] 
+    t_steps, N = A.shape
+    
+    minv = act_mat[0].min() - 1
+    maxv = act_mat[0].max() + 1
+    
+    minw = act_mat[1].min() - 1
+    maxw = act_mat[1].max() + 1
+            
+    for t in range(stepstart, stepend, stepsize):
+            
+        xs = act_mat[0]
+        x = xs[t, :]       
+        ys = act_mat[1]
+        y = ys[t, :]
+            
+        fig = plt.figure(figsize=(10,10))
+        sns.set_style("whitegrid")
+        plt.scatter(x, y)
+        
+        # plot null-clines
+        x_null = np.arange(minv,maxv,.1) 
+        y1 = [z-1./3*z**3 for z in x_null]
+        y2 = [1/0.1*z+0.3/0.1 for z in x_null]
+        plt.plot(x_null,y1)
+        plt.plot(x_null,y2)
+        
+        plt.xlim([minv, maxv])
+        plt.ylim([minw, maxw])
+        
+        plt.xlabel("v", fontsize=16)
+        plt.ylabel("w", fontsize=16)
+        
+        plt.title('t =%s' %t, fontsize=20)
+        #plt.axis('off')
+        
+        #save pngs to folder pngs that is in the same directory
+        if t<100:
+            plt.savefig('pngs/m_t0000%s.png' %round((t)))
+        elif t<1000:
+            plt.savefig('pngs/m_t000%s.png' %round((t)))
+        elif t<10000:
+            plt.savefig('pngs/m_t00%s.png' %round((t)))
+        elif t<100000:
+            plt.savefig('pngs/m_t0%s.png' %round((t)))
+        else:
+            plt.savefig('pngs/m_t%s.png' %round((t)))
+
+        plt.clf()
+        plt.cla()
+        plt.close(fig)
+        
+        
+        
+        
+def scatter_chim_gif(act_mat, start, stepsize):  
+    '''
+    act_mat: nd array
+        activity matrix from model
+        
+    stepstart: integer 
+        starting time to begin taking pictures to make a GIF
+        stepstart < T/delta_t, ie. total number of steps in model
+        note: this GIF is for "later times" where the network has reached (some kind of) synchronicity
+        
+    stepsize: integer
+        every stepsize-number of timestep is taken from the activity matrix
+    '''
+    
+    
+    A = act_mat[0] 
+    t_steps, N = A.shape
+    
+    minv = act_mat[0].min() - 0.5
+    maxv = act_mat[0].max() + 0.5
+    
+    for snapshot in range(start, t_steps, stepsize):   
+        u_k = A[snapshot,:]   
+        
+        fig = plt.figure(figsize=(10,10))
+        sns.set_style("whitegrid")
+        plt.scatter(range(len(u_k)), u_k)
+        
+        plt.ylim([minv, maxv]) 
+        
+        plt.xlabel("k", fontsize=16)
+        plt.ylabel("$v_{k}$", fontsize=16)
+        
+        plt.title('t =%s' %snapshot, fontsize=20)
+        #plt.axis('off')
+        
+        if snapshot<1000:
+            plt.savefig('pngs/m_t000%s.png' %round((snapshot)))
+        elif snapshot<10000:
+            plt.savefig('pngs/m_t00%s.png' %round((snapshot)))
+        elif snapshot<100000:
+            plt.savefig('pngs/m_t0%s.png' %round((snapshot)))
+        else:
+            plt.savefig('pngs/m_t%s.png' %round((snapshot)))
+
+        plt.clf()
+        plt.cla()
+        plt.close(fig)
+        
+        
+        
+        
+def coh_gif(phase_coherence_v, simulation_run, stepsize):
+    '''
+    phase_coherence_v: 2d-array
+        phase coherence values for every time step
+        
+    simulation_run: integer
+        simulation run of interest to make GIF
+    
+    stepsize: float
+        after stepsize many iterations the next png is created
+    '''
+    
+    PCV_mat = phase_coherence_v[:,simulation_run]
+
+
+    for t in range(0, len(PCV_mat), stepsize):   
+        fig = plt.figure(figsize=(20,10))
+        sns.set_style("whitegrid")
+        plt.plot(PCV_mat)
+        plt.axvline(x=t, color='r')
+        
+        plt.xlabel("Time t", fontsize=16)
+        plt.ylabel("Phase Coherence", fontsize=16)
+        
+        plt.title('t =%s' %t, fontsize=20)
+        
+        if t<100:
+            plt.savefig('pngs/m_t0000%s.png' %round((t)))
+        elif t<1000:
+            plt.savefig('pngs/m_t000%s.png' %round((t)))
+        elif t<10000:
+            plt.savefig('pngs/m_t00%s.png' %round((t)))
+        elif t<100000:
+            plt.savefig('pngs/m_t0%s.png' %round((t)))
+        else:
+            plt.savefig('pngs/m_t%s.png' %round((t)))
+
+        plt.clf()
+        plt.cla()
+        plt.close(fig)
+        
+        
+        
+def image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
+    '''
+    G: network of interest
+    
+    act_mat: array
+    
+    pos: dictionary with nodes as keys and positions as values
+    
+    colormap: matplotlib.cm.colormap
+        colormap for node states
+        
+    stepstart: float
+        iteration step where first png is created
+    
+    stepsize: float
+        after stepsize many iterations the next png is created
+    '''
+    
+    A1 = act_mat[0] 
+    t_steps, N = A1.shape
+
+    minima = A1.min() #min value for colorscale
+    maxima = A1.max() #max value for colorscale
+
+    norm = matplotlib.colors.Normalize(vmin=minima, vmax=maxima, clip=True)
+    mapper = matplotlib.cm.ScalarMappable(norm=norm, cmap=colormap)  #cividis
+
+    # t_steps = int(1.*T/dt)
+    for t in range(stepstart,t_steps,stepsize): 
+        time_slice = A1[t,:]
+
+        l_color = []
+
+        for theta in time_slice:
+
+            v = theta
+            # print(v)
+            red = int(255*mapper.to_rgba(v)[0])
+            green = int(255*mapper.to_rgba(v)[1])
+            blue = int(255*mapper.to_rgba(v)[2])
+            hexcol = '#%02x%02x%02x' % (red, green, blue)
+            # print(hexcol)
+            l_color.append(hexcol)
+
+        fig = plt.figure(figsize=(10,10))
+
+        # posG = nx.circular_layout(graph_nx)
+        nx.draw_networkx_nodes(G,pos=pos, node_color='k', node_size=80)
+        nx.draw_networkx_nodes(G,pos=pos, node_color=l_color, node_size=40)
+        nx.draw_networkx_edges(G,pos=pos,edge_color='#aaaaaa',alpha=.5)
+
+        # a1 = nx.draw_networkx_nodes(G,pos = pos2d, node_c)
+        plt.title('t =%s' %t)
+        plt.axis('off')
+        
+        if t<100:
+            plt.savefig('pngs/m_t0000%s.png' %round((t)))
+        elif t<1000:
+            plt.savefig('pngs/m_t000%s.png' %round((t)))
+        elif t<10000:
+            plt.savefig('pngs/m_t00%s.png' %round((t)))
+        elif t<100000:
+            plt.savefig('pngs/m_t0%s.png' %round((t)))
+        else:
+            plt.savefig('pngs/m_t%s.png' %round((t)))
+
+        plt.clf()
+        plt.cla()
+        plt.close(fig)
+    
+    
+    
+    
+def GIF_creator(duration, png_dir, path):
+    '''
+    duration: float
+        time each picture is shown in GIF
+        
+    png_dir: string
+        direction where .pngs are to make GIF out of
+    
+    path: string
+        direction where the GIF should be saved
+        
+    this code is from stackoverflow.com
+    '''
+    time_now = datetime.today().strftime("%d-%m-%Y %H%M%S")
+    images = []
+    for file_name in sorted(os.listdir(png_dir)):
+        if file_name.endswith('.png'):
+            file_path = os.path.join(png_dir, file_name)
+            images.append(imageio.imread(file_path))
+    #imageio.mimsave(FHNgif.gif, path, images, format='GIF')
+    imageio.mimsave(os.path.join('my_very_own_gif_%s.gif' %time_now), images, duration = duration)
+    
+    
+    
+    
+    
+def video_maker(duration, image_dir):
+    '''
+    duration: float
+        amount of seconds one png is show
+        
+    image_dir: string
+        path to where pngs should be taken from
+        the images are used in alphanumeric order
+    '''
+    # Create a list of file names for all PNG images in the directory
+    image_files = [os.path.join(image_dir, f) for f in sorted(os.listdir(image_dir)) if f.endswith('.png')]
+
+    # Define the name and location of your output video file
+    time_now = datetime.today().strftime("%d-%m-%Y %H%M%S")
+    video_path = './phase_coherence_%s.mp4'%time_now
+
+    # Define the frames per second and the codec for the video
+    fps = int(1/duration)
+    codec = 'h264'
+
+    # Use imageio to create the video from the list of image files
+    with imageio.get_writer(video_path, fps=fps, codec=codec) as writer:
+        for filename in image_files:
+            image = imageio.imread(filename)
+            writer.append_data(image)
