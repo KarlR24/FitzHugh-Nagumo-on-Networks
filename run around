@@ -1,36 +1,69 @@
-def run_around(act_mat, stepstart, stepsize):
-  A = act_mat[0] 
-  t_steps, N = A.shape
+def runaround(act_mat, stepstart, stepend, stepsize):
     
-  minv = act_mat[0].min() - 1
-  maxv = act_mat[0].max() + 1
+    '''
+    act_mat: nd array
+        activity matrix from model
+        
+    stepstart: integer 
+        starting time to begin taking pictures to make a GIF
+        stepstart < T/delta_t, ie. total number of steps in model
+        
+    stepend: integer 
+        time step where last pictures is taken for GIF
+        stepstart < stepend < T/delta_t, ie. total number of steps in model   
     
-  minw = act_mat[1].min() - 1   
-  maxw = act_mat[1].max() + 1
+    stepsize: integer
+        every stepsize-number of timestep is taken from the activity matrix
+    '''
+    
+    A = act_mat[0] 
+    t_steps, N = A.shape
+    
+    minv = act_mat[0].min() - 1
+    maxv = act_mat[0].max() + 1
+    
+    minw = act_mat[1].min() - 1
+    maxw = act_mat[1].max() + 1
             
-  for t in range(stepstart, t_steps, stepsize):            
-    xs = act_mat[0]
-    x = xs[t-stepstart:t, :]       
-    ys = act_mat[1]
-    y = ys[t-stepstart:t, :]
+    for t in range(stepstart, stepend, stepsize):
             
-    fig = plt.figure(figsize=(10,10))
-    plt.plot(x, y, 'bo') 
-
-    plt.xlim([minv, maxv])
-    plt.ylim([minw, maxw])
+        xs = act_mat[0]
+        x = xs[t, :]       
+        ys = act_mat[1]
+        y = ys[t, :]
+            
+        fig = plt.figure(figsize=(10,10))
+        sns.set_style("whitegrid")
+        plt.scatter(x, y)
         
-    plt.title('t =%s' %t)
+        # plot null-clines
+        x_null = np.arange(minv,maxv,.1) 
+        y1 = [z-1./3*z**3 for z in x_null]
+        y2 = [1/0.1*z+0.3/0.1 for z in x_null]
+        plt.plot(x_null,y1)
+        plt.plot(x_null,y2)
         
-    if t<1000:
-        plt.savefig('pngs/m_t000%s.png' %round((t)))
-    elif t<10000:
-        plt.savefig('pngs/m_t00%s.png' %round((t)))
-    elif t<100000:
-        plt.savefig('pngs/m_t0%s.png' %round((t)))
-    else:
-        plt.savefig('pngs/m_t%s.png' %round((t)))
+        plt.xlim([minv, maxv])
+        plt.ylim([minw, maxw])
+        
+        plt.xlabel("v", fontsize=16)
+        plt.ylabel("w", fontsize=16)
+        
+        plt.title('t =%s' %t, fontsize=20)
+        #plt.axis('off')
+        
+        #save pngs to folder pngs that is in the same directory
+        if t<100:
+            plt.savefig('pngs/m_t0000%s.png' %round((t)))
+        elif t<1000:
+            plt.savefig('pngs/m_t000%s.png' %round((t)))
+        elif t<10000:
+            plt.savefig('pngs/m_t00%s.png' %round((t)))
+        elif t<100000:
+            plt.savefig('pngs/m_t0%s.png' %round((t)))
+        else:
+            plt.savefig('pngs/m_t%s.png' %round((t)))
 
-    plt.clf()
-    plt.cla()
-    plt.close(fig)
+        plt.clf()
+        plt.cla()
+        plt.close(fig)
