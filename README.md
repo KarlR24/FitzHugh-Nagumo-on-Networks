@@ -73,6 +73,8 @@ Example: same example as for plot activity \
 The following functions create sequences of png images and use them to create GIFs/videos. \
 There are several different ways to visualize the network dynamics:
 
+# image_creator(network, act_mat, pos, colormap, stepstart, stepsize)
+
      The function image_creator visualized the node activity on the network. The network is plotted according to a specified layout 
      and the node activity is colorcoded. \
      Afterwards, one can make a GIF (used here) or video out of the png images 
@@ -161,6 +163,36 @@ Now compile pngs into GIF with GIF_creator.
 ![10 node ring, cpl=0.5, a=1, b=0.1, tau=5, T=500, runaround](https://user-images.githubusercontent.com/104760326/200849817-55175359-92ac-491a-84db-b8a2a526a184.gif)
 
 
+# scatter_chim_gif(act_mat, start, stepsize)
+
+To visualize chimera states in the network of coupled oscillators scatter_chim_gif creates png images to make a GIF/video.
+
+     scatter_chim_gif(act_mat, start, stepsize):  
+          '''
+          act_mat: nd array
+          activity matrix from model
+        
+          stepstart: integer 
+               starting time to begin taking pictures to make a GIF
+               stepstart < T/delta_t, ie. total number of steps in model
+               note: this GIF is for "later times" where the network has reached (some kind of) synchronicity
+        
+          stepsize: integer
+          every stepsize-number of timestep is taken from the activity matrix
+          '''
+Example: G = nx.watts_strogatz_graph(100, 14, 0)\
+model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=5, delta_t=10**(-3), T=100)\
+act_mat = model.run(adj_mat)\
+
+scatter_chim_gif(act_mat, 95.000, 50)
+video_maker(0.1, '/Users/user/my/directory/pngs')
+
+
+
+https://user-images.githubusercontent.com/104760326/228857148-89eddbb7-cc18-498d-b9db-7050479340e3.mp4
+
+
+
 
 # Phase Coherence measure:
 
@@ -195,18 +227,18 @@ $R(t) =  \frac{1}{N^2} * \sum_{i,j} \langle [v_i(t) - v_j(t)]^2 \rangle $
                     
 where $\langle \rangle$ denotes the average of a stochastic random variable.
     
-Example: For a ring graph with ten nodes we want to run the dynamics with non-oscillatory parameter choice on it ten times where for every simulation run new initial states are generated. The initial states are picked according to a uniform distribution and should be in the interval $[-5, 5]$. The rest of the parameters are in the same order as they are in the FitzHughNagumo_on_network class:
-number_simulation_runs = 10 
-initial_states_interval = 5
-coupling = 1
-network = nx.watts_strogatz_graph(10, 2, 0)
-a = 1
-b = 1
-tau = 1 
-delta_t = 10**(-3)
-T = 100
+Example: For a ring graph with ten nodes we want to run the dynamics with non-oscillatory parameter choice on it ten times where for every simulation run new initial states are generated. The initial states are picked according to a uniform distribution and should be in the interval $[-5, 5]$. The rest of the parameters are in the same order as they are in the FitzHughNagumo_on_network class:\
+number_simulation_runs = 10 \
+initial_states_interval = 5\
+coupling = 1\
+network = nx.watts_strogatz_graph(10, 2, 0)\
+a = 1\
+b = 1\
+tau = 1\ 
+delta_t = 10**(-3)\
+T = 100\
 
-plot_phase_coherence(number_simulation_runs, initial_states_interval, coupling, network, a, b, tau, delta_t, T)
+plot_phase_coherence(number_simulation_runs, initial_states_interval, coupling, network, a, b, tau, delta_t, T) =
 
 plot_phase_coherence(10, 5, 1, G, 1, 1, 1, 10**(-3), 100)
 
