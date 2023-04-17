@@ -275,6 +275,7 @@ https://user-images.githubusercontent.com/104760326/228861323-ac74ffc4-0a10-4013
 
 # phase_coh_freq():
 phase_coh_freq(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T, every_x_run, last_steps):
+
      number_simulation_runs: integer
         number of simulations to run for phase coherence plots
     
