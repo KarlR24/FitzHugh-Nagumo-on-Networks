@@ -323,25 +323,17 @@ phase_coh_freq(number_simulation_runs, range_initial_states, coupling, network, 
 
 phase_coh_freq(3, 3, 1, G, 0.3, 0.1, 5, 10**(-2), 1000, 10, 10000)
 
-![heatmap for longtalk](https://user-images.githubusercontent.com/104760326/228865661-2c919912-877a-4e25-9853-394b9dd9e078.png)
 
-![node activity, long talk](https://user-images.githubusercontent.com/104760326/228865707-a4bc710c-8b6c-4918-9420-286560a1455e.png)
-
-![frq ana rand nodes, long talk](https://user-images.githubusercontent.com/104760326/228865769-ac4f9604-c412-46ef-8f27-83fed089a49c.png)
-
-![node 1 act, long talk](https://user-images.githubusercontent.com/104760326/228865827-f59894f7-3a53-4491-8f76-20db72374e0b.png)
-
-![freq ana node 1, long talk](https://user-images.githubusercontent.com/104760326/228865864-35d67857-f307-40d8-880f-d25fdb80b059.png)
-
-![phase coh, long talk](https://user-images.githubusercontent.com/104760326/228865913-962ee750-8a3c-46e5-9994-dfe170aa7983.png)
-
-![phase coh last, long talk](https://user-images.githubusercontent.com/104760326/228866204-0e3f1fd4-7d01-4440-82cf-f704d6e3ffa3.png)
-
-![freq ana phase coh, long talk](https://user-images.githubusercontent.com/104760326/228866233-ce019498-35a0-4423-a9a1-dc66b5392ad2.png)
-
-![phase coh run1, long talk](https://user-images.githubusercontent.com/104760326/228866294-3adabd7d-ad6c-42c9-967b-c5e3d4768bd0.png)
-
-
+![sim1 5run1, heatmap, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/f3b6fb85-6da8-4cca-9d25-cef403f15405)
+![sim1 5run1, node activity, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/14ba652c-34b0-4a03-ac4e-682534c4997a)
+![sim1 5run1, freq ana random nodes, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/8df5a115-6b18-4b2a-86ff-b2eeb7ff7d93)
+![sim1 5run1, node activity node 1, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/3996895b-c773-4ff1-96ca-36fc8263f54a)
+![sim1 5run1, feq ana node 1, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/a96d4084-192d-4afc-a848-e32bb6cc296a)
+![sim1 5run1, phase coherence, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/1c2b9ee5-02a0-4a45-815b-660f14119671)
+![sim1 5run1, phase coherence last 10000 steps, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/83795edb-d77c-49cc-8339-949c5de39f63)
+![sim1 5run1, freq ana phase coherence, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/b38e574b-88fd-463c-924e-776e8c748239)
+![sim1 5run1, phase coherence filtered 1, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/3538d6af-a5e2-42fd-b66f-d7162e70e3ae)
+![sim1 5run1, freq ana phase coherence filtered 1, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/ca12d384-e350-41d3-a0c2-1157651de9d8)
 
 
 
