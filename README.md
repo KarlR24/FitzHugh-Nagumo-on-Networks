@@ -1,37 +1,38 @@
 # FitzHugh-Nagumo-on-Networks
-Implementation of FitzHugh-Nagumo oscillators on a network.
-Every node of the network is a FitzHugh-Nagumo oscillator which is coupled to its nearest neighbors. \
-Here, the ODE is approximated according to the Euler method. \
-The code is built according to [fabridamicelli's Kuramoto repository](https://github.com/fabridamicelli/kuramoto) and rewritten for FitzHugh-Nagumo oscillators. 
+Implementation of FitzHugh-Nagumo model on a network.
+Every node of the network is a FitzHugh-Nagumo neuron which is coupled to its nearest neighbors. \
+Here, the ODE is approximated according to the [Euler method](https://en.wikipedia.org/wiki/Euler_method). \
+The class is built according to [fabridamicelli's Kuramoto repository](https://github.com/fabridamicelli/kuramoto) and rewritten for FitzHugh-Nagumo dynamics. 
 
+The majority of this repository are different visualizations of the FitzHugh-Nagumo dynamics on network. These visualiztions show the same thing from different angles/perspectives.
 
-FitzHugh-Nagumo for node i: \
+FitzHugh-Nagumo dynamics for node i: \
 $\dot{v_i} = v_i - \frac{v_i^3}{3} - w_i + \frac{k}{I_i}* \sum_{j =1,...,N} a_{ij} (v_i - v_j)$ \
 $\dot{w_i} = \frac{1}{\tau} (v_i - bw_i + a)$ \
 where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network) and $I_i$ is the number of incoming interactions for node i (ie. degree of node i). Note that the sum is equivalent to summing only over neighboring nodes and omitting the adjacency matrix. \
-Remark: Depending on the choice of parameters in the equations the behaviour of the dynamics changes drastically. E.g. the choice of parameters in the ReadMe is such that the system exhibits oscillatory behaviour.
+Remark: Depending on the choice of parameters in the model the behaviour change qualitatively (saddle node bifurcation, limit cycles, Hopf bifurcation, etc.). E.g. the choice of parameters in the ReadMe is such that the system exhibits oscillatory behaviour.
 
 ## Class FitzHugh_Nagumo_coupled()
      FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) 
-          coupling: positive real value which gives the strength of the coupling of neighbors with 
-                    default vaulue = 1
-                    usually the coupling strenght is between 0 (= no coupling) and 2.
+          coupling: positive real value which gives the strength of the coupling of neighbors with default vaulue = 1
+                    coupling strenght 0 corresponds to no coupling
                 
-          network: graph on which dynamics run. Also gives the neighbor relations (ie. adjacency matrix) 
-                   If no network is specified a Watts Strogatz network with rewiring probability p = 0 is created.
+          network: networkx graph on which dynamics run. Gives the neighbor relations (ie. adjacency matrix) 
+                   If no network is specified then a Watts-Strogatz network is created.
          
           a, b, tau: float/ parameters of the FitzHugh-Nagumo model 
                    Note: depending on the choice of parameters the dynamics exhibit qualitative different  
-                         behaviours (saddle node bifurcation, limit cycles, Hopf bifurcation, etc.)
+                         behaviours 
 
-          delta_t: small real value; step size for the Euler method 
+          delta_t: small real value 
+                   step size for the Euler method 
 
-          T: integer; duration of the simulation
+          T: integer 
+             duration of the simulation
 
-          initial_states: list or array containing two arrays of length number of nodes: one with initial 
-                    states for v and the other one for w 
+          initial_states: list or array containing two arrays of length number of nodes 
+                    one with initial states for v and the other one for w 
                     If no initial states are given then random ones are created for every node. 
-                    Sidenote: either network or initial_states must be given
           
 
 ## Visualizations:
