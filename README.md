@@ -2,8 +2,8 @@
 Implementation of FitzHugh-Nagumo oscillators on a network.
 Every node of the network is a FitzHugh-Nagumo oscillator which is coupled to its nearest neighbors. \
 Here, the ODE is approximated according to the Euler method. \
-The code is built according to fabridamicelli and rewritten for FitzHugh-Nagumo oscillators. \
-https://github.com/fabridamicelli/kuramoto
+The code is built according to [fabridamicelli's Kuramoto repository](https://github.com/fabridamicelli/kuramoto) and rewritten for FitzHugh-Nagumo oscillators. \
+
 
 FitzHugh-Nagumo for node i: \
 $\dot{v_i} = v_i - \frac{v_i^3}{3} - w_i + \frac{k}{I_i}* \sum_{j =1,...,N} a_{ij} (v_i - v_j)$ \
