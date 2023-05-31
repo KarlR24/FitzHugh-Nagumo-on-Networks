@@ -2,7 +2,7 @@
 Implementation of FitzHugh-Nagumo oscillators on a network.
 Every node of the network is a FitzHugh-Nagumo oscillator which is coupled to its nearest neighbors. \
 Here, the ODE is approximated according to the Euler method. \
-The code is built according to [fabridamicelli's Kuramoto repository](https://github.com/fabridamicelli/kuramoto) and rewritten for FitzHugh-Nagumo oscillators. \
+The code is built according to [fabridamicelli's Kuramoto repository](https://github.com/fabridamicelli/kuramoto) and rewritten for FitzHugh-Nagumo oscillators. 
 
 
 FitzHugh-Nagumo for node i: \
@@ -15,9 +15,7 @@ Remark: Depending on the choice of parameters in the equations the behaviour of 
      FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) 
           coupling: positive real value which gives the strength of the coupling of neighbors with 
                     default vaulue = 1
-                    Note: if we are at a very stable fixed point it can happen that the coupling is 
-                    too weak to influence/perturbe its neighbors 
-                    usually the coupling strenght is between 0 (= no coupling & only local dynamics) and 2.
+                    usually the coupling strenght is between 0 (= no coupling) and 2.
                 
           network: graph on which dynamics run. Also gives the neighbor relations (ie. adjacency matrix) 
                    If no network is specified a Watts Strogatz network with rewiring probability p = 0 is created.
