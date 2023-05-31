@@ -1,5 +1,5 @@
 # FitzHugh-Nagumo-on-Networks
-Implementation of FitzHugh-Nagumo model on a network.
+Python implementation of FitzHugh-Nagumo model on a network.
 Every node of the network is a FitzHugh-Nagumo neuron which is coupled to its nearest neighbors. \
 Here, the ODE is approximated according to the [Euler method](https://en.wikipedia.org/wiki/Euler_method). \
 The class is built according to [fabridamicelli's Kuramoto repository](https://github.com/fabridamicelli/kuramoto) and rewritten for FitzHugh-Nagumo dynamics. 
@@ -48,7 +48,7 @@ act_mat=model.run(adj_mat) \
 plot_activity(act_mat)
 
 
-![image](https://user-images.githubusercontent.com/104760326/188576765-893c7b97-43e5-458e-85de-4273d5efa95b.png)
+![Activity of first and second variable plotted against the time steps.](https://user-images.githubusercontent.com/104760326/188576765-893c7b97-43e5-458e-85de-4273d5efa95b.png)
 
 
 ### plot_phase_portrait(a, b, tau, act_mat, force_field=optional)
