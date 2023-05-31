@@ -11,7 +11,7 @@ $\dot{w_i} = \frac{1}{\tau} (v_i - bw_i + a)$ \
 where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network) and $I_i$ is the number of incoming interactions for node i (ie. degree of node i). Note that the sum is equivalent to summing only over neighboring nodes and omitting the adjacency matrix. \
 Remark: Depending on the choice of parameters in the equations the behaviour of the dynamics changes drastically. E.g. the choice of parameters in the ReadMe is such that the system exhibits oscillatory behaviour.
 
-# Class FitzHugh_Nagumo_coupled()
+## Class FitzHugh_Nagumo_coupled()
      FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) 
           coupling: positive real value which gives the strength of the coupling of neighbors with 
                     default vaulue = 1
@@ -36,9 +36,9 @@ Remark: Depending on the choice of parameters in the equations the behaviour of 
                     Sidenote: either network or initial_states must be given
           
 
-# Visualizations:
+## Visualizations:
 
-# plot_activity(act_mat)
+### plot_activity(act_mat)
 This plots the node activity for all nodes for all times.
 
 Example: \
@@ -52,7 +52,7 @@ plot_activity(act_mat)
 ![image](https://user-images.githubusercontent.com/104760326/188576765-893c7b97-43e5-458e-85de-4273d5efa95b.png)
 
 
-# plot_phase_portrait(a, b, tau, act_mat, force_field=optional)
+### plot_phase_portrait(a, b, tau, act_mat, force_field=optional)
 force_field=True draws arrows in the direction of the flow \
 Note that the force_field is drawn for the differential equation without coupling! Therefore, it is not precise but accurate enough to get an idea of the flow.
 
@@ -68,12 +68,12 @@ Example: same example as for plot activity \
 ![download](https://user-images.githubusercontent.com/104760326/188612773-91fcc9eb-a876-48ba-b8ce-1a9c740a492f.png)
 
 
- # Pngs to GIF/Video
+ ## Pngs to GIF/Video
  
 The following functions create sequences of png images and use them to create GIFs/videos. \
 There are several different ways to visualize the network dynamics:
 
-# image_creator(network, act_mat, pos, colormap, stepstart, stepsize)
+### image_creator(network, act_mat, pos, colormap, stepstart, stepsize)
 
      The function image_creator visualized the node activity on the network. The network is plotted according to a specified layout 
      and the node activity is colorcoded. \
@@ -138,7 +138,7 @@ Observe the propagation of the pertubation away from perturbed node throughout t
 ![10x10, one perturbed, twilight](https://user-images.githubusercontent.com/104760326/188586292-599d7e96-57f2-4e70-a445-8ad671d5f781.gif)
 
 
-# run around:
+### run around:
 
      runaround visualizes the node activity in the phase plane where the first variable v is on the x-axis and the second variable w is on the y-axis.
      
@@ -163,7 +163,7 @@ Now compile pngs into GIF with GIF_creator.
 ![10 node ring, cpl=0.5, a=1, b=0.1, tau=5, T=500, runaround](https://user-images.githubusercontent.com/104760326/200849817-55175359-92ac-491a-84db-b8a2a526a184.gif)
 
 
-# scatter_chim_gif(act_mat, start, stepsize)
+### scatter_chim_gif(act_mat, start, stepsize)
 
 To visualize chimera states in the network of coupled oscillators scatter_chim_gif creates png images to make a GIF/video.
 
@@ -196,7 +196,7 @@ https://user-images.githubusercontent.com/104760326/228857148-89eddbb7-cc18-498d
 
 
 
-# Phase Coherence measure:
+## Phase Coherence measure:
 
      
      plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T):
@@ -247,7 +247,7 @@ plot_phase_coherence(100, 1, 1, G, 1.3, 0.7, 200/3, 10**(-3), 600)
 ![Screenshot 2023-05-24 at 17 01 23](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/99b0add9-7ffc-47a7-8a5d-ef0f5ef93769)
 
 
-# coh_gif(phase_coherence_v, simulation_run, stepsize)
+### coh_gif(phase_coherence_v, simulation_run, stepsize)
 
 To compare the dynamics from image_creator, scatter_chim_gif and runaround we make a GIF/video where a vertical bar is at the current time step. This function is used in the code of phase_coh_freq below!
 
@@ -271,7 +271,7 @@ https://user-images.githubusercontent.com/104760326/228861323-ac74ffc4-0a10-4013
 
 
 
-# phase_coh_freq():
+### phase_coh_freq():
 phase_coh_freq(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T, every_x_run, last_steps):
 
      number_simulation_runs: integer
