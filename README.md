@@ -21,7 +21,7 @@ Remark: Depending on the choice of parameters in the equations the behaviour of 
                    If no network is specified a Watts Strogatz network with rewiring probability p = 0 is created.
          
           a, b, tau: float/ parameters of the FitzHugh-Nagumo model 
-                   Note: depending on the choice of parameters the dynamics exhibit different qualitative 
+                   Note: depending on the choice of parameters the dynamics exhibit qualitative different  
                          behaviours (saddle node bifurcation, limit cycles, Hopf bifurcation, etc.)
 
           delta_t: small real value; step size for the Euler method 
