@@ -1,5 +1,5 @@
 # FitzHugh-Nagumo-on-Networks
-Python implementation of FitzHugh-Nagumo model on a network.
+Python implementation of a network with local FitzHugh-Nagumo dynamics.
 Every node of the network is a FitzHugh-Nagumo neuron which is coupled to its nearest neighbors. \
 Here, the ODE is approximated according to the [Euler method](https://en.wikipedia.org/wiki/Euler_method). \
 The class is built according to [fabridamicelli's Kuramoto repository](https://github.com/fabridamicelli/kuramoto) and rewritten for FitzHugh-Nagumo dynamics. 
