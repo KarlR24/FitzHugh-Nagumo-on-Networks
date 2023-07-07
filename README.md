@@ -39,15 +39,12 @@ Remark: Depending on the choice of parameters in the model the behaviour change 
 
 ## Visualizations:
 
-### plot_activity(act_mat)
-This plots the node activity for all nodes for all times.
-
-Example: \
-G = nx.grid_2d_graph(3, 3) \
-model = FitzHugh_Nagumo_coupled(coupling=2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) \
-adj_mat = nx.to_numpy_array(G) \
-act_mat=model.run(adj_mat) \
-plot_activity(act_mat)
+### Plot the node activity of both variables
+     G = nx.grid_2d_graph(3, 3) 
+     model = FitzHugh_Nagumo_coupled(coupling=2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) 
+     adj_mat = nx.to_numpy_array(G) 
+     act_mat=model.run(adj_mat) 
+     plot_activity(act_mat)
 
 
 ![Activity of first and second variable plotted against the time steps.](https://user-images.githubusercontent.com/104760326/188576765-893c7b97-43e5-458e-85de-4273d5efa95b.png)
