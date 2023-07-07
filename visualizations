@@ -10,21 +10,18 @@ from moviepy.editor import *
 
 
 
-def plot_activity(activity):
+def plot_activity(act_mat):
     """
-    Plot v vs time & w vs time for each oscillator time series.
-    activity: 2D-np.ndarray
-        Activity time series, node vs. time; ie output of FitzHugh_Nagumo_coupled.run()
-    return:
-        matplotlib axis for further customization
+    act_mat: list containing two 2Darrays
+        Activity matrix [act_v, act_w] contains the time evolution of both variables of the FitzHugh-Nagumo model
     """
     _, ax = plt.subplots(figsize=(12, 4))
-    ax.plot(activity[0])
+    ax.plot(act_mat[0])
     ax.set_xlabel('Time', fontsize=25)
     ax.set_ylabel('v', fontsize=25)
     
     _, ax = plt.subplots(figsize=(12, 4))
-    ax.plot(activity[1])
+    ax.plot(act_mat[1])
     ax.set_xlabel('Time', fontsize=25)
     ax.set_ylabel('w', fontsize=25)
     
@@ -106,7 +103,6 @@ def plot_phase_portrait(a, b, tau, act_mat, force_field=False):
 
 
 def runaround(act_mat, stepstart, stepend, stepsize):
-    
     '''
     act_mat: nd array
         activity matrix from model
@@ -159,7 +155,8 @@ def runaround(act_mat, stepstart, stepend, stepsize):
         plt.title('t =%s' %t, fontsize=20)
         #plt.axis('off')
         
-        #save pngs to folder pngs that is in the same directory
+        # save pngs to folder '/pngs' in the same directory
+        # note: up to 9.999.999 time steps possible otherwise have to add line
         if t<100:
             plt.savefig('pngs/m_t0000%s.png' %round((t)))
         elif t<1000:
@@ -184,14 +181,12 @@ def scatter_chim_gif(act_mat, start, stepsize):
         activity matrix from model
         
     stepstart: integer 
-        starting time to begin taking pictures to make a GIF
-        stepstart < T/delta_t, ie. total number of steps in model
-        note: this GIF is for "later times" where the network has reached (some kind of) synchronicity
+        starting time to begin taking pictures to make a movie/GIF
+        stepstart < T/delta_t = total number of steps in simulation
         
     stepsize: integer
-        every stepsize-number of timestep is taken from the activity matrix
+        after stepsize many steps the next png is created
     '''
-    
     
     A = act_mat[0] 
     t_steps, N = A.shape
@@ -205,23 +200,22 @@ def scatter_chim_gif(act_mat, start, stepsize):
         fig = plt.figure(figsize=(10,10))
         sns.set_style("whitegrid")
         plt.scatter(range(len(u_k)), u_k)
-        
-        plt.ylim([minv, maxv]) 
-        
+        plt.ylim([minv, maxv])  
         plt.xlabel("k", fontsize=16)
         plt.ylabel("$v_{k}$", fontsize=16)
-        
         plt.title('t =%s' %snapshot, fontsize=20)
-        #plt.axis('off')
-        
-        if snapshot<1000:
-            plt.savefig('pngs/m_t000%s.png' %round((snapshot)))
+
+        # note: up to 9.999.999 time steps possible otherwise have to add line
+        if snapshot<100:
+            plt.savefig('chimera/m_t0000%s.png' %round((snapshot)))
+        elif snapshot<1000:
+            plt.savefig('chimera/m_t000%s.png' %round((snapshot)))
         elif snapshot<10000:
-            plt.savefig('pngs/m_t00%s.png' %round((snapshot)))
+            plt.savefig('chimera/m_t00%s.png' %round((snapshot)))
         elif snapshot<100000:
-            plt.savefig('pngs/m_t0%s.png' %round((snapshot)))
+            plt.savefig('chimera/m_t0%s.png' %round((snapshot)))
         else:
-            plt.savefig('pngs/m_t%s.png' %round((snapshot)))
+            plt.savefig('chimera/m_t%s.png' %round((snapshot)))
 
         plt.clf()
         plt.cla()
@@ -233,27 +227,24 @@ def scatter_chim_gif(act_mat, start, stepsize):
 def coh_gif(phase_coherence_v, simulation_run, stepsize):
     '''
     phase_coherence_v: 2d-array
-        phase coherence values for every time step
+        coherence measure values for every time step
         
     simulation_run: integer
-        simulation run of interest to make GIF
+        simulation run of interest to make video/GIF
     
-    stepsize: float
-        after stepsize many iterations the next png is created
+    stepsize: integer
+        after stepsize many steps the next png is created
     '''
     
     PCV_mat = phase_coherence_v[:,simulation_run]
-
 
     for t in range(0, len(PCV_mat), stepsize):   
         fig = plt.figure(figsize=(20,10))
         sns.set_style("whitegrid")
         plt.plot(PCV_mat)
         plt.axvline(x=t, color='r')
-        
         plt.xlabel("Time t", fontsize=16)
         plt.ylabel("Phase Coherence", fontsize=16)
-        
         plt.title('t =%s' %t, fontsize=20)
         
         if t<100:
