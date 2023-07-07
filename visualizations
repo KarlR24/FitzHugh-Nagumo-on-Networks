@@ -21,13 +21,16 @@ def plot_activity(act_mat):
     ax.plot(act_mat[0])
     ax.set_xlabel('Time', fontsize=25)
     ax.set_ylabel('v', fontsize=25)
+    plt.xticks(fontsize = 22)
+    plt.yticks(fontsize = 22)
     
     _, ax = plt.subplots(figsize=(12, 4))
     ax.set_title('Activity of first variable', fontsize = 35)
     ax.plot(act_mat[1])
     ax.set_xlabel('Time', fontsize=25)
     ax.set_ylabel('w', fontsize=25)
-    
+    plt.xticks(fontsize = 22)
+    plt.yticks(fontsize = 22)
     return ax
 
 
@@ -69,6 +72,11 @@ def plot_phase_portrait(a, b, tau, act_mat, force_field=False):
             x = xs[:, i]       
             ys = act_mat[1]
             y = ys[:, i]
+            plt.xlabel("v", fontsize=30)
+            plt.ylabel("w", fontsize=30)
+            plt.xticks(fontsize = 22)
+            plt.yticks(fontsize = 22)
+            plt.title('phase portrait', fontsize=35)
             plt.plot(x, y)
     
     else:
@@ -77,8 +85,6 @@ def plot_phase_portrait(a, b, tau, act_mat, force_field=False):
         v = x-1./3*x**3 - y
         w = 1/tau * (x + a - b*y)
         plt.quiver(x, y, v, w)
-        
-    #plt.figure(figsize=(20,20))
     
         # plot the clines for v', w'
         x_null = np.arange(-5,5,.1) 
@@ -102,6 +108,11 @@ def plot_phase_portrait(a, b, tau, act_mat, force_field=False):
             x = xs[:, i]       
             ys = act_mat[1]
             y = ys[:, i]
+            plt.xlabel("v", fontsize=30)
+            plt.ylabel("w", fontsize=30)
+            plt.xticks(fontsize = 22)
+            plt.yticks(fontsize = 22)
+            plt.title('phase portrait', fontsize=35)
             plt.plot(x, y)
 
 
@@ -157,11 +168,11 @@ def runaround(act_mat, stepstart, stepend, stepsize):
         plt.xlim([minv, maxv])
         plt.ylim([minw, maxw])
         
-        plt.xlabel("v", fontsize=16)
-        plt.ylabel("w", fontsize=16)
-        
-        plt.title('t =%s' %t, fontsize=20)
-        #plt.axis('off')
+        plt.title('t =%s' %t, fontsize=35)
+        plt.xlabel("v", fontsize=30)
+        plt.ylabel("w", fontsize=30)
+        plt.xticks(fontsize = 22)
+        plt.yticks(fontsize = 22)
         
         # save pngs to folder '/pngs' in the same directory
         # note: up to 9.999.999 time steps possible otherwise have to add line
@@ -203,15 +214,17 @@ def scatter_chim_gif(act_mat, start, stepsize):
     maxv = act_mat[0].max() + 0.5
     
     for snapshot in range(start, t_steps, stepsize):   
-        u_k = A[snapshot,:]   
+        v_k = A[snapshot,:]   
         
         fig = plt.figure(figsize=(10,10))
         sns.set_style("whitegrid")
-        plt.scatter(range(len(u_k)), u_k)
+        plt.scatter(range(len(v_k)), v_k)
         plt.ylim([minv, maxv])  
-        plt.xlabel("k", fontsize=16)
-        plt.ylabel("$v_{k}$", fontsize=16)
-        plt.title('t =%s' %snapshot, fontsize=20)
+        plt.xlabel("k", fontsize=30)
+        plt.ylabel("$v_{k}(t)$", fontsize=30)
+        plt.xticks(fontsize = 22)
+        plt.yticks(fontsize = 22)
+        plt.title('t =%s' %snapshot, fontsize=35)
 
         # note: up to 9.999.999 time steps possible otherwise have to add line
         if snapshot<100:
@@ -251,9 +264,12 @@ def coh_gif(phase_coherence_v, simulation_run, stepsize):
         sns.set_style("whitegrid")
         plt.plot(PCV_mat)
         plt.axvline(x=t, color='r')
-        plt.xlabel("Time t", fontsize=16)
-        plt.ylabel("Phase Coherence", fontsize=16)
-        plt.title('t =%s' %t, fontsize=20)
+        plt.xlabel("Time t", fontsize=30)
+        plt.ylabel("Phase Coherence", fontsize=30)
+        plt.xticks(fontsize = 22)
+        plt.yticks(fontsize = 22)
+        step = start+t
+        plt.title('t =%s' %step, fontsize=35)
         
         if t<100:
             plt.savefig('pngs/m_t0000%s.png' %round((t)))
@@ -324,7 +340,7 @@ def image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
         nx.draw_networkx_edges(G,pos=pos,edge_color='#aaaaaa',alpha=.5)
 
         # a1 = nx.draw_networkx_nodes(G,pos = pos2d, node_c)
-        plt.title('t =%s' %t)
+        plt.title('t =%s' %t, fontsize=35)
         plt.axis('off')
         
         if t<100:
@@ -358,6 +374,7 @@ def GIF_creator(duration, png_dir, path):
         
     this code is from stackoverflow.com
     '''
+
     time_now = datetime.today().strftime("%d-%m-%Y %H%M%S")
     images = []
     for file_name in sorted(os.listdir(png_dir)):
@@ -374,11 +391,13 @@ def GIF_creator(duration, png_dir, path):
 def video_maker(duration, image_dir):
     '''
     duration: float
-        amount of seconds one png is show
+        how long one png is shown in seconds
         
     image_dir: string
         path to where pngs should be taken from
         the images are used in alphanumeric order
+
+    This code was refined by unfriend https://github.com/unfriend
     '''
     # Create a list of file names for all PNG images in the directory
     image_files = [os.path.join(image_dir, f) for f in sorted(os.listdir(image_dir)) if f.endswith('.png')]
