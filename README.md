@@ -4,7 +4,7 @@ Every node of the network is a FitzHugh-Nagumo neuron which is coupled to its ne
 Here, the ODE is approximated according to the [Euler method](https://en.wikipedia.org/wiki/Euler_method). \
 The class is built according to [fabridamicelli's Kuramoto repository](https://github.com/fabridamicelli/kuramoto) and rewritten for FitzHugh-Nagumo dynamics. 
 
-This repository contains:\
+This repository contains:
  - a class which computes the time evolution of the local FitzHugh-Nagumo dynamics for given parameter values and network\
  - different visualizations of the dynamics 
 
