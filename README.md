@@ -5,13 +5,13 @@ Here, the ODE is approximated according to the [Euler method](https://en.wikiped
 The class is built according to [fabridamicelli's Kuramoto repository](https://github.com/fabridamicelli/kuramoto) and rewritten for FitzHugh-Nagumo dynamics. 
 
 This repository contains:
- - a class which computes the time evolution of the local FitzHugh-Nagumo dynamics for given parameter values and network\
+ - a class which computes the time evolution of the local FitzHugh-Nagumo dynamics for given parameter values and network
  - different visualizations of the dynamics 
 
 FitzHugh-Nagumo dynamics for node i: \
-$\dot{v_i} = v_i - \frac{v_i^3}{3} - w_i + \frac{k}{I_i}* \sum_{j =1,...,N} a_{ij} (v_i - v_j)$ \
+$\dot{v_i} = v_i - \frac{v_i^3}{3} - w_i + \frac{k}{N}* \sum_{j =1,...,N} a_{ij} (v_i - v_j)$ \
 $\dot{w_i} = \frac{1}{\tau} (v_i - bw_i + a)$ \
-where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network) and $I_i$ is the number of incoming interactions for node i (ie. degree of node i). Note that the sum is equivalent to summing only over neighboring nodes and omitting the adjacency matrix. \
+where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network) and $N$ is the number of nodes. \
 Remark: Depending on the choice of parameters in the model the behaviour change qualitatively (saddle node bifurcation, limit cycles, Hopf bifurcation, etc.). E.g. the choice of parameters in the ReadMe is such that the system exhibits oscillatory behaviour.
 
 ## Class FitzHugh_Nagumo_coupled()
