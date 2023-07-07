@@ -13,14 +13,17 @@ from moviepy.editor import *
 def plot_activity(act_mat):
     """
     act_mat: list containing two 2Darrays
+        output of the class FitzHugh_Nagumo_on_network
         Activity matrix [act_v, act_w] contains the time evolution of both variables of the FitzHugh-Nagumo model
     """
     _, ax = plt.subplots(figsize=(12, 4))
+    ax.set_title('Activity of first variable', fontsize = 35)
     ax.plot(act_mat[0])
     ax.set_xlabel('Time', fontsize=25)
     ax.set_ylabel('v', fontsize=25)
     
     _, ax = plt.subplots(figsize=(12, 4))
+    ax.set_title('Activity of first variable', fontsize = 35)
     ax.plot(act_mat[1])
     ax.set_xlabel('Time', fontsize=25)
     ax.set_ylabel('w', fontsize=25)
@@ -32,14 +35,19 @@ def plot_activity(act_mat):
 
 def plot_phase_portrait(a, b, tau, act_mat, force_field=False):
     '''
-    a, b: parameters used in FitzHugh-Nagumo model
+    a, b, tau: parameters used in FitzHugh-Nagumo model
     
-    act_mat: activity matrix according to class FitzHugh_Nagumo_on_network
+    act_mat: list containing two 2Darrays
+        output of the class FitzHugh_Nagumo_on_network
+        Activity matrix [act_v, act_w] contains the time evolution of both variables of the FitzHugh-Nagumo model
+
+    force_field: optional
+        draw arrows to show flow in phase plane
     '''
     if force_field is False:
         plt.figure(figsize=(20,20))
     
-        # plot the clines for v', w'
+        # plot the nullclines
         x_null = np.arange(-5,5,.1) 
         y1 = [z-1./3*z**3 for z in x_null]
         y2 = [1/b*z+a/b for z in x_null]
