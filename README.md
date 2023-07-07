@@ -1,4 +1,4 @@
-# FitzHugh-Nagumo-on-Networks
+# FitzHugh-Nagumo dynamics on Networks
 Python implementation of a network with local FitzHugh-Nagumo dynamics.
 Every node of the network is a FitzHugh-Nagumo neuron which is coupled to its nearest neighbors. \
 Here, the ODE is approximated according to the [Euler method](https://en.wikipedia.org/wiki/Euler_method). \
@@ -50,7 +50,7 @@ Remark: Depending on the choice of parameters in the model the behaviour change 
 ![Activity of first and second variable plotted against the time steps.](https://user-images.githubusercontent.com/104760326/188576765-893c7b97-43e5-458e-85de-4273d5efa95b.png)
 
 
-### plot_phase_portrait(a, b, tau, act_mat, force_field=optional)
+### Trajectories in the Phase Plane
 force_field=True draws arrows in the direction of the flow \
 Note that the force_field is drawn for the differential equation without coupling! Therefore, it is not precise but accurate enough to get an idea of the flow.
 
