@@ -66,69 +66,28 @@ Note that the force_field is drawn for the differential equation without couplin
 
  ## Pngs to GIF/Video
  
-The following functions create sequences of png images and use them to create GIFs/videos. \
+The following functions create sequences of png images which are used to create GIFs/videos. \
 There are several different ways to visualize the network dynamics:
 
-### image_creator(network, act_mat, pos, colormap, stepstart, stepsize)
+### Evolution of the Dynamics on the Network 
 
-     The function image_creator visualized the node activity on the network. The network is plotted according to a specified layout 
-     and the node activity is colorcoded. \
-     Afterwards, one can make a GIF (used here) or video out of the png images 
+The function image_creator visualized the node activity on the network. The network is plotted according to a chosen layout algorithm
+and the node activity is colorcoded. \
+Afterwards, one can make a GIF (used here) or video with the png images .
 
-     image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
-          G: networkX graph
-    
-          act_mat: ndarray
-    
-          pos: dictionary with nodes as keys and positions as values
-               layouts like nx.circular_layout, nx.spring_layout, etc.
-    
-          colormap: matplotlib.cm.colormap
-               colormap for node states
-        
-          stepstart: float
-               iteration step where first png is created
-    
-          stepsize: float
-               after stepsize many iterations the next png is created
-    
-    
-   
-     GIF_creator(duration, png_dir, path):
-          duration: float
-               time each picture is shown in GIF
-               useful range is between 0.05 to 0.2 
-        
-          png_dir: string
-               direction where .pngs are to make GIF out of
-    
-          path: string
-               direction where the GIF should be saved
-        
-    this code is from stackoverflow.com
-    
-    
-    
-    
-Example: Here the initial_states are chosen such that one node in a corner is perturbed and all other nodes are at the equilibrium. \
-G = nx.grid_2d_graph(10, 10) \
-model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins) \
-act_mat = model.run(adj_mat=nx.to_numpy_array(G))\
-pos = nx.spring_layout(G, iterations=500) \
-colormap = matplotlib.cm.twilight \
-stepstart = 100 \
-stepsize = 250 
+Here the initial_states are chosen such that one node in a corner is perturbed and all other nodes are at the equilibrium. Observe the propagation of the pertubation away from perturbed node throughout the network.\
+     G = nx.grid_2d_graph(10, 10) 
+     model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins) 
+     act_mat = model.run(adj_mat=nx.to_numpy_array(G))
+     pos = nx.spring_layout(G, iterations=500) 
+     colormap = matplotlib.cm.twilight 
+     
+     stepstart = 100 
+     stepsize = 250 
 
-The image_creator saves the created pngs in the directory into a folder named "pngs". This folder has to be created beforehand manually. 
+     image_creator(G, act_mat, pos, colormap, stepstart, stepsize)
 
-
-image_creator(G, act_mat, pos, colormap, stepstart, stepsize)
-
-GIF_creator(0.05, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
-
-
-The parameters are chosen such that we have oscillatory behaviour and the colormap is only with respect to the first equation of FitzHugh-Nagumo. \
-Observe the propagation of the pertubation away from perturbed node throughout the network.
+     GIF_creator(0.05, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
 
 
 ![10x10, one perturbed, twilight](https://user-images.githubusercontent.com/104760326/188586292-599d7e96-57f2-4e70-a445-8ad671d5f781.gif)
