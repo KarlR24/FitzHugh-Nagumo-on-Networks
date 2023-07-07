@@ -9,7 +9,7 @@ from datetime import datetime
 
 def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T, every_x_run, last_steps):
     '''
-    number_simulation_runs: integer
+    number_simulation_runs: positive integer
         number of simulations to run for phase coherence plots
     
     range_initial_states: positiv integer
@@ -24,27 +24,19 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
         parameters for FitzHugh-Nagumo
     
     delta_t, T: float
-        for Euler approximation of the differential equations
+        parameters for Euler approximation method of the differential equations
         
     every_x_run: integer
-        for every x-th run in the simulation, the individual node dynamics will be analysis and GIFs & plots generated
+        for every x-th simulation run all visualizations will be generated
         
     last_steps: interger (< T/delta_t)
-        number of time units/steps where eg. phase coherence frequency is analysed and chimera GIF are generated
-        want to analyse time where network has reached a stable state of (some degree of) synchronicity
+        visualiztions will be generated for the "last_steps" number of time steps
+        Idea: at late time steps in the simulation the coupling has taken effect
         
-     
-         
-    phase coherence measure: 
+          
+    a modified version of the coherence measure is used from the following paper:
     "The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
-    
-                     1
-            R(t) =  --- * sum_i,j { [v_i(t) - v_j(t)]^2 } 
-                    N^2
-                    
-        where {} denotes the average of a stochastic random variable
     '''
-    
     
     # to generate random initial conditions for every node and every run
     number_nodes = network.number_of_nodes()
@@ -54,7 +46,9 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
     # at the end one simulation run is one curve in the plot 
     phase_coherence_v = np.empty([int(T/delta_t)+1, number_simulation_runs], dtype=float)
     
-    #to reduce computational time all we compute the phase coherence only for the first variable v
+    #to reduce computational time all lines correspomding to the phase coherence measure for w are excluded
+    #those lines are one below the lines for the first variable v
+    #phase_coherence_w = np.empty([int(T/delta_t)+1, number_simulation_runs], dtype=float)
     
     act_mat = None
     sns.set_style("whitegrid")
@@ -70,23 +64,16 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
         minact = A0.min()
         
         for timestep in range(int(t_steps)):
-            
-            
             # get the difference of the states for all nodes for fixed time step 'timestep':
-            # take empirical average since there is no random variable involved
-            # because the difference is taken of two states divide by 2 to take average
             state_vi, state_vj = np.meshgrid(A0[timestep, :], A0[timestep, :])
             
-            # absolute value because pairwise differences are squared in formula and therefore positive
-            #interactions_v = 2**(-1)*(state_vi - state_vj) 
+            # scale with maximal-minimal value of v such that R(t) is in [0, 1]:
             interactions_v = (maxact - minact)**(-1)*(state_vi - state_vj)
             
-            # to take the squares of the differences in the formula we multilply the array with its transposed
-            # note that: here only row i of the interaction matrix is multiplied with column i of its transposed
-            # therfore only the interactions we are interested in are squared
+            # we are only interested in squaring the diagonal entries 
             intact_sq_v = [np.matmul(interactions_v[i,:], interactions_v.T[:,i]) for i in range(N)]
             
-            # to get double sum in formula we only need to sum up all entries of the first column 
+            # to get double sum in formula we only need to sum up all entries
             coherence_v = N**(-2)*(np.sum(intact_sq_v)) 
 
             # write phase coherence into matrix for every timestep and run
@@ -98,22 +85,20 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
         if simulation_run % every_x_run == 0:
             # make heatmap of the spatiotemporal node activity 
             plt.figure(figsize=(14, 20))
-
-            # heatmap
             fig = sns.heatmap(act_mat[0][:,:], vmin=minact, vmax=maxact, cmap=matplotlib.cm.cividis, 
-                        xticklabels=100, yticklabels=10000)
+                        xticklabels=100, yticklabels=20000)
             fig.invert_yaxis()
-            plt.title('Spatiotemporal Node Activity', fontsize = 20) 
-            plt.xlabel('Nodes', fontsize = 16) 
-            plt.ylabel('Timesteps', fontsize = 16) 
-            # save the figure
-            plt.savefig('spatiotemporal_activity.png', dpi=600)
+            plt.title('Spatiotemporal Node Activity', fontsize = 35) 
+            plt.xlabel('Nodes', fontsize = 30) 
+            plt.ylabel('Timesteps', fontsize = 30) 
+            plt.xticks(fontsize = 22)
+            plt.yticks(fontsize = 22)
+            plt.savefig('spatiotemporal_activity.png', dpi=600) # save the figure in directory of where this code is
             plt.show()
-            
             
             start_sampl = int(T/delta_t)- last_steps
             
-            # we are interested in "later steps" of the simulation run where synchronization has/can happened
+            # we are interested in "later steps" of the simulation run where the coupling took effect
             # to analyse the oscillation of nodes we use the Fast Fourier Transform
             A = act_mat[0]
             nodesignal = A[int(start_sampl):,:]
@@ -121,107 +106,91 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
 
             # FFT gives us complex values -> use absolute value
             mag = np.abs(FFT_node)
-            freq = np.fft.fftfreq(len(FFT_node), delta_t)
-        
+            freq = np.fft.fftfreq(len(FFT_node))
             
             fig, (ax0, ax1, ax2, ax3) = plt.subplots(4, 1, figsize=(20,30))
             plt.subplots_adjust(hspace=0.4)
             
             # plot activity of all nodes k: u_k vs time (where k = 1,..., N)
             ax0.plot(nodesignal)
+            ax0.tick_params(axis='both', labelsize=22)
             sns.set_style("whitegrid")
-            ax0.set_title('Oscillation of Nodes in Run %s' %str(simulation_run+1), fontsize = 20)
-            ax0.set_xlabel('Time', fontsize=16)
-            ax0.set_ylabel('Magnitude', fontsize=16)
+            ax0.set_title('Node Activity in Run %s' %str(simulation_run+1), fontsize = 35)
+            ax0.set_xlabel('Time', fontsize=30)
+            ax0.set_ylabel('Magnitude', fontsize=30)
             
             
             # plot frequency analysis from randomly sampled nodes: frequencies vs magnitude
             number_samples = int(np.ceil(np.sqrt(len(range(0,N)))) + 1)
-            #rand_sampl = sorted(rd.choices(range(0,N), k=number_samples))
-            [ax1.plot(100/freq[1:], mag[1:,i]) for i in rd.choices(range(0,N), k=number_samples)]
-            plt.xlim([0, 100*max([freq[find_peaks(mag[:,i])[0][0:3]].max() for i in range(len(mag.T))])])
+            [ax1.plot(1/freq[1:], mag[1:,i]) for i in rd.choices(range(0,N), k=number_samples)]
+            ax1.tick_params(axis='both', labelsize=22)
+            plt.xlim([0, max([freq[find_peaks(mag[:,i])[0][0:3]].max() for i in range(len(mag.T))])])
             plt.ylim([0, max([mag[1:,i].max() for i in range(len(mag.T))])+100])
             sns.set_style("whitegrid")
-            ax1.set_title(r'$\frac{1}{Frequency}$ of %s Randomly Sampled Nodes' %number_samples, fontsize = 20)
-            ax1.set_xlabel(r'$\frac{1}{Frequency}$', fontsize=16)
-            ax1.set_ylabel('Magnitude', fontsize=16)
+            ax1.set_title(r'$\frac{1}{Frequency}$ of %s Randomly Sampled Nodes' %number_samples, fontsize = 35, pad=25)
+            ax1.set_xlabel(r'$\frac{1}{Frequency}$', fontsize=30)
+            ax1.set_ylabel('Magnitude', fontsize=30)
             
-            # plot the activity of node 1: u_1 vs time
+            
+            # plot the activity of node 1: v_1 vs time
             # this is for comparison with the frequency analysis of the phase coherence in the same run
             ax2.plot(nodesignal[:,0])
+            ax2.tick_params(axis='both', labelsize=22)
             sns.set_style("whitegrid")
-            ax2.set_title('Oscillation Node 1 in Run %s' %str(simulation_run+1), fontsize = 20)
-            ax2.set_xlabel('Time', fontsize=16)
-            ax2.set_ylabel('$v_{1}$', fontsize=16)
-
-            # plot frequencies vs magnitude for the most important ones
-            #plt.axis((0, 30, 0, 17000))
-            sns.set_style("whitegrid")
-            ax3.set_title('FFT: Frequencies of Node 1 in Run %s' %str(simulation_run+1), fontsize = 20)
-            ax3.plot(100*freq, mag[:,0])
-            plt.xlim([0, 100*max(freq[find_peaks(mag[:,0])[0][:4]])])
-            plt.ylim([0, int(mag[:,0].max()+100)])
-            ax3.set_xlabel('Frequency', fontsize=16)
-            ax3.set_ylabel('Magnitude', fontsize=16)
-            plt.show()
-        
-            # print most important frequencies for given run
-            mn = find_peaks(mag[:,0])
-            print('run', simulation_run+1, 'frequency for first peak index', mn[0][0], 'of node 1:', freq[mn[0][0]],
-                 '*10^(-2) --> period:', 100/freq[mn[0][0]])
-            print('run', simulation_run+1, 'frequency for second peak index', mn[0][1], 'of node 1:', freq[mn[0][1]],
-                 '*10^(-2) --> period:', 100/freq[mn[0][1]])
-        
+            ax2.set_title('Activity Node 1 in Run %s' %str(simulation_run+1), fontsize = 35)
+            ax2.set_xlabel('Time', fontsize=30)
+            ax2.set_ylabel('$v_{1}$', fontsize=30)
             
-            # Make GIFs for individual runs:
-            # chimera GIF: 
-            # make sure that no 'old' png's left in directory
-            [f.unlink() for f in Path('/Users/username/your/directory/pngs').glob("*") if f.is_file()]
+
+            # plot most important frequencies vs magnitude
+            sns.set_style("whitegrid")
+            lbl = str(r'$\frac{1}{frequency}$ = ') + str(round(100/freq[find_peaks(mag[:,0])[0][0]]))
+            ax3.set_title('FFT: Frequencies of Node 1 in Run %s' %str(simulation_run+1), fontsize = 35, pad=25)
+            ax3.plot(1/freq, mag[:,0])
+            ax3.legend([lbl], fontsize=22)
+            plt.xlim([0, 1/max(freq[find_peaks(mag[:,0])[0][:4]])])
+            plt.ylim([0, int(mag[:,0].max()+100)])
+            ax3.tick_params(axis='both', labelsize=22)
+            ax3.set_xlabel('Frequency', fontsize=30)
+            ax3.set_ylabel('Magnitude', fontsize=30)
+            plt.show()       
+            
+            # Make video/GIFs for individual runs:
+            # chimera video/GIF: 
+            # delete 'old' png's left in directory
+            [f.unlink() for f in Path('/Users/User/your_directory/pngs').glob("*") if f.is_file()]
             scatter_chim_gif(act_mat, 0, 150)
-            video_maker(0.1, '/Users/username/your/directory/pngs')
-            #GIF_creator(0.1, '/Users/username/your/directory/pngs', '/Users/username/your/directory/GIF')
-            [f.unlink() for f in Path('/Users/username/your/directory/pngs').glob("*") if f.is_file()]
+            video_maker(0.1, '/Users/User/your_directory/pngs', 'chimera')
+            #GIF_creator(0.1, '/Users/User/your_directory/pngs', '/Users/User/your_directory/GIF')
+            [f.unlink() for f in Path('/Users/User/your_directory/pngs').glob("*") if f.is_file()]
         
-            # blinking network GIF
+            # blinking network video/GIF
             pos = nx.circular_layout(network)
             image_creator(network, act_mat, pos, matplotlib.cm.cividis, 0, 150)
-            video_maker(0.1, '/Users/username/your/directory/pngs')
-            #GIF_creator(0.1, '/Users/username/your/directory/pngs', '/Users/username/your/directory/GIF')
-            [f.unlink() for f in Path('/Users/username/your/directory/pngs').glob("*") if f.is_file()]
-        
-            #pos = nx.circular_layout(network)
-            #net_coh_gif(network, act_mat, pos, matplotlib.cm.cividis, phase_coherence_v, simulation_run, 0, 200)
-            #(network, act_mat, pos, matplotlib.cm.cividis, 50, 200)
-            #GIF_creator(0.1, '/Users/username/your/directory/pngs', '/Users/username/your/directory/GIF')
-            #[f.unlink() for f in Path('/Users/username/your/directory/pngs').glob("*") if f.is_file()]
-            # runaround GIF for first 5.000 steps
-            runaround(act_mat, 0, 100000, 150)
-            video_maker(0.1, '/Users/username/your/directory/pngs')
-            #GIF_creator(0.1, '/Users/username/your/directory/pngs', '/Users/username/your/directory/GIF')
-            [f.unlink() for f in Path('/Users/username/your/directory/pngs').glob("*") if f.is_file()]
+            video_maker(0.1, '/Users/Users/your_directory/pngs', 'blinking_network')
+            #GIF_creator(0.1, '/Users/Users/your_directory/pngs', '/Users/Users/your_directory/GIF')
+            [f.unlink() for f in Path('/Users/Users/your_directory/pngs').glob("*") if f.is_file()]
             
-            
-            # runaround GIF for first 5.000 steps
-            #runaround(act_mat, 95000, 100000, 10)
-            #video_maker(0.1, '/Users/username/your/directory/pngs')
-            #GIF_creator(0.1, '/Users/username/your/directory/pngs', '/Users/karl/FitzHugh-Nagumo dynamics/GIF')
+            # runaround video/GIF to visualize the trajectoris in the phase space
+            runaround(act_mat, 0, int(T/delta_t)+1, 150)
+            video_maker(0.1, '/Users/User/your_directory/pngs', 'runaround')
+            #GIF_creator(0.1, '/Users/User/your_directory/pngs', '/Users/User/your_directory/GIF')
+            [f.unlink() for f in Path('/Users/User/your_directory/pngs').glob("*") if f.is_file()]
             
         else:
             pass
         
         
-        
-        
 
-    # now use phase_coherence_v/-w matrices to make plots
+    # now use phase_coherence_v matrix to make plots
     sns.set_style("whitegrid")
     _, ax = plt.subplots(figsize=(20, 4))
     ax.plot(phase_coherence_v)
-    plt.title('Simulations = %s' %number_simulation_runs, fontsize = 20)
-    ax.set_xlabel('Time t', fontsize=16)
-    ax.set_ylabel('Coherence Measure', fontsize=16) #R(t) for v
+    plt.title('Simulations = %s' %number_simulation_runs, fontsize = 35)
+    ax.set_xlabel('Time t', fontsize=30)
+    ax.set_ylabel('Coherence Measure R(t)', fontsize=30) #R(t) for v
+    ax.tick_params(axis='both', labelsize=22)
     plt.show()
-    
     
     # Frequency analyisis of phase coherence matrix
     start_sampl = int(T/delta_t)-last_steps
@@ -230,10 +199,8 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
     FFT_sig = np.fft.fft(signal, axis=0)
 
     magnitude = np.abs(FFT_sig)
-    #PSD = magnitude**2 # power spectral density
-    freqs = np.fft.fftfreq(len(FFT_sig), delta_t)
-    
-    #print('We start sampling the phase coherence at t =', start_sampl)
+    #PSD = magnitude**2 # power spectral density 
+    freqs = np.fft.fftfreq(len(FFT_sig))
 
     # figures
     fig, (ax4, ax5) = plt.subplots(2, 1, figsize=(20,20))
@@ -241,52 +208,50 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
 
     # plot the phase coherences of all runs: coherence vs time steps
     ax4.plot(signal)
-    ax4.set_title('Phase Coherence Measure for last %s Timesteps' %str(int(last_steps)), fontsize = 20)
-    ax4.set_xlabel('Time', fontsize=16)
-    ax4.set_ylabel('Coherence Measure', fontsize=16)
+    ax4.set_title('Phase Coherence Measure for last %s Timesteps' %str(int(last_steps)), fontsize = 35)
+    ax4.set_xlabel('Time', fontsize=30)
+    ax4.set_ylabel('Coherence Measure R(t)', fontsize=30)
+    ax4.tick_params(axis='both', labelsize=22)
 
     # plot frequency analysis of phase coherences: frequencies vs magnitude
-    ax5.set_title('FFT: Frequencies of Phase Coherence for last %s Timesteps' %str(int(last_steps)), fontsize = 20)
-    ax5.plot(100*freqs, magnitude)
-    plt.xlim([0, 100*max([freqs[find_peaks(magnitude[:,i])[0][0:3]].max() for i in range(len(magnitude.T))])])
-    plt.ylim([0, max([magnitude[1:,i].max() for i in range(len(magnitude.T))])+100])
-    ax5.set_xlabel('Frequency', fontsize=16)
-    ax5.set_ylabel('Magnitude', fontsize=16)
-
+    ax5.set_title(r'FFT: $\frac{1}{frequency}$ of Phase Coherence for last %s Timesteps' %str(int(last_steps)), fontsize = 35, pad=25)
+    ax5.plot(1/freqs, magnitude)
+    #plt.xlim([0, max([freqs[find_peaks(magnitude[:,i])[0][0:3]].max() for i in range(len(magnitude.T))])])
+    #plt.ylim([0, max([magnitude[1:,i].max() for i in range(len(magnitude.T))])+100])
+    lbl = [str(r'$\frac{1}{frequency}$ = ') + str(round(1/freqs[find_peaks(magnitude[:,i])[0][0]])) for i in range(len(FFT_sig.T))]
+    ax5.legend(lbl, fontsize=22)
+    ax5.set_xlabel(r'$\frac{1}{frequency}$', fontsize=30)
+    ax5.set_ylabel('Magnitude', fontsize=30)
+    ax5.tick_params(axis='both', labelsize=22)
+    ax3.legend([round(1/freqs[find_peaks(mag[:,0])[0][0]]), round(1/freqs[find_peaks(mag[:,0])[0][1]])])
     plt.show()
     
-    # print most important frequencies for every run
-    for run in range(number_simulation_runs):
-        m = find_peaks(magnitude[:,run])
-        print('run', run+1, ': frequency for first peak index of coherence', m[0][0],':', freqs[m[0][0]], 
-              '*10^(-2) --> period:', 100/freqs[m[0][0]])
-        print('run', run+1, ': frequency for second peak index of coherence', m[0][1],':', freqs[m[0][1]], 
-              '*10^(-2) --> period:', 100/freqs[m[0][1]])
-        print('\n')
     
     # make extra phase coherence plots plots for filtered runs           
     for simrun in range(0, number_simulation_runs, every_x_run):
         # plot phase coherence for filtered run "simrun"
         _, ax = plt.subplots(figsize=(20, 4))
         ax.plot(phase_coherence_v[:, simrun])
-        ax.set_title('Simulation Run = %s' %str(simrun+1), fontsize = 20)
-        ax.set_xlabel('Time t', fontsize=16)
-        ax.set_ylabel('Phase Coherence', fontsize=16)
+        ax.set_title('Simulation Run = %s' %str(simrun+1), fontsize = 35)
+        ax.set_xlabel('Time t', fontsize=30)
+        ax.set_ylabel('Phase Coherence R(t)', fontsize=30)
+        ax.tick_params(axis='both', labelsize=22)
         
         # plot frequency analysis of the filtered simlution run "simrun"
         _, ax = plt.subplots(figsize=(20, 4))
-        ax.plot(100*freqs, magnitude[:, simrun])
-        plt.xlim([0, 100*max(freqs[find_peaks(magnitude[:, simrun])[0][:4]])])
-        plt.ylim([0, int(magnitude[:, simrun].max()+100)])
-        ax.set_title('Frequencies for Simulation Run = %s' %str(simrun+1), fontsize = 20)
-        ax.set_xlabel('Frequencies', fontsize=16)
-        ax.set_ylabel('Magnitude', fontsize=16)
+        ax.plot(1/freqs, magnitude[:, simrun])
+        lbl = str(r'$\frac{1}{frequency}$ = ') + str(round(1/freqs[find_peaks(magnitude[:,0])[0][0]]))
+        ax.legend([lbl], fontsize=22)
+        ax.set_title(r'$\frac{1}{Frequency}$ for Simulation Run = %s' %str(simrun+1), fontsize = 35, pad=25)
+        ax.set_xlabel(r'$\frac{1}{Frequency}$', fontsize=30)
+        ax.set_ylabel('Magnitude', fontsize=30)
+        ax.tick_params(axis='both', labelsize=22)
         
         # GIF phase coherence 
-        [f.unlink() for f in Path('/Users/karl/FitzHugh-Nagumo dynamics/pngs').glob("*") if f.is_file()]
-        coh_gif(phase_coherence_v, simrun, 150)
-        video_maker(0.1, '/Users/username/your/directory/pngs')
-        #GIF_creator(0.1, '/Users/username/your/directory/pngs', '/Users/username/your/directory/GIF')
-        
-        
-        
+        [f.unlink() for f in Path('/Users/Users/your_directory/pngs').glob("*") if f.is_file()]
+        coh_gif(phase_coherence_v, simrun, 0, 150)
+        video_maker(0.1, '/Users/Users/your_directory/pngs', 'phase_coherence')
+        #GIF_creator(0.1, '/Users/Users/your_directory/pngs', '/Users/karl/FitzHugh-Nagumo dynamics/GIF')
+    
+    
+    
