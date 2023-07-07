@@ -75,46 +75,34 @@ The function image_creator visualized the node activity on the network. The netw
 and the node activity is colorcoded. \
 Afterwards, one can make a GIF (used here) or video with the png images .
 
-Here the initial_states are chosen such that one node in a corner is perturbed and all other nodes are at the equilibrium. Observe the propagation of the pertubation away from perturbed node throughout the network.\
+Here the initial_states are chosen such that one node in a corner is perturbed and all other nodes are at the equilibrium. Observe the propagation of the pertubation away from perturbed node throughout the network.
+
      G = nx.grid_2d_graph(10, 10) 
      model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins) 
      act_mat = model.run(adj_mat=nx.to_numpy_array(G))
      pos = nx.spring_layout(G, iterations=500) 
      colormap = matplotlib.cm.twilight 
-     
      stepstart = 100 
      stepsize = 250 
 
      image_creator(G, act_mat, pos, colormap, stepstart, stepsize)
-
      GIF_creator(0.05, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
 
 
 ![10x10, one perturbed, twilight](https://user-images.githubusercontent.com/104760326/188586292-599d7e96-57f2-4e70-a445-8ad671d5f781.gif)
 
 
-### run around:
+### Phase portrait:
 
-     runaround visualizes the node activity in the phase plane where the first variable v is on the x-axis and the second variable w is on the y-axis.
+The difference between runaround and plot_phase_portrait is that runaround illustrates every oscillator as a dot for a given time point.
+The advantage is that for every time point it can be seen where the oscillators are in the phase plane.
      
-     runaround(act_mat, stepstart, stepend, stepsize)
-          act_mat: array
-               states of oscillators for all times
-          stepstart: int
-               time step where first png is created
-          stepend: int
-               time step where last png is created
-          stepsize: int
-               after stepsize many timesteps/iterations the next png is created
-               
-Like the image_creator above run_around creates and stores png images in a folder "pngs".
-
-Example: G = nx.watts_strogatz_graph(10, 2, 0)\
-model = FitzHugh_Nagumo_coupled(coupling=0.5, network=G, a=1, b=0.1, tau=5, delta_t=10**(-3), T=500)\
-act_mat = model.run(adj_mat)\
-runaround(act_mat, 50, 500)\
-Now compile pngs into GIF with GIF_creator.
-
+     G = nx.watts_strogatz_graph(10, 2, 0)
+     model = FitzHugh_Nagumo_coupled(coupling=0.5, network=G, a=1, b=0.1, tau=5, delta_t=10**(-3), T=500)
+     act_mat = model.run(adj_mat)
+     runaround(act_mat, 50, 500)
+     GIF_creator(0.05, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
+     
 ![10 node ring, cpl=0.5, a=1, b=0.1, tau=5, T=500, runaround](https://user-images.githubusercontent.com/104760326/200849817-55175359-92ac-491a-84db-b8a2a526a184.gif)
 
 
