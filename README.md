@@ -12,21 +12,21 @@ FitzHugh-Nagumo dynamics for node i: \
 $\dot{v_i} = v_i - \frac{v_i^3}{3} - w_i + \frac{k}{N}* \sum_{j =1,...,N} a_{ij} (v_i - v_j)$ \
 $\dot{w_i} = \frac{1}{\tau} (v_i - bw_i + a)$ \
 where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network) and $N$ is the number of nodes. \
-Remark: Depending on the choice of parameters in the model the behaviour change qualitatively (saddle node bifurcation, limit cycles, Hopf bifurcation, etc.). E.g. the choice of parameters in the ReadMe is such that the system exhibits oscillatory behaviour.
+Remark: Depending on the choice of parameters in the model the behaviour change qualitatively (saddle node bifurcation, limit cycles, Hopf bifurcation, etc.). 
 
 ## Class FitzHugh_Nagumo_coupled()
      FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) 
           coupling: positive real value which gives the strength of the coupling of neighbors with default vaulue = 1
-                    coupling strenght 0 corresponds to no coupling
+                    coupling = 0 corresponds to no coupling
                 
-          network: networkx graph on which dynamics run. Gives the neighbor relations (ie. adjacency matrix) 
+          network: networkx graph 
+                   network of interest
                    If no network is specified then a Watts-Strogatz network is created.
          
-          a, b, tau: float/ parameters of the FitzHugh-Nagumo model 
-                   Note: depending on the choice of parameters the dynamics exhibit qualitative different  
-                         behaviours 
+          a, b, tau: float 
+                   parameters of the FitzHugh-Nagumo model 
 
-          delta_t: small real value 
+          delta_t: float 
                    step size for the Euler method 
 
           T: integer 
