@@ -39,7 +39,7 @@ Remark: Depending on the choice of parameters in the model the behaviour change 
 
 ## Visualizations:
 
-### Plot the node activity of both variables
+### Plot the node activity for both FitzHugh-Nagumo variables
      G = nx.grid_2d_graph(3, 3) 
      model = FitzHugh_Nagumo_coupled(coupling=2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) 
      adj_mat = nx.to_numpy_array(G) 
