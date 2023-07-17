@@ -52,7 +52,7 @@ Remark: Depending on the choice of parameters in the model the behaviour change 
 
 ### Trajectories in the Phase Plane
 force_field=True draws arrows in the direction of the flow \
-Note that the force_field is drawn for the differential equation without coupling! Therefore, it is not exact and meant to get intuition for the flow.
+Note that the force_field is drawn for the differential equation without coupling! Therefore, it is not exact and meant to give intuition for the flow.
 
      G = nx.grid_2d_graph(3, 3) 
      model = FitzHugh_Nagumo_coupled(coupling=2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) 
