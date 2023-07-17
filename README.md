@@ -75,7 +75,7 @@ The function image_creator visualized the node activity on the network. The netw
 and the node activity is colorcoded. \
 Afterwards, one can make a GIF (used here) or video with the png images .
 
-Here the initial_states are chosen such that one node in a corner is perturbed and all other nodes are at the equilibrium. Observe the propagation of the pertubation away from the perturbed node throughout the network.
+Here the initial states = "ins" are chosen such that one node in a corner is perturbed and all other nodes are at the equilibrium. Observe the propagation of the pertubation away from the perturbed node throughout the network.
 
      G = nx.grid_2d_graph(10, 10) 
      model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins) 
