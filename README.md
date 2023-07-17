@@ -14,7 +14,7 @@ $\dot{w_i} = \frac{1}{\tau} (v_i - bw_i + a)$ \
 where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network) and $N$ is the number of nodes. \
 Remark: Depending on the choice of parameters in the model the behaviour change qualitatively (saddle node bifurcation, limit cycles, Hopf bifurcation, etc.). 
 
-## Class FitzHugh_Nagumo_coupled()
+## Given network with local FitzHugh-Nagumo dynamics:
      FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) 
           coupling: positive real value which gives the strength of the coupling of neighbors with default vaulue = 1
                     coupling = 0 corresponds to no coupling
