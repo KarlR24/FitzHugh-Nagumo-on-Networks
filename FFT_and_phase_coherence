@@ -88,7 +88,7 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
             fig = sns.heatmap(act_mat[0][:,:], vmin=minact, vmax=maxact, cmap=matplotlib.cm.cividis, 
                         xticklabels=100, yticklabels=20000)
             fig.invert_yaxis()
-            plt.title('Spatiotemporal Node Activity', fontsize = 35) 
+            plt.title('Spatiotemporal Node Activity', fontsize = 35, pad=10) 
             plt.xlabel('Nodes', fontsize = 30) 
             plt.ylabel('Timesteps', fontsize = 30) 
             plt.xticks(fontsize = 22)
