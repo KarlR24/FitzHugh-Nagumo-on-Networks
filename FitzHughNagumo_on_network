@@ -7,6 +7,7 @@ class FitzHugh_Nagumo_coupled():
         '''
         coupling: float
             coupling strength between oscillators where default is 1
+            coupling = 0 corresponds to no coupling and only local dynamics
             later on we normalize the coupling by the number of incoming interactions
         
         network: graph
