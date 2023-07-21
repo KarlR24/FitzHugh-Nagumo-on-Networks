@@ -45,14 +45,17 @@ Wall time: 1min 16s
 force_field=True draws arrows in the direction of the flow \
 Note that the force_field is drawn for the differential equation without coupling! Therefore, it is not exact and meant to give intuition for the flow.
 
-     G = nx.grid_2d_graph(3, 3) 
-     model = FitzHugh_Nagumo_coupled(coupling=2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) 
+     G = nx.watts_strogatz_graph(10, 2, 0) 
+     a = 0.3
+     b = 0.1
+     tau = 5
+     model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=a, b=b, tau=tau, delta_t=10**(-2), T=50) 
      adj_mat = nx.to_numpy_array(G) 
      act_mat=model.run(adj_mat) 
-     plot_phase_portrait(0.3, 0.1, 0.2, act_mat, force_field=True)
+     plot_phase_portrait(a, b, tau, act_mat, force_field=True)
          
 
-![download](https://user-images.githubusercontent.com/104760326/188612773-91fcc9eb-a876-48ba-b8ce-1a9c740a492f.png)
+![phase portrait for GitHub, N=10, k=2, T=50, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7d628eb0-70f7-49a0-815c-4b75ebd691a1)
 
 
  ## Pngs to GIF/Video
