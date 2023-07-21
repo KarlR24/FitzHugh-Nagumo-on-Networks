@@ -21,7 +21,7 @@ Remark: Depending on the choice of parameters in the model the behaviour change 
      b = 0.1
      tau = 5
      delta_t = 10**(-2)
-     T = 1000
+     T = 5000
      
      FitzHugh_Nagumo_coupled(coupling=coupling, network=G, a=a, b=b, tau=tau, delta_t=delta_t, T=T, initial_states=None) 
           
