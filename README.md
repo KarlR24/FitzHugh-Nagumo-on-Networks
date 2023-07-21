@@ -48,6 +48,7 @@ Note that:
  - the force_field is drawn for the differential equation without coupling! Therefore, it is not exact and meant to give intuition for the flow.
  - the nullclines are drawn in blue and orange.
 
+
      G = nx.watts_strogatz_graph(10, 2, 0) 
      a = 0.3
      b = 0.1
