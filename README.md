@@ -108,29 +108,16 @@ https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7f2121d6
 
 
 
-### scatter_chim_gif(act_mat, start, stepsize)
+### Chimera plot
 
-To visualize chimera states in the network of coupled oscillators scatter_chim_gif creates png images to make a GIF/video.
+scatter_chim_gif is used to visualize chimera states in a network of coupled oscillators. The function creates png images which can be used to make a GIF or video.
 
-     scatter_chim_gif(act_mat, start, stepsize):  
-          '''
-          act_mat: nd array
-          activity matrix from model
-        
-          stepstart: integer 
-               starting time to begin taking pictures to make a GIF
-               stepstart < T/delta_t, ie. total number of steps in model
-               note: this GIF is for "later times" where the network has reached (some kind of) synchronicity
-        
-          stepsize: integer
-          every stepsize-number of timestep is taken from the activity matrix
-          '''
-Example: G = nx.watts_strogatz_graph(100, 14, 0)\
-model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=5, delta_t=10**(-3), T=100)\
-act_mat = model.run(adj_mat)\
+     G = nx.watts_strogatz_graph(100, 14, 0)\
+     model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=5, delta_t=10**(-3), T=100)\
+     act_mat = model.run(adj_mat)\
 
-scatter_chim_gif(act_mat, 95.000, 50)
-video_maker(0.1, '/Users/user/my/directory/pngs')
+     scatter_chim_gif(act_mat, 95.000, 50)
+     video_maker(0.1, '/Users/user/my/directory/pngs')
 
 
 
