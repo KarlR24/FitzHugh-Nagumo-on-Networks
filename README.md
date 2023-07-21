@@ -98,8 +98,13 @@ The advantage is that for every time point it can be seen where the oscillators 
      model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=5, delta_t=10**(-2), T=100)
      act_mat = model.run(adj_mat)
      runaround(act_mat, 50, 10000, 50)
-     GIF_creator(0.1, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
+     video_maker(0.1, '/Users/User/FitzHugh-Nagumo dynamics/pngs', 'runaround')
      
+
+
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7f2121d6-35cc-43c1-b670-9ff5740227cc
+
+
 
 
 
