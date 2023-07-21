@@ -110,19 +110,17 @@ https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7f2121d6
 
 ### Chimera plot
 
-scatter_chim_gif is used to visualize chimera states in a network of coupled oscillators. The function creates png images which can be used to make a GIF or video.
+scatter_chim_gif is used to visualize chimera patterns in a network of identical, coupled oscillators. The function creates png images which can be used to make a GIF or video. 
 
-     G = nx.watts_strogatz_graph(100, 14, 0)\
-     model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=5, delta_t=10**(-3), T=100)\
-     act_mat = model.run(adj_mat)\
+     G = nx.watts_strogatz_graph(100, 20, 0)
+     model = FitzHugh_Nagumo_coupled(coupling=100, network=G, a=0.3, b=0.1, tau=5, delta_t=10**(-2), T=500)
+     act_mat = model.run(adj_mat)
 
-     scatter_chim_gif(act_mat, 95.000, 50)
-     video_maker(0.1, '/Users/user/my/directory/pngs')
+     scatter_chim_gif(act_mat, 400.000, 50)
+     video_maker(0.1, '/Users/user/my/directory/pngs', 'chimera')
 
 
-
-https://user-images.githubusercontent.com/104760326/228857148-89eddbb7-cc18-498d-b9db-7050479340e3.mp4
-
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7216da03-6587-448c-ae3e-50f4d652cc77
 
 
 
