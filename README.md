@@ -43,9 +43,6 @@ Wall time: 1min 16s
 
 
 ### Trajectories in the Phase Plane
-force_field=True draws arrows in the direction of the flow \
-Note that the nullclines are drawn in blue and orange and the force_field is drawn for the differential equation without coupling! Therefore, it is not exact and meant to give intuition for the flow. 
-
      G = nx.watts_strogatz_graph(10, 2, 0) 
      a = 0.3
      b = 0.1
@@ -54,6 +51,11 @@ Note that the nullclines are drawn in blue and orange and the force_field is dra
      adj_mat = nx.to_numpy_array(G) 
      act_mat=model.run(adj_mat) 
      plot_phase_portrait(a, b, tau, act_mat, force_field=True)
+
+force_field=True draws arrows in the direction of the flow \
+Note that:
+- the nullclines are drawn in blue and orange
+- the force_field is drawn for the differential equation without coupling! Therefore, it is not exact and meant to give intuition for the flow. 
          
 
 ![phase portrait for GitHub, N=10, k=2, T=50, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7d628eb0-70f7-49a0-815c-4b75ebd691a1)
