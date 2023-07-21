@@ -174,34 +174,9 @@ https://user-images.githubusercontent.com/104760326/228861323-ac74ffc4-0a10-4013
 
 
 
-### phase_coh_freq():
-phase_coh_freq(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T, every_x_run, last_steps):
+### Run simulations and generate above visualizations:
 
-     number_simulation_runs: integer
-        number of simulations to run for phase coherence plots
-    
-    range_initial_states: positiv integer
-        size of rectangle around origin from which initial states are drawn according to uniform distribution
-    
-    coupling: float
-        coupling strength between oscillators
-    
-    network: networkx graph
-        
-    a, b, tau: float
-        parameters for FitzHugh-Nagumo
-    
-    delta_t, T: float
-        for Euler approximation of the differential equations
-        
-    every_x_run: integer
-        for every x-th run in the simulation, the individual node dynamics will be analysis and GIFs/videos & plots generated
-        
-    last_steps: interger (< T/delta_t)
-        number of time units/steps where eg. phase coherence frequency is analysed and chimera GIF are generated
-        want to analyse time where network has reached a stable state of (some degree of) synchronicity
-        
-This function combines the class and visualiation function from above to make simulation runs and analyse them in one go. \
+This function combines the class and visualiation function from above to make simulation runs and analyse them. \
 Additionally, the activity matrix for the first variable v is plotted as heatmap to be able to link the different visualization together.\
 Furthermore, the node activity and the phase coherence measure are decomposed into their frequencies using Fast Fourier Transform (FFT).\
 Note that: phase_coh_freq purpose is to make simulation runs and analysis individual runs with the same function. \
