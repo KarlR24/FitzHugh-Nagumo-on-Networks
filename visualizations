@@ -15,6 +15,7 @@ def plot_activity(act_mat):
         output of the class FitzHugh_Nagumo_on_network
         Activity matrix [act_v, act_w] contains the time evolution of both variables of the FitzHugh-Nagumo model
     """
+    sns.set_style('whitegrid')
     _, ax = plt.subplots(figsize=(12, 4))
     ax.set_title('Activity of first variable', fontsize = 35)
     ax.plot(act_mat[0])
