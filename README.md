@@ -124,38 +124,13 @@ https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7216da03
 
 
 
-## Phase Coherence measure:
-     
-     
-     plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T):
-          number_simulation_runs: integer
-               number of simulations to run for phase coherence plots
-    
-          range_initial_states: positiv integer
-               size of rectangle around origin from which initial states are drawn according to uniform distribution
-    
-          coupling: float
-               coupling strength between oscillators
-    
-          network: networkx graph
-        
-          a, b, tau: float
-               parameters for FitzHugh-Nagumo
-    
-          delta_t, T: float
-               for Euler approximation of the differential equations
-          
-Note that new random initial states are generated for every simulation run. Every simulation run is one curve in the plot which describes the phase coherence (synchronicity of the oscillators) in the network.
+## Phase Coherence measure:       
+Note that (new) random initial states are generated in every simulation run. Every simulation run is one curve in the plot which describes the evolution of the  coherence measure (= synchronicity of the oscillators).
 Note that, the acitivity matrix is not stored therefore not available for further analysis. The output of this function is a plot of the phase coherence measure for both variables v, w.
 
-phase coherence measure $R(t)$ from the paper: 
+A modified version of the coherence measure $R(t)$ from the following paper is used: 
 "The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - 
 Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
-    
-$R(t) =  \frac{1}{N^2} * \sum_{i,j} \langle [v_i(t) - v_j(t)]^2 \rangle $
-        
-                    
-where $\langle \rangle$ denotes the average of a stochastic random variable.
     
 Example: For a ring graph with 25 nodes we want to run the dynamics with non-oscillatory parameter choice on it 100 times where for every simulation run new initial states are generated. The initial states are picked according to a uniform distribution and should be in the interval $[-1, 1]$. The rest of the parameters are in the same order as they are in the FitzHughNagumo_on_network class:\
 
