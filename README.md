@@ -15,27 +15,18 @@ where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network)
 Remark: Depending on the choice of parameters in the model the behaviour change qualitatively (saddle node bifurcation, limit cycles, Hopf bifurcation, etc.). 
 
 ## Given network with local FitzHugh-Nagumo dynamics:
-     FitzHugh_Nagumo_coupled(coupling=1, network=None, a=None, b=None, tau=None, delta_t=10**(-3), T=10, initial_states=None) 
-          coupling: positive real value which gives the strength of the coupling of neighbors with default vaulue = 1
-                    coupling = 0 corresponds to no coupling
-                
-          network: networkx graph 
-                   network of interest
-                   If no network is specified then a Watts-Strogatz network is created.
-         
-          a, b, tau: float 
-                   parameters of the FitzHugh-Nagumo model 
-
-          delta_t: float 
-                   step size for the Euler method 
-
-          T: integer 
-             duration of the simulation
-
-          initial_states: list or array containing two arrays of length number of nodes 
-                    one with initial states for v and the other one for w 
-                    If no initial states are given then random ones are created for every node. 
+     coupling = 1
+     G = nx.watts_strogatz_graph(100, 2, 0)
+     a = 0.3
+     b = 0.1
+     tau = 5
+     delta_t = 10**(-2)
+     T = 1000
+     
+     FitzHugh_Nagumo_coupled(coupling=coupling, network=G, a=a, b=b, tau=tau, delta_t=delta_t, T=T, initial_states=None) 
           
+CPU times: user 1min, sys: 11.5 s, total: 1min 12s
+Wall time: 1min 16s
 
 ## Visualizations:
 
