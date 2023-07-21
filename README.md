@@ -32,13 +32,14 @@ Wall time: 1min 16s
 
 ### Plot the node activity for both FitzHugh-Nagumo variables
      G = nx.grid_2d_graph(3, 3) 
-     model = FitzHugh_Nagumo_coupled(coupling=2, network=G, a=0.3, b=0.1, tau=0.2, delta_t=10**(-3), T=20) 
+     model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=5, delta_t=10**(-3), T=50) 
      adj_mat = nx.to_numpy_array(G) 
      act_mat=model.run(adj_mat) 
      plot_activity(act_mat)
+     
+![plot activity v for GitHub, grid 3x3, T=50, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/1fd45b3d-a7ee-4398-a938-55342e3dc9fe)
+![plot activity w for GitHub, grid 3x3, T=50, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/419bd9eb-2664-4a56-91d1-9c8d6b53bc98)
 
-
-![Activity of first and second variable plotted against the time steps.](https://user-images.githubusercontent.com/104760326/188576765-893c7b97-43e5-458e-85de-4273d5efa95b.png)
 
 
 ### Trajectories in the Phase Plane
