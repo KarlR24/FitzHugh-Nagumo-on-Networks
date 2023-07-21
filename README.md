@@ -95,12 +95,12 @@ The difference between runaround and plot_phase_portrait is that runaround illus
 The advantage is that for every time point it can be seen where the oscillators are in the phase plane.
      
      G = nx.watts_strogatz_graph(10, 2, 0)
-     model = FitzHugh_Nagumo_coupled(coupling=0.5, network=G, a=1, b=0.1, tau=5, delta_t=10**(-3), T=500)
+     model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=5, delta_t=10**(-2), T=100)
      act_mat = model.run(adj_mat)
-     runaround(act_mat, 50, 500)
-     GIF_creator(0.05, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
+     runaround(act_mat, 50, 10000, 50)
+     GIF_creator(0.1, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
      
-![10 node ring, cpl=0.5, a=1, b=0.1, tau=5, T=500, runaround](https://user-images.githubusercontent.com/104760326/200849817-55175359-92ac-491a-84db-b8a2a526a184.gif)
+
 
 
 ### scatter_chim_gif(act_mat, start, stepsize)
