@@ -238,22 +238,21 @@ Furthermore, the node activity and the phase coherence measure are decomposed in
 Note that: phase_coh_freq purpose is to make simulation runs and analysis individual runs with the same function. \
 In comparison, the individual functions above can be used for sinlge model realizations to test and visualize
 
-Example
-number_simulation_runs = 3
-range_initial_states = 3
-coupling = 1
-network = nx.watts_strogatz_graph(500, 20, 0)
-a = 0.3
-b = 0.1
-tau = 5
-delta_t = 10**(-2)
-T = 1000
-every_x_run = 10
-last_steps = 10000
 
-phase_coh_freq(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T, every_x_run, last_steps) = 
+    number_simulation_runs = 3
+    range_initial_states = 3
+    coupling = 1
+    network = nx.watts_strogatz_graph(500, 20, 0)
+    a = 0.3
+    b = 0.1
+    tau = 5
+    delta_t = 10**(-2)
+    T = 1000
+    every_x_run = 10
+    last_steps = 10000
 
-phase_coh_freq(3, 3, 1, G, 0.3, 0.1, 5, 10**(-2), 1000, 10, 10000)
+    phase_coh_freq(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T, every_x_run, last_steps) = 
+    phase_coh_freq(3, 3, 1, G, 0.3, 0.1, 5, 10**(-2), 1000, 10, 10000)
 
 
 ![sim1 5run1, heatmap, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/f3b6fb85-6da8-4cca-9d25-cef403f15405)
