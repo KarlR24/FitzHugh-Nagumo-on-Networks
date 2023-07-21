@@ -116,7 +116,7 @@ scatter_chim_gif is used to visualize chimera patterns in a network of identical
      model = FitzHugh_Nagumo_coupled(coupling=100, network=G, a=0.3, b=0.1, tau=5, delta_t=10**(-2), T=500)
      act_mat = model.run(adj_mat)
 
-     scatter_chim_gif(act_mat, 400.000, 50)
+     scatter_chim_gif(act_mat, 40000, 50)
      video_maker(0.1, '/Users/user/my/directory/pngs', 'chimera')
 
 
@@ -124,10 +124,8 @@ https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7216da03
 
 
 
-
-
 ## Phase Coherence measure:
-
+     
      
      plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T):
           number_simulation_runs: integer
@@ -160,19 +158,19 @@ $R(t) =  \frac{1}{N^2} * \sum_{i,j} \langle [v_i(t) - v_j(t)]^2 \rangle $
 where $\langle \rangle$ denotes the average of a stochastic random variable.
     
 Example: For a ring graph with 25 nodes we want to run the dynamics with non-oscillatory parameter choice on it 100 times where for every simulation run new initial states are generated. The initial states are picked according to a uniform distribution and should be in the interval $[-1, 1]$. The rest of the parameters are in the same order as they are in the FitzHughNagumo_on_network class:\
-number_simulation_runs = 100 \
-initial_states_interval = 1\
-coupling = 1\
-network = nx.erdos_renyi_graph(25, 0.35)\
-a = 1.3\
-b = 0.7\
-tau = 200/3\ 
-delta_t = 10**(-3)\
-T = 600\
 
-plot_phase_coherence(number_simulation_runs, initial_states_interval, coupling, network, a, b, tau, delta_t, T) =
+     number_simulation_runs = 100
+     initial_states_interval = 1
+     coupling = 1
+     network_list = nx.erdos_renyi_graph(25, 0.35)
+     a = 1.3
+     b = 0.7
+     tau = 200/3
+     delta_t = 10**(-3)
+     T = 600
 
-plot_phase_coherence(100, 1, 1, G, 1.3, 0.7, 200/3, 10**(-3), 600)
+     plot_phase_coherence(number_simulation_runs, initial_states_interval, coupling, network, a, b, tau, delta_t, T) =
+     plot_phase_coherence(100, 1, 1, G, 1.3, 0.7, 200/3, 10**(-3), 600)
 
 ![Screenshot 2023-05-24 at 17 01 23](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/99b0add9-7ffc-47a7-8a5d-ef0f5ef93769)
 
