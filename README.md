@@ -44,9 +44,9 @@ Wall time: 1min 16s
 
 ### Trajectories in the Phase Plane
 force_field=True draws arrows in the direction of the flow \
-Note that:
- - the force_field is drawn for the differential equation without coupling! Therefore, it is not exact and meant to give intuition for the flow.
- - the nullclines are drawn in blue and orange.
+Note that: \
+1) the force_field is drawn for the differential equation without coupling! Therefore, it is not exact and meant to give intuition for the flow. \
+2) the nullclines are drawn in blue and orange.
 
 
      G = nx.watts_strogatz_graph(10, 2, 0) 
