@@ -134,37 +134,21 @@ Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-R
     
 Example: For a ring graph with 25 nodes we want to run the dynamics with non-oscillatory parameter choice on it 100 times where for every simulation run new initial states are generated. The initial states are picked according to a uniform distribution and should be in the interval $[-1, 1]$. The rest of the parameters are in the same order as they are in the FitzHughNagumo_on_network class:\
 
-     number_simulation_runs = 100
-     initial_states_interval = 1
-     coupling = 1
-     network_list = nx.erdos_renyi_graph(25, 0.35)
-     a = 1.3
-     b = 0.7
-     tau = 200/3
-     delta_t = 10**(-3)
-     T = 600
-
-     plot_phase_coherence(number_simulation_runs, initial_states_interval, coupling, network, a, b, tau, delta_t, T) =
-     plot_phase_coherence(100, 1, 1, G, 1.3, 0.7, 200/3, 10**(-3), 600)
-
-![Screenshot 2023-05-24 at 17 01 23](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/99b0add9-7ffc-47a7-8a5d-ef0f5ef93769)
 
 
-### coh_gif(phase_coherence_v, simulation_run, stepsize)
 
-To compare the dynamics from image_creator, scatter_chim_gif and runaround we make a GIF/video where a vertical bar is at the current time step. This function is used in the code of phase_coh_freq below!
 
-     coh_gif(phase_coherence_v, simulation_run, stepsize):
-          '''
-          phase_coherence_v: 2d-array
-               phase coherence values for every time step
+### Coherence Measure 
+The coherence measure measures the synchronicity of the network of oscillators for all time steps. The function coh_gif() generates pngs images with a vertical line drawn at time steps of interest. The main use is to make a video or GIF to compare the dynamics from image_creator, scatter_chim_gif and runaround. \
+coh_gif() is mainly used in phase_coh_freq() function!
+
+     phase_coherence_v = generated in phase_coh_freq() function
+     simulation_run = a filtered run for which all visualizations are generated
+     start = 0
+     stepsize = 150
+     
+     coh_gif(phase_coherence_v, simulation_run, start, stepsize):
         
-          simulation_run: integer
-               simulation run of interest to make GIF
-    
-          stepsize: float
-               after stepsize many iterations the next png is created
-          '''
     
 Example: Since coh_gif takes its imputs from variables inside the phase_coh_freq function. Therefore, this example only showcases the output images compiled into a video.
 
