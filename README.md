@@ -125,7 +125,7 @@ https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7216da03
 
 
 ## Phase Coherence measure:       
-The coherence measure $0 \leq R(t) \leq 1$ is a function that measures the synchronicity of the network of oscillators where $R(t) = 0$ corresponds to total incoherent and $R(t) = 1$ corresponds to total coherent. \
+The coherence measure $R(t) \in [0, 1]$ is a function that measures the synchronicity of the network of oscillators where $R(t) = 0$ corresponds to total incoherent and $R(t) = 1$ corresponds to total coherent. \
 A modified version of the coherence measure $R(t)$ from the following paper is used: 
 "The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - 
 Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
