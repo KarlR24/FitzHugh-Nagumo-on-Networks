@@ -176,11 +176,11 @@ https://user-images.githubusercontent.com/104760326/228861323-ac74ffc4-0a10-4013
 
 ### Run simulations and generate above visualizations:
 
-The phase_coh_freq() - function combines the class and visualiation function from above to make simulation runs and analyse them. \
+The phase_coh_freq() - function combines the class and visualiations from above to make simulation runs and analyse them. \
 Additionally, the activity matrix for the first variable v is plotted as heatmap to be able to link the different visualization together.\
-Furthermore, the node activity and the phase coherence measure are decomposed into their frequencies using Fast Fourier Transform (FFT).\
-Note that: phase_coh_freq purpose is to make simulation runs and analysis individual runs with the same function. \
-In comparison, the individual functions above can be used for sinlge model realizations to test and visualize
+Also, frequency analysis using the Fast Fourier Transform (FFT) is made for node activity and phase coherence measure.\
+Note that: the main use of phase_coh_freq() is to make simulation runs and analyse individual runs. \
+In comparison, the individual functions above can be used for sinlge model realizations/simulation runs.
 
 
     number_simulation_runs = 3
