@@ -132,7 +132,7 @@ Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-R
 
 
 ### Coherence Measure 
-The coherence measure measures the synchronicity of the network of oscillators for all time steps. The function coh_gif() generates pngs images with a vertical line drawn at time steps of interest. The main use is to make a video or GIF to compare the dynamics from image_creator, scatter_chim_gif and runaround. \
+The coherence measure measures the synchronicity of the network of oscillators for all time steps. The function coh_gif() generates pngs images with a vertical line drawn at time steps of interest. The main use is to make a video or GIF to compare the dynamics from image_creator, scatter_chim_gif and runaround. One can stack these four visualization videos next to each other such that they run in parallel in one video. \
 coh_gif() is mainly used in phase_coh_freq() function!
 
      G = nx.watts_strogatz_graph(50, 2, 0)
