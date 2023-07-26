@@ -135,19 +135,22 @@ Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-R
 The coherence measure measures the synchronicity of the network of oscillators for all time steps. The function coh_gif() generates pngs images with a vertical line drawn at time steps of interest. The main use is to make a video or GIF to compare the dynamics from image_creator, scatter_chim_gif and runaround. \
 coh_gif() is mainly used in phase_coh_freq() function!
 
-     phase_coherence_v = generated in phase_coh_freq() function
+     G = nx.watts_strogatz_graph(50, 2, 0)
+     model = FitzHugh_Nagumo_coupled(coupling=10, network=G, a=0.3, b=0.1, tau=5, delta_t=10**(-3), T=1500)
+     
+     phase_coherence_v = coherence values for a filtered simulation run
      simulation_run = a filtered run for which all visualizations are generated
      start = 0
      stepsize = 150
      
      coh_gif(phase_coherence_v, simulation_run, start, stepsize):
         
-    
-Example: Since coh_gif takes its imputs from variables inside the phase_coh_freq function. Therefore, this example only showcases the output images compiled into a video.
 
 
 
-https://user-images.githubusercontent.com/104760326/228861323-ac74ffc4-0a10-4013-8a87-663674978003.mp4
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/644e1ed5-67a7-46f4-8226-7c2b12c428dd
+
+
 
 
 
