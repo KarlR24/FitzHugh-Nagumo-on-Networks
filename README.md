@@ -164,9 +164,9 @@ In comparison, the individual functions above can be used for sinlge model reali
 
 
     number_simulation_runs = 3
-    range_initial_states = 3
-    coupling = 1
-    network = nx.watts_strogatz_graph(500, 20, 0)
+    range_initial_states = 2
+    coupling = 10
+    network = nx.watts_strogatz_graph(500, 16, 0)
     a = 0.3
     b = 0.1
     tau = 5
@@ -176,23 +176,21 @@ In comparison, the individual functions above can be used for sinlge model reali
     last_steps = 10000
 
     phase_coh_freq(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T, every_x_run, last_steps) = 
-    phase_coh_freq(3, 3, 1, G, 0.3, 0.1, 5, 10**(-2), 1000, 10, 10000)
-
-
-![sim1 5run1, heatmap, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/f3b6fb85-6da8-4cca-9d25-cef403f15405)
-![sim1 5run1, node activity, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/14ba652c-34b0-4a03-ac4e-682534c4997a)
-![sim1 5run1, freq ana random nodes, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/8df5a115-6b18-4b2a-86ff-b2eeb7ff7d93)
-![sim1 5run1, node activity node 1, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/3996895b-c773-4ff1-96ca-36fc8263f54a)
-![sim1 5run1, feq ana node 1, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/a96d4084-192d-4afc-a848-e32bb6cc296a)
-![sim1 5run1, phase coherence, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/1c2b9ee5-02a0-4a45-815b-660f14119671)
-![sim1 5run1, phase coherence last 10000 steps, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/83795edb-d77c-49cc-8339-949c5de39f63)
-![sim1 5run1, freq ana phase coherence, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/b38e574b-88fd-463c-924e-776e8c748239)
-![sim1 5run1, phase coherence filtered 1, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/3538d6af-a5e2-42fd-b66f-d7162e70e3ae)
-![sim1 5run1, freq ana phase coherence filtered 1, 500 nodes, k=20, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/ca12d384-e350-41d3-a0c2-1157651de9d8)
+    phase_coh_freq(3, 2, 10, G, 0.3, 0.1, 5, 10**(-2), 1000, 10, 10000)
 
 
 
 
+![sim10 7run1, heatmap, N=500,k=16, cpl=10,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/af94c800-7013-4d66-b145-611ebb2c04e8)
+![sim10 7run1, individual node analysis, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/4664ef5a-d31a-4d60-b40d-5eafd8b2c6af)
+![sim10 7run1, phase coherence all, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/0b9c75b2-79f7-4d9d-86e4-0348c9beba42)
+![sim10 7run1, phase coherence last 10 000 steps, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/08252289-dd73-4fc8-aa09-895cb561b9f9)
+![sim10 7run1, frequency analysis phase coherence, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/5dd5deb3-7c04-4cdc-bf22-3fdf4beda523)
+![sim10 7run1, phase coherence run1, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/a2d03ca9-aa38-44d7-9316-9e23c845fe36)
+![sim10 7run1, frequency analysis phase coherence run1, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/98670ed6-883f-40be-a9ec-255407446f57)
+
+
+[need different run: mp4 too big?]
 
 
 
