@@ -125,17 +125,10 @@ https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7216da03
 
 
 ## Phase Coherence measure:       
-Note that (new) random initial states are generated in every simulation run. Every simulation run is one curve in the plot which describes the evolution of the  coherence measure (= synchronicity of the oscillators).
-Note that, the acitivity matrix is not stored therefore not available for further analysis. The output of this function is a plot of the phase coherence measure for both variables v, w.
-
+The coherence measure $0 \leq R(t) \leq 1$ is a function that measures the synchronicity of the network of oscillators where $R(t) = 0$ corresponds to total incoherent and $R(t) = 1$ corresponds to total coherent. \
 A modified version of the coherence measure $R(t)$ from the following paper is used: 
 "The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - 
 Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
-    
-Example: For a ring graph with 25 nodes we want to run the dynamics with non-oscillatory parameter choice on it 100 times where for every simulation run new initial states are generated. The initial states are picked according to a uniform distribution and should be in the interval $[-1, 1]$. The rest of the parameters are in the same order as they are in the FitzHughNagumo_on_network class:\
-
-
-
 
 
 ### Coherence Measure 
