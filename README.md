@@ -185,7 +185,6 @@ In comparison, the individual functions above can be used for sinlge model reali
 ![sim10 7run1, individual node analysis, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/4664ef5a-d31a-4d60-b40d-5eafd8b2c6af)
 ![sim10 7run1, phase coherence all, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/0b9c75b2-79f7-4d9d-86e4-0348c9beba42)
 ![sim10 7run1, phase coherence last 10 000 steps, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/08252289-dd73-4fc8-aa09-895cb561b9f9)
-![sim10 7run1, frequency analysis phase coherence, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/5dd5deb3-7c04-4cdc-bf22-3fdf4beda523)
 ![sim10 7run1, phase coherence run1, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/a2d03ca9-aa38-44d7-9316-9e23c845fe36)
 ![sim10 7run1, frequency analysis phase coherence run1, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/98670ed6-883f-40be-a9ec-255407446f57)
 
