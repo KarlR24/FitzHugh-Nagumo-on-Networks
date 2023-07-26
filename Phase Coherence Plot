@@ -77,14 +77,17 @@ def plot_phase_coherence(number_simulation_runs, range_initial_states, coupling,
     
     
     # now use phase_coherence_v/-w matrices to make plots
+    sns.set_style("whitegrid")
     _, ax = plt.subplots(figsize=(12, 4))
     ax.plot(phase_coherence_v)
-    sns.set_style("whitegrid")
-    plt.suptitle('simulations = %s' %number_simulation_runs)
+    plt.suptitle('simulations = %s' %number_simulation_runs, fontsize=35, pad=15)
+    ax.tick_params(axis='both', labelsize=22)
     ax.set_xlabel('Time t', fontsize=25)
     ax.set_ylabel('R(t) for v', fontsize=25)
     
+    sns.set_style("whitegrid")
     _, ax = plt.subplots(figsize=(12, 4))
+    ax.tick_params(axis='both', labelsize=22)
     ax.plot(phase_coherence_w)
     ax.set_xlabel('Time t', fontsize=25)
     ax.set_ylabel('R(t) for w', fontsize=25)
