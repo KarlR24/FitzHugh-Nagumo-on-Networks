@@ -189,7 +189,23 @@ In comparison, the individual functions above can be used for sinlge model reali
 ![sim10 7run1, frequency analysis phase coherence run1, N=500,k=16, cpl=50,T=1000, delta_t=10^(-2)](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/98670ed6-883f-40be-a9ec-255407446f57)
 
 
-[need different run: label and can't upload mp4 too big?]
+
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/d09b99c3-df34-491b-ace3-fd87329043b9
+
+
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/e3e69867-28bf-4ae1-9e8f-f3d01b007a20
+
+
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7e2a271c-a938-449b-b127-99ba234d4a24
+
+
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/e0900715-7297-4e08-9364-d938cec0bf38
+
+
+
+
+
+[need different run: label last plot!]
 
 
 
