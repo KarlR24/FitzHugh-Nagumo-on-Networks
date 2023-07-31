@@ -189,12 +189,9 @@ In comparison, the individual functions above can be used for sinlge model reali
 
 https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/8fb4c243-70c3-48db-996e-0de608caca4f
 
-
 https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/53095b34-f9f9-4a7c-9dec-e1a0d8fa0a4e
 
-
 https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/a8fe4499-fb0a-42ed-a219-4b7f830495d1
-
 
 https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/0a64c4ab-a27a-4376-8fc7-19da4cce1d20
 
