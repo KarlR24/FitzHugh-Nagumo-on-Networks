@@ -10,23 +10,21 @@ class FitzHugh_Nagumo_coupled():
             coupling = 0 corresponds to no coupling and only local dynamics
             later on we normalize the coupling by the number of incoming interactions
         
-        network: graph
-            nx network with number of nodes and neighbor relations --> adjacency matrix
-            sidenote: number of nodes = number of oscillators
+        network: networkX graph
+            network of interest
             
         a, b, tau: float
             parameters of the FitzHugh-Nagumo model
             
         delta_t: float
-            delta_t is size of integration/time steps
+            delta_t is step size of the Euler method
             
         T: float
-            time for which simulation runs
-            total number of integration/time steps is T/delta_t
+            time duration for simulation
+            total number of time steps is T/delta_t
         
-        initial_states: 2d-array (or list)
+        initial_states: 2d-array (or list containing two 1d-arrays)
             array with initial states for all nodes
-            length of initial_states must match number of nodes
             note: FitzHugh-Nagumo described by two ODEs. For coding: we want the initial_states to contain two arrays 
             one array contains initial states for v's and the second array contains initial states for w's.
             So, initial_states is an (2 x #nodes)-array [[v_1, ..., v_n], [w_1, ..., w_n]]
@@ -63,7 +61,7 @@ class FitzHugh_Nagumo_coupled():
             self.initial_states = initial_states
             number_nodes = len(self.initial_states[0]) # match number of nodes to number of initial states
             k = rd.randint(2, number_nodes - 1)
-            self.network = nx.watts_strogatz_graph(number_nodes, k, 0) # watts strogatz graph for ring reasons
+            self.network = nx.watts_strogatz_graph(number_nodes, k, 0) 
             self.adj_mat = nx.to_numpy_array(self.network) 
             
         # if a network is given then generate random initial states for all nodes
@@ -72,7 +70,7 @@ class FitzHugh_Nagumo_coupled():
         elif initial_states is None:
             self.network = network
             number_nodes = self.network.number_of_nodes()
-            self.initial_states = np.array([np.random.normal(size=number_nodes), np.random.normal(size=number_nodes)])    #np.random.normal() draws samples from (parametrized) normal distribution
+            self.initial_states = np.array([np.random.normal(size=number_nodes), np.random.normal(size=number_nodes)])    
             self.adj_mat = nx.to_numpy_array(network)
             
         elif network is not None and initial_states is not None:
