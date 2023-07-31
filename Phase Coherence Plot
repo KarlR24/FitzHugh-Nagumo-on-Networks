@@ -85,7 +85,7 @@ def plot_phase_coherence(number_simulation_runs, range_initial_states, coupling,
     sns.set_style("whitegrid")
     _, ax = plt.subplots(figsize=(12, 4))
     ax.plot(phase_coherence_v)
-    plt.suptitle('simulations = %s' %number_simulation_runs, fontsize=35, pad=15)
+    ax.set_title('simulations = %s' %number_simulation_runs, fontsize=35, pad=15)
     ax.tick_params(axis='both', labelsize=22)
     ax.set_xlabel('Time t', fontsize=25)
     ax.set_ylabel('R(t) for v', fontsize=25)
