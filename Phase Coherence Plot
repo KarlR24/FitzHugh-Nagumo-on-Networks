@@ -47,32 +47,37 @@ def plot_phase_coherence(number_simulation_runs, range_initial_states, coupling,
         model = FitzHugh_Nagumo_coupled(coupling=coupling, network=network, a=a, b=b, tau=tau, delta_t=delta_t, T=T, initial_states=np.array([np.random.uniform(-range_initial_states, range_initial_states, size=number_nodes), np.random.uniform(-range_initial_states, range_initial_states, size=number_nodes)]))
         act_mat = model.run(model.adj_mat) 
         t_steps, N = act_mat[0].shape
+
+        minact_v = act_mat[0].max()
+        maxact_v = act_mat[0].min()
+
+        minact_w = act_mat[1].max()
+        maxact_w = act_mat[1].min()
         
         for timestep in range(int(t_steps)):
             A0 = act_mat[0] # states of v
             A1 = act_mat[1] # states of w
             
             # get the difference of the states for all nodes for fixed time step 'timestep':
-            # take empirical average since there is no random variable involved
-            # because the difference is taken of two states divide by 2 for average
             state_vi, state_vj = np.meshgrid(A0[timestep, :], A0[timestep, :])
             state_wi, state_wj = np.meshgrid(A1[timestep, :], A1[timestep, :])
             
-            # absolute value because pairwise differences are squared in formula and therefore positive
-            interactions_v = 2**(-1)*np.abs((state_vi - state_vj))
-            interactions_w = 2**(-1)*np.abs((state_wi - state_wj))
+            # scale the differences such that |state_vi - state_vj| in [0, 1]
+            interactions_v = (maxact_v - minact_v)**(-1)*(state_vi - state_vj)
+            interactions_w = (maxact_w - minact_w)**(-1)*(state_wi - state_wj)
             
             # to take the squares of the differences in the formula we multilply the array with its transposed
-            intact_sq_v = np.matmul(interactions_v, interactions_v.T)
-            intact_sq_w = np.matmul(interactions_w, interactions_w.T)
+            intact_sq_v = [np.matmul(interactions_v[i,:], interactions_v.T[:,i]) for i in range(N)]
+            intact_sq_w = [np.matmul(interactions_w[i,:], interactions_w.T[:,i]) for i in range(N)]
             
             # to get the double sum in the formula -> sum up all diagonal entries 
-            coherence_v = N**(-2)*(np.trace(intact_sq_v))
-            coherence_w = N**(-2)*(np.trace(intact_sq_w))
+            coherence_v = N**(-2)*(np.sum(intact_sq_v))
+            coherence_w = N**(-2)*(np.sum(intact_sq_w))
 
             # write phase coherence into matrix for every timestep and run
-            phase_coherence_v[timestep, simulation_run] = coherence_v
-            phase_coherence_w[timestep, simulation_run] = coherence_w
+            # take (1-coherence) such that 0 corresponds to total incoherence and 1 corresponds to total coherence
+            phase_coherence_v[timestep, simulation_run] = 1-coherence_v
+            phase_coherence_w[timestep, simulation_run] = 1-coherence_w
      
     
     
