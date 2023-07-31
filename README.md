@@ -165,8 +165,8 @@ In comparison, the individual functions above can be used for sinlge model reali
 
     number_simulation_runs = 3
     range_initial_states = 2
-    coupling = 10
-    network = nx.watts_strogatz_graph(500, 16, 0)
+    coupling = 50
+    network = nx.watts_strogatz_graph(500, 12, 0)
     a = 0.3
     b = 0.1
     tau = 5
