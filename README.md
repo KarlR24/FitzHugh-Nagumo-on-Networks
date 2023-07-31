@@ -182,7 +182,6 @@ In comparison, the individual functions above can be used for sinlge model reali
 ![sim31 7run1, individual node analysis, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/1d0480df-481e-4bce-be97-2944a03bdee5)
 ![sim31 7run1, phase coh, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7ab40318-a04a-4da6-8902-096f3534dff4)
 ![sim31 7run1, phase coh last 10000 steps, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/4bdc1275-2dba-4acb-8fbd-9c99970c675e)
-![sim31 7run1, freq ana phase coh, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/4436d04a-c074-4d44-98d4-03ed16b0b4df)
 ![sim31 7run1, phase coh run1, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/0075dafe-05bf-4cec-9012-5f4289e59f96)
 ![sim31 7run1, freq ana phase coh run1, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/51f31d13-69be-480a-90e7-399152514223)
 
