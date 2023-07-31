@@ -188,23 +188,17 @@ In comparison, the individual functions above can be used for sinlge model reali
 
 
 
-https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/acc40b08-0f0b-4e8d-95b1-4e26df159349
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/8fb4c243-70c3-48db-996e-0de608caca4f
 
 
-https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/3bab6e68-d755-4432-b9f6-5b9c612436d3
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/53095b34-f9f9-4a7c-9dec-e1a0d8fa0a4e
 
 
-https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/6c58c80b-94f1-4650-bb10-183372fd58ee
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/a8fe4499-fb0a-42ed-a219-4b7f830495d1
 
 
-https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/86aa4fcc-3976-4f08-9de0-bee9af534191
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/0a64c4ab-a27a-4376-8fc7-19da4cce1d20
 
-
-
-
-
-
-[need different run: label last plot!]
 
 
 
