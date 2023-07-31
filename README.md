@@ -124,14 +124,32 @@ https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7216da03
 
 
 
-## Phase Coherence measure:       
+## Coherence measure:       
 The coherence measure $R(t) \in [0, 1]$ is a function that measures the synchronicity of the network of oscillators where $R(t) = 0$ corresponds to total incoherent and $R(t) = 1$ corresponds to total coherent. \
 A modified version of the coherence measure $R(t)$ from the following paper is used: 
 "The synchronization of FitzHugh–Nagumo neuron network coupled by gap junction" - 
 Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
 
+### Coherence measure plot for several simulation runs
+The plot_phase_cohere() function plots the coherence measure for both variable. The other visualizations only take the first/fast variable.
 
-### Coherence Measure 
+     number_simulation_runs = 3
+     range_initial_states = 2
+     coupling = 50
+     network = nx.watts_strogatz_graph(250, 2, 0)
+     a = 0.3
+     b = 0.1
+     tau = 5
+     delta_t = 10**(-2)
+     T = 1000
+
+     plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T) =
+     plot_phase_coherence(3, 2, 10, G, 0.3, 0.1, 5, 10**(-2), 1000)
+
+![plot_phase_coherence,runs=3, init_states=2, ws(250,2,0), cpl=50, dt=0 01, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/da5dd2d4-ae6a-4679-bdfc-873c3b48b52f)
+
+
+## Simulation runs and visualizations 
 The coherence measure measures the synchronicity of the network of oscillators for all time steps. The function coh_gif() generates pngs images with a vertical line drawn at time steps of interest. The main use is to make a video or GIF to compare the dynamics from image_creator, scatter_chim_gif and runaround. One can stack these four visualization videos next to each other such that they run in parallel in one video. \
 coh_gif() is mainly used in phase_coh_freq() function!
 
