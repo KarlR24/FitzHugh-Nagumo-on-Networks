@@ -16,11 +16,13 @@ Remark: Depending on the choice of parameters in the model the behaviour change 
 
 ## Requirements
 packages required for FHN-class:
+
      import networkx as nx
      import numpy as np
      import random as rd
 
 packages required for visualizations:
+
      import numpy as np
      import matplotlib.pyplot as plt
      from scipy.signal import find_peaks
@@ -29,6 +31,8 @@ packages required for visualizations:
      import os
      from datetime import datetime
      from moviepy.editor import *
+
+
 
 ## Given network with local FitzHugh-Nagumo dynamics:
      coupling = 1
