@@ -56,10 +56,9 @@ Wall time: 1min 16s
      adj_mat = nx.to_numpy_array(G) 
      act_mat=model.run(adj_mat) 
      plot_activity(act_mat)
-     
-![plot activity v for GitHub, grid 3x3, T=50, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/1fd45b3d-a7ee-4398-a938-55342e3dc9fe)
-![plot activity w for GitHub, grid 3x3, T=50, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/419bd9eb-2664-4a56-91d1-9c8d6b53bc98)
 
+![plot activity v for GitHub, grid 3x3, cpl=1, T=50, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/8cac99bf-cee1-4351-9e56-9bfc5d35f605)
+![plot activity w for GitHub, grid 3x3, cpl=1, T=50, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/011a6f90-978b-4772-ab78-5ff3ef664ba4)
 
 
 ### Trajectories in the Phase Plane
@@ -78,7 +77,7 @@ Note that:
 - the force_field is drawn for the differential equation without coupling! Therefore, it is not exact and meant to give intuition for the flow. 
          
 
-![phase portrait for GitHub, N=10, k=2, T=50, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7d628eb0-70f7-49a0-815c-4b75ebd691a1)
+![phase portrait for GitHub, cpl=1, N=10, k=2, T=50, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7d703055-77f6-441c-b427-5a89e629ad9e)
 
 
  ## Pngs to GIF/Video
@@ -105,7 +104,7 @@ Here the initial states = "ins" are chosen such that the middle node in the grid
      image_creator(G, act_mat, pos, colormap, stepstart, stepsize)
      GIF_creator(0.1, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
 
-![blinking network gif for github, grid 11x11, a=0 3, b=0 1, tau=0 1, dt =0 001, T=50, cpl=20](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/e145f83a-ed87-4926-8d69-633d12a6a577)
+![blinking network gif for github, grid 11x11, a=0 3, b=0 1, tau=0 1, dt =0 001, T=50, cpl=20](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/35737e07-6dd4-49bd-8a5a-5788f9c92da7)
 
 
 ### Phase portrait:
@@ -120,8 +119,8 @@ The advantage is that for every time point it can be seen where the oscillators 
      video_maker(0.1, '/Users/User/FitzHugh-Nagumo dynamics/pngs', 'runaround')
      
 
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/b65ef87e-f1fd-4804-96d5-6c73f63faeae
 
-https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7f2121d6-35cc-43c1-b670-9ff5740227cc
 
 
 
@@ -138,8 +137,8 @@ scatter_chim_gif is used to visualize chimera patterns in a network of identical
      scatter_chim_gif(act_mat, 40000, 50)
      video_maker(0.1, '/Users/user/my/directory/pngs', 'chimera')
 
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/11f1965b-9be0-4617-ab8c-6e1fbd9d84a8
 
-https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7216da03-6587-448c-ae3e-50f4d652cc77
 
 
 
@@ -150,7 +149,7 @@ A modified version of the coherence measure $R(t)$ from the following paper is u
 Zhan Yong, Zhang Su-Hua, Zhao Tong-Jun, An Hai-Long, Zhang Zhen-Dong, Han Ying-Rong, Liu Hui, and Zhang Yu-Hong
 
 ### Coherence measure plot for several simulation runs
-The plot_phase_cohere() function plots the coherence measure for both variable. The other visualizations only take the first/fast variable.
+The plot_phase_coherence() function plots the coherence measure for both variable. The other visualizations only take the first/fast variable.
 
      number_simulation_runs = 3
      range_initial_states = 2
@@ -181,7 +180,7 @@ coh_gif() is mainly used in phase_coh_freq() function!
      stepsize = 150
      
      coh_gif(phase_coherence_v, simulation_run, start, stepsize):
-        
+     
 
 
 
@@ -215,22 +214,30 @@ In comparison, the individual functions above can be used for sinlge model reali
     phase_coh_freq(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T, every_x_run, last_steps) = 
     phase_coh_freq(3, 2, 10, G, 0.3, 0.1, 5, 10**(-2), 1000, 10, 10000)
 
-![sim31 7run1, heatmap, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/6663a0f0-cf43-4746-8e4c-18ee612d140f)
-![sim31 7run1, individual node analysis, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/1d0480df-481e-4bce-be97-2944a03bdee5)
-![sim31 7run1, phase coh, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/7ab40318-a04a-4da6-8902-096f3534dff4)
-![sim31 7run1, phase coh last 10000 steps, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/4bdc1275-2dba-4acb-8fbd-9c99970c675e)
-![sim31 7run1, phase coh run1, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/0075dafe-05bf-4cec-9012-5f4289e59f96)
-![sim31 7run1, freq ana phase coh run1, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/51f31d13-69be-480a-90e7-399152514223)
+![sim31 7run1, heatmap, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/2b1fd572-ddc5-4c63-982c-f0aabed9c96d)
+![sim31 7run1, individual node analysis, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/113404c8-261e-4dec-8e7b-fb8e975081df)
+![sim31 7run1, phase coh, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/04600d48-73c9-4f40-9ef2-39d3ae468f50)
+![sim31 7run1, phase coh last 10000 steps, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/9685b655-a688-45b2-a082-c7429e1fd709)
+![sim31 7run1, phase coh run1, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/6bac56ca-ee30-428b-b7c6-383772e34d09)
+![sim31 7run1, freq ana phase coh run1, N=500, k=12, p=0, cpl=50, T=1000, dt=0 01](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/181aefdb-987e-423c-a562-1c1746200ebb)
 
 
 
-https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/8fb4c243-70c3-48db-996e-0de608caca4f
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/85d36c59-0a29-4880-9bb6-8d5da0b90994
 
-https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/53095b34-f9f9-4a7c-9dec-e1a0d8fa0a4e
 
-https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/a8fe4499-fb0a-42ed-a219-4b7f830495d1
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/98622e82-c7ef-40a5-a2e4-bc66f90ebab6
 
-https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/0a64c4ab-a27a-4376-8fc7-19da4cce1d20
+
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/6fbc6ac0-4549-4c05-9923-d3977aa29870
+
+
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/da2a8100-6a9b-4a2f-9b71-7a294e3361b0
+
+
+
+
+
 
 
 
