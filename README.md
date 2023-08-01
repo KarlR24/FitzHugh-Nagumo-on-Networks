@@ -63,7 +63,7 @@ Note that:
 
  ## Pngs to GIF/Video
  
-The following functions create sequences of png images which are used to create GIFs/videos. \
+The following functions create sequences of png images which are used to create GIFs or videos with the functions GIF_creator() and video_maker() respectively. \
 There are several different ways to visualize the network dynamics:
 
 ### Evolution of the Dynamics on the Network 
@@ -72,21 +72,20 @@ The function image_creator visualized the node activity on the network. The netw
 and the node activity is colorcoded. \
 Afterwards, one can make a GIF (used here) or video with the png images .
 
-Here the initial states = "ins" are chosen such that one node in a corner is perturbed and all other nodes are at the equilibrium. Observe the propagation of the pertubation away from the perturbed node throughout the network.
+Here the initial states = "ins" are chosen such that the middle node in the grid network is perturbed and all other nodes are at the equilibrium. Observe the propagation of the pertubation away from the perturbed node throughout the network.
 
-     G = nx.grid_2d_graph(10, 10) 
-     model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins) 
+     G = nx.grid_2d_graph(11, 11) 
+     model = FitzHugh_Nagumo_coupled(coupling=20, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins) 
      act_mat = model.run(adj_mat=nx.to_numpy_array(G))
-     pos = nx.spring_layout(G, iterations=500) 
+     pos = nx.spring_layout(G, iterations=800) 
      colormap = matplotlib.cm.twilight 
-     stepstart = 100 
-     stepsize = 250 
+     stepstart = 0 
+     stepsize = 200 
 
      image_creator(G, act_mat, pos, colormap, stepstart, stepsize)
-     GIF_creator(0.05, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
+     GIF_creator(0.1, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
 
-
-![10x10, one perturbed, twilight](https://user-images.githubusercontent.com/104760326/188586292-599d7e96-57f2-4e70-a445-8ad671d5f781.gif)
+![blinking network gif for github, grid 11x11, a=0 3, b=0 1, tau=0 1, dt =0 001, T=50, cpl=20](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/e145f83a-ed87-4926-8d69-633d12a6a577)
 
 
 ### Phase portrait:
