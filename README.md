@@ -15,20 +15,20 @@ where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network)
 Remark: Depending on the choice of parameters in the model the behaviour change qualitatively (saddle node bifurcation, limit cycles, Hopf bifurcation, etc.). 
 
 ## Requirements
-class:
-import networkx as nx
-import numpy as np
-import random as rd
+packages required for FHN-class:
+     import networkx as nx
+     import numpy as np
+     import random as rd
 
-visualizations:
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.signal import find_peaks
-import seaborn as sns
-from pathlib import Path
-import os
-from datetime import datetime
-from moviepy.editor import *
+packages required for visualizations:
+     import numpy as np
+     import matplotlib.pyplot as plt
+     from scipy.signal import find_peaks
+     import seaborn as sns
+     from pathlib import Path
+     import os
+     from datetime import datetime
+     from moviepy.editor import *
 
 ## Given network with local FitzHugh-Nagumo dynamics:
      coupling = 1
