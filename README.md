@@ -165,7 +165,7 @@ The plot_phase_cohere() function plots the coherence measure for both variable. 
      plot_phase_coherence(number_simulation_runs, range_initial_states, coupling, network, a, b, tau, delta_t, T) =
      plot_phase_coherence(3, 2, 10, G, 0.3, 0.1, 5, 10**(-2), 1000)
 
-![plot_phase_coherence,runs=3, init_states=2, ws(250,2,0), cpl=50, dt=0 01, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/da5dd2d4-ae6a-4679-bdfc-873c3b48b52f)
+![plot_phase_coherence,runs=3, init_states=2, ws(250,2,0), cpl=50, dt=0 01, T=1000](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/bed0c7d3-c651-4d12-b9b2-7e8be5b7995f)
 
 
 ## Simulation runs and visualizations 
