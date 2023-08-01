@@ -179,12 +179,16 @@ coh_gif() is mainly used in phase_coh_freq() function!
      start = 0
      stepsize = 150
      
-     coh_gif(phase_coherence_v, simulation_run, start, stepsize):
-     
+     coh_gif(phase_coherence_v, simulation_run, start, stepsize)
+     video_maker(0.1, '/Users/user/my/directory/pngs', 'phase_coherence')
 
 
 
-https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/644e1ed5-67a7-46f4-8226-7c2b12c428dd
+
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/f0c0ac9e-c6e7-44ae-819f-53479e47c2a1
+
+
+
 
 
 
