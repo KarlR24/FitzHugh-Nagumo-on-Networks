@@ -184,12 +184,7 @@ coh_gif() is mainly used in phase_coh_freq() function!
 
 
 
-
-https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/f0c0ac9e-c6e7-44ae-819f-53479e47c2a1
-
-
-
-
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/ddfbb24e-787f-4d78-8e0e-a981caf155c6
 
 
 
