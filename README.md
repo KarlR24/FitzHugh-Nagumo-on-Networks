@@ -1,6 +1,6 @@
 # FitzHugh-Nagumo dynamics on Networks
-Python implementation of a network with local FitzHugh-Nagumo dynamics in Jupyter notebooks.
-Every node of the network is a FitzHugh-Nagumo neuron which is coupled to its nearest neighbors. \
+Python implementation of local FitzHugh-Nagumo dynamics on given networks with in Jupyter notebooks.
+Every node of the network is a FitzHugh-Nagumo (FHN) neuron which is coupled to its nearest neighbors. \
 Here, the ODE is approximated according to the [Euler method](https://en.wikipedia.org/wiki/Euler_method). \
 The class is built according to [fabridamicelli's Kuramoto repository](https://github.com/fabridamicelli/kuramoto) and rewritten for FitzHugh-Nagumo dynamics. 
 
@@ -50,7 +50,7 @@ Wall time: 1min 16s
 
 ## Visualizations:
 
-### Plot the node activity for both FitzHugh-Nagumo variables
+### Plot the node activity for both variables of the FitzHugh-Nagumo model
      G = nx.grid_2d_graph(3, 3) 
      model = FitzHugh_Nagumo_coupled(coupling=1, network=G, a=0.3, b=0.1, tau=5, delta_t=10**(-3), T=50) 
      adj_mat = nx.to_numpy_array(G) 
@@ -88,10 +88,10 @@ There are several different ways to visualize the network dynamics:
 ### Evolution of the Dynamics on the Network 
 
 The function image_creator visualized the node activity on the network. The network is plotted according to a chosen layout algorithm
-and the node activity is colorcoded. \
+and the node activity is color coded. \
 Afterwards, one can make a GIF (used here) or video with the png images .
 
-Here the initial states = "ins" are chosen such that the middle node in the grid network is perturbed and all other nodes are at the equilibrium. Observe the propagation of the pertubation away from the perturbed node throughout the network.
+Here the initial states = "ins" are chosen such that the middle node in the grid network is perturbed and all other nodes are at the equilibrium. Observe the propagation of the perturbation away from the perturbed node throughout the network.
 
      G = nx.grid_2d_graph(11, 11) 
      model = FitzHugh_Nagumo_coupled(coupling=20, network=G, a=0.3, b=0.1, tau=0.1, delta_t=10**(-3), T=50, initial_states=ins) 
@@ -191,11 +191,11 @@ https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/ddfbb24e
 
 ### Run simulations and generate above visualizations:
 
-The phase_coh_freq() - function combines the class and visualiations from above to make simulation runs and analyse them. \
+The phase_coh_freq() - function combines the class and visualizations from above to make simulation runs and analyse them. \
 Additionally, the activity matrix for the first variable v is plotted as heatmap to be able to link the different visualization together.\
 Also, frequency analysis using the Fast Fourier Transform (FFT) is made for node activity and phase coherence measure.\
 Note that: the main use of phase_coh_freq() is to make simulation runs and analyse individual runs. \
-In comparison, the individual functions above can be used for sinlge model realizations/simulation runs.
+In comparison, the individual functions above can be used for single model realizations/simulation runs.
 
 
     number_simulation_runs = 3
