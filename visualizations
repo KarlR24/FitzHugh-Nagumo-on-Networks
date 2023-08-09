@@ -156,7 +156,7 @@ def runaround(act_mat, stepstart, stepend, stepsize):
             
         fig = plt.figure(figsize=(10,10))
         sns.set_style("whitegrid")
-        plt.scatter(x, y)
+        plt.scatter(x, y, color='r')
         
         # plot null-clines
         x_null = np.arange(minv,maxv,.1) 
