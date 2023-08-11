@@ -1,0 +1,32 @@
+from pathlib import Path
+import os
+from datetime import datetime
+from moviepy.editor import *
+  
+  def video_maker(duration, image_dir):
+    '''
+    duration: float
+        how long one png is shown in seconds
+        
+    image_dir: string
+        path to where pngs should be taken from
+        the images are used in alphanumeric order
+
+    This code was refined by [unfriend](https://github.com/unfriend)
+    '''
+    # Create a list of file names for all PNG images in the directory
+    image_files = [os.path.join(image_dir, f) for f in sorted(os.listdir(image_dir)) if f.endswith('.png')]
+
+    # Define the name and location of your output video file
+    time_now = datetime.today().strftime("%d-%m-%Y %H%M%S")
+    video_path = './phase_coherence_%s.mp4'%time_now
+
+    # Define the frames per second and the codec for the video
+    fps = int(1/duration)
+    codec = 'h264'
+
+    # Use imageio to create the video from the list of image files
+    with imageio.get_writer(video_path, fps=fps, codec=codec) as writer:
+        for filename in image_files:
+            image = imageio.imread(filename)
+            writer.append_data(image)
