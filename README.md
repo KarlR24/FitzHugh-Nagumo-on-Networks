@@ -17,6 +17,7 @@ Remark: Depending on the choice of parameters in the model the behaviour change 
 ## Requirements
 
 Jupyter stats:
+
 <img width="251" alt="jupyter stats" src="https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/37c92005-a1c7-4052-a8a3-6c9fb6d27200">
 
 
