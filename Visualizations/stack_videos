@@ -4,6 +4,8 @@ def stack_videos(video1, video2, video3, video4):
     '''
     video1 - video4 = string
         name of video clips in same directory as stack_videos file 
+
+    code is mostly from stackoverflow.com
     '''
 
     clip1 = VideoFileClip(video1)
