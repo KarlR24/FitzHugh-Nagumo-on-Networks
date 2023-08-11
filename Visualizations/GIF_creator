@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 from moviepy.editor import *
 
-def GIF_creator(duration, png_dir, path):
+def GIF_creator(duration, png_dir):
     '''
     duration: float
         time each picture is shown in GIF
