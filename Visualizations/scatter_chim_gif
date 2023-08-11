@@ -1,0 +1,51 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+def scatter_chim_gif(act_mat, start, stepsize):  
+    '''
+    act_mat: nd array
+        activity matrix from model
+        
+    stepstart: integer 
+        starting time to begin taking pictures to make a movie/GIF
+        stepstart < T/delta_t = total number of steps in simulation
+        
+    stepsize: integer
+        after stepsize many steps the next png is created
+    '''
+    
+    A = act_mat[0] 
+    t_steps, N = A.shape
+    
+    minv = act_mat[0].min() - 0.5
+    maxv = act_mat[0].max() + 0.5
+    
+    for snapshot in range(start, t_steps, stepsize):   
+        v_k = A[snapshot,:]   
+        
+        fig = plt.figure(figsize=(10,10))
+        sns.set_style("whitegrid")
+        plt.scatter(range(len(v_k)), v_k)
+        plt.ylim([minv, maxv])  
+        plt.xlabel("k", fontsize=30)
+        plt.ylabel("$v_{k}(t)$", fontsize=30)
+        plt.xticks(fontsize = 22)
+        plt.yticks(fontsize = 22)
+        plt.title('t =%s' %snapshot, fontsize=35)
+
+        # note: up to 9.999.999 time steps possible otherwise have to add line
+        if snapshot<100:
+            plt.savefig('chimera/m_t0000%s.png' %round((snapshot)))
+        elif snapshot<1000:
+            plt.savefig('chimera/m_t000%s.png' %round((snapshot)))
+        elif snapshot<10000:
+            plt.savefig('chimera/m_t00%s.png' %round((snapshot)))
+        elif snapshot<100000:
+            plt.savefig('chimera/m_t0%s.png' %round((snapshot)))
+        else:
+            plt.savefig('chimera/m_t%s.png' %round((snapshot)))
+
+        plt.clf()
+        plt.cla()
+        plt.close(fig)
+        
