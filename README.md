@@ -15,6 +15,11 @@ where $a_{ij}$ denotes the entries of the adjacency matrix (for a given network)
 Remark: Depending on the choice of parameters in the model the behaviour change qualitatively (saddle node bifurcation, limit cycles, Hopf bifurcation, etc.). 
 
 ## Requirements
+
+Jupyter stats:
+<img width="251" alt="jupyter stats" src="https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/37c92005-a1c7-4052-a8a3-6c9fb6d27200">
+
+
 packages required for FHN-class:
 
      import networkx as nx
@@ -238,7 +243,7 @@ https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/da2a8100
 
 
 ### Stack videos
-To make it easier to visually analyse the videos created by phase_coh_freq() one can put them in a 2x2 grid. The advantage is that one has them running side by side and to pause all visualizations at times of interest. Note that the videos have to have the same number of images.
+To make it easier to visually analyse the videos created by phase_coh_freq() one can put them in a 2x2 grid enabling to pause at times of interest. Note that the videos have to have the same number of images and framerate.
 
     G = nx.watts_strogatz_graph(100, 12, 0)
     phase_coh_freq(3, 2, 20, G, 0.3, 0.1, 5, 10**(-2), 100, 10, 10000)
@@ -250,7 +255,7 @@ To make it easier to visually analyse the videos created by phase_coh_freq() one
     
     stack_videos(video1, video2, video3, video4)
 
-
+[video will soon be uploaded]
 
 
 
