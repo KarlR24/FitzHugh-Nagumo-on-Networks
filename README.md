@@ -83,6 +83,7 @@ Note that:
  ## Pngs to GIF/Video
  
 The following functions create sequences of png images which are used to create GIFs or videos with the functions GIF_creator() and video_maker() respectively. \
+For videos there is an additional function stack_videos() to create one video out of four by stacking them in a 2x2 grid. \
 There are several different ways to visualize the network dynamics:
 
 ### Evolution of the Dynamics on the Network 
@@ -102,7 +103,7 @@ Here the initial states = "ins" are chosen such that the middle node in the grid
      stepsize = 200 
 
      image_creator(G, act_mat, pos, colormap, stepstart, stepsize)
-     GIF_creator(0.1, '/Users/User/FitzHugh-Nagumo dynamics/pngs', '/Users/User/FitzHugh-Nagumo dynamics/GIF')
+     GIF_creator(0.1, '/Users/User/FitzHugh-Nagumo dynamics/pngs')
 
 ![blinking network gif for github, grid 11x11, a=0 3, b=0 1, tau=0 1, dt =0 001, T=50, cpl=20](https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/35737e07-6dd4-49bd-8a5a-5788f9c92da7)
 
@@ -195,7 +196,8 @@ The phase_coh_freq() - function combines the class and visualizations from above
 Additionally, the activity matrix for the first variable v is plotted as heatmap to be able to link the different visualization together.\
 Also, frequency analysis using the Fast Fourier Transform (FFT) is made for node activity and phase coherence measure.\
 Note that: the main use of phase_coh_freq() is to make simulation runs and analyse individual runs. \
-In comparison, the individual functions above can be used for single model realizations/simulation runs.
+In comparison, the individual functions above can be used for single model realizations/simulation runs. \
+Additionally, using stack_videos() one can stack the four out put videos to have the four visualiztions side by side as shown below.
 
 
     number_simulation_runs = 3
