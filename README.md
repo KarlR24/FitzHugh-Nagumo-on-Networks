@@ -237,7 +237,18 @@ https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/da2a8100
 
 
 
+### Stack videos
+To make it easier to visually analyse the videos created by phase_coh_freq() one can put them in a 2x2 grid. The advantage is that one has them running side by side and to pause all visualizations at times of interest. Note that the videos have to have the same number of images.
 
+    G = nx.watts_strogatz_graph(100, 12, 0)
+    phase_coh_freq(3, 2, 20, G, 0.3, 0.1, 5, 10**(-2), 100, 10, 10000)
+
+    video1 = "runaround"
+    video2 = "blinking_network"
+    video3 = "chimera"
+    video4 = "phase_coherence"
+    
+    stack_videos(video1, video2, video3, video4)
 
 
 
