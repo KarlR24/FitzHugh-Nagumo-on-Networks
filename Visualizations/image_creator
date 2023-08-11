@@ -1,0 +1,72 @@
+import matplotlib.pyplot as plt
+import networkx as nx
+
+def image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
+    '''
+    G: network of interest
+    
+    act_mat: array
+    
+    pos: dictionary with nodes as keys and positions as values
+    
+    colormap: matplotlib.cm.colormap
+        colormap for node states
+        
+    stepstart: float
+        iteration step where first png is created
+    
+    stepsize: float
+        after stepsize many iterations the next png is created
+    '''
+    
+    A1 = act_mat[0] 
+    t_steps, N = A1.shape
+
+    minima = A1.min() #min value for colorscale
+    maxima = A1.max() #max value for colorscale
+
+    norm = matplotlib.colors.Normalize(vmin=minima, vmax=maxima, clip=True)
+    mapper = matplotlib.cm.ScalarMappable(norm=norm, cmap=colormap)  #cividis
+
+    # t_steps = int(1.*T/dt)
+    for t in range(stepstart,t_steps,stepsize): 
+        time_slice = A1[t,:]
+
+        l_color = []
+
+        for theta in time_slice:
+
+            v = theta
+            # print(v)
+            red = int(255*mapper.to_rgba(v)[0])
+            green = int(255*mapper.to_rgba(v)[1])
+            blue = int(255*mapper.to_rgba(v)[2])
+            hexcol = '#%02x%02x%02x' % (red, green, blue)
+            # print(hexcol)
+            l_color.append(hexcol)
+
+        fig = plt.figure(figsize=(10,10))
+
+        # posG = nx.circular_layout(graph_nx)
+        nx.draw_networkx_nodes(G,pos=pos, node_color='k', node_size=80)
+        nx.draw_networkx_nodes(G,pos=pos, node_color=l_color, node_size=40)
+        nx.draw_networkx_edges(G,pos=pos,edge_color='#aaaaaa',alpha=.5)
+
+        # a1 = nx.draw_networkx_nodes(G,pos = pos2d, node_c)
+        plt.title('t =%s' %t, fontsize=35)
+        plt.axis('off')
+        
+        if t<100:
+            plt.savefig('pngs/m_t0000%s.png' %round((t)))
+        elif t<1000:
+            plt.savefig('pngs/m_t000%s.png' %round((t)))
+        elif t<10000:
+            plt.savefig('pngs/m_t00%s.png' %round((t)))
+        elif t<100000:
+            plt.savefig('pngs/m_t0%s.png' %round((t)))
+        else:
+            plt.savefig('pngs/m_t%s.png' %round((t)))
+
+        plt.clf()
+        plt.cla()
+        plt.close(fig)
