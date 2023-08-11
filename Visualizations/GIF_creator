@@ -1,0 +1,27 @@
+from pathlib import Path
+import os
+from datetime import datetime
+from moviepy.editor import *
+
+def GIF_creator(duration, png_dir, path):
+    '''
+    duration: float
+        time each picture is shown in GIF
+        
+    png_dir: string
+        direction where .pngs are to make GIF out of
+    
+    path: string
+        direction where the GIF should be saved
+        
+    this code is from stackoverflow.com
+    '''
+
+    time_now = datetime.today().strftime("%d-%m-%Y %H%M%S")
+    images = []
+    for file_name in sorted(os.listdir(png_dir)):
+        if file_name.endswith('.png'):
+            file_path = os.path.join(png_dir, file_name)
+            images.append(imageio.imread(file_path))
+    #imageio.mimsave(FHNgif.gif, path, images, format='GIF')
+    imageio.mimsave(os.path.join('my_very_own_gif_%s.gif' %time_now), images, duration = duration)
