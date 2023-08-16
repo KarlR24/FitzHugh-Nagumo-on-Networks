@@ -244,7 +244,7 @@ https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/da2a8100
 
 
 ### Stack videos
-To make it easier to visually analyse the videos created by phase_coh_freq() one can put them in a 2x2 grid enabling to pause at times of interest. The videos have to be in the same directory as the Jupyter notbook running this code. \
+To make it easier to visually analyse the videos created by phase_coh_freq() one can put them in a 2x2 grid enabling to pause at times of interest. The videos have to be in the same directory as the Jupyter notebook running this code. \
 Note that the videos have to have the same number of images and framerate.
 
     G = nx.watts_strogatz_graph(100, 12, 0)
