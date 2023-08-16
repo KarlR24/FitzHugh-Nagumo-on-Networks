@@ -256,7 +256,9 @@ To make it easier to visually analyse the videos created by phase_coh_freq() one
     
     stack_videos(video1, video2, video3, video4)
 
-[video will soon be uploaded]
+
+https://github.com/KarlR24/FitzHugh-Nagumo-on-Networks/assets/104760326/4185ae59-a120-46bb-a5a0-8fc117a9828a
+
 
 
 
