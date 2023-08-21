@@ -30,6 +30,7 @@ packages required for FHN-class:
 packages required for visualizations:
 
      import numpy as np
+     import networkx as nx
      import matplotlib.pyplot as plt
      from scipy.signal import find_peaks
      import seaborn as sns
