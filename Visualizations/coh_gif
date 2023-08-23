@@ -1,31 +1,36 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def coh_gif(phase_coherence_v, simulation_run, stepsize):
+def coh_gif(phase_coherence_v, simulation_run, start, stepsize):
     '''
     phase_coherence_v: 2d-array
-        coherence measure values for every time step
+        phase coherence values for every time step
         
     simulation_run: integer
-        simulation run of interest to make video/GIF
+        simulation run of interest to create pngs for
     
-    stepsize: integer
-        after stepsize many steps the next png is created
+    start: interger
+        timestep to start creating pngs
+    
+    stepsize: float
+        after stepsize many iterations the next png is created
     '''
     
-    PCV_mat = phase_coherence_v[:,simulation_run]
+    PCV_mat = phase_coherence_v[start:,simulation_run]
 
     for t in range(0, len(PCV_mat), stepsize):   
         fig = plt.figure(figsize=(20,10))
         sns.set_style("whitegrid")
         plt.plot(PCV_mat)
         plt.axvline(x=t, color='r')
+        
         plt.xlabel("Time t", fontsize=30)
         plt.ylabel("Phase Coherence", fontsize=30)
+        
         plt.xticks(fontsize = 22)
         plt.yticks(fontsize = 22)
-        step = start+t
-        plt.title('t =%s' %step, fontsize=35)
+        
+        plt.title('t =%s' %t, fontsize=35)
         
         if t<100:
             plt.savefig('pngs/m_t0000%s.png' %round((t)))
