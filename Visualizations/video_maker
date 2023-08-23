@@ -12,6 +12,9 @@ from moviepy.editor import *
         path to where pngs should be taken from
         the images are used in alphanumeric order
 
+    name: string
+        name for the output video 
+
     This code was refined by [unfriend](https://github.com/unfriend)
     '''
     # Create a list of file names for all PNG images in the directory
