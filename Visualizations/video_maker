@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 from moviepy.editor import *
   
-  def video_maker(duration, image_dir):
+  def video_maker(duration, image_dir, name):
     '''
     duration: float
         how long one png is shown in seconds
@@ -19,7 +19,8 @@ from moviepy.editor import *
 
     # Define the name and location of your output video file
     time_now = datetime.today().strftime("%d-%m-%Y %H%M%S")
-    video_path = './phase_coherence_%s.mp4'%time_now
+    naming = str(name)+str(time_now)
+    video_path = './%s.mp4' %naming
 
     # Define the frames per second and the codec for the video
     fps = int(1/duration)
