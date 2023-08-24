@@ -117,7 +117,7 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
             sns.set_style("whitegrid")
             ax0.set_title('Node Activity in Run %s' %str(simulation_run+1), fontsize = 35)
             ax0.set_xlabel('Time', fontsize=30)
-            ax0.set_ylabel('$v_k$ for all k', fontsize=30)
+            ax0.set_ylabel('v', fontsize=30)
             
             
             # plot frequency analysis from randomly sampled nodes: frequencies vs magnitude
