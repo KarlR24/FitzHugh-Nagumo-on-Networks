@@ -17,6 +17,8 @@ def image_creator(G, act_mat, pos, colormap, stepstart, stepsize):
     
     stepsize: float
         after stepsize many iterations the next png is created
+
+    This code was provided by [Feliksmueller](https://github.com/Feliksmueller) 
     '''
     
     A1 = act_mat[0] 
