@@ -251,10 +251,10 @@ Note that the videos have to have the same number of images and framerate.
     G = nx.watts_strogatz_graph(100, 12, 0)
     phase_coh_freq(3, 2, 20, G, 0.3, 0.1, 5, 10**(-2), 100, 10, 10000)
 
-    video1 = "runaround.mp4"
-    video2 = "blinking_network.mp4"
-    video3 = "chimera.mp4"
-    video4 = "phase_coherence.mp4"
+    video1 = "blinking_network.mp4"
+    video2 = "chimera.mp4"
+    video3 = "phase_coherence.mp4"
+    video4 = "runaround.mp4"
     
     stack_videos(video1, video2, video3, video4)
 
