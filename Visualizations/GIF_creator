@@ -11,8 +11,7 @@ def GIF_creator(duration, png_dir):
     png_dir: string
         direction where .pngs are to make GIF out of
     
-    path: string
-        direction where the GIF should be saved
+    Note: GIF is saved in the directory where this code is run
         
     this code is from stackoverflow.com
     '''
