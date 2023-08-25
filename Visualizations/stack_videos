@@ -14,14 +14,14 @@ def stack_videos(video1, video2, video3, video4):
     clip4 = VideoFileClip(video4)
  
     # Creating a white color background clip with the same dimensions as the stacked clips
-    wid = max(clip2.w+clip3.w, clip1.w+clip4.w)
-    heigh = max(clip4.h+clip2.h, clip1.h+clip3.h)
+    wid = max(clip1.w+clip2.w, clip3.w+clip4.w)
+    heigh = max(clip1.h+clip3.h, clip2.h+clip4.h)
     white_clip = ColorClip(size=(wid, heigh), color=(255, 255, 255)).set_duration(clip1.duration)
     background = ColorClip(size=white_clip.size, color=(255, 255, 255)).set_duration(white_clip.duration)
 
     # list of clips
-    clips = [[clip2, clip3],
-            [clip4, clip1]]
+    clips = [[clip1, clip2],
+            [clip3, clip4]]
 
     # Stacking clips on top of the white background
     final = CompositeVideoClip([background, clips_array(clips)], size=background.size)
