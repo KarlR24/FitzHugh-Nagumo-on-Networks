@@ -93,6 +93,8 @@ def phase_coh_freq(number_simulation_runs, range_initial_states, coupling, netwo
             plt.ylabel('Timesteps', fontsize = 30) 
             plt.xticks(fontsize = 22)
             plt.yticks(fontsize = 22)
+            cbar = fig.collections[0].colorbar
+            cbar.ax.tick_params(labelsize=22)
             plt.savefig('spatiotemporal_activity.png', dpi=600) # save the figure in directory of where this code is
             plt.show()
             
